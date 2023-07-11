@@ -134,6 +134,14 @@ public class User extends Account
         notifications.add("your order has been delivered to you!");
     }
 
+    public Order getReceivedOrderbyId(int id) throws Order.OrderDoesntExistEXception
+    {
+        for(Order o:receivedOrders)
+            if(o.getId() == id)
+                return o;
+        throw new Order.OrderDoesntExistEXception();
+    }
+
     public Order getActiveOrder()
     {
         return activeOrder;
