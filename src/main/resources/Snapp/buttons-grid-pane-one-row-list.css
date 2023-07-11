@@ -1,0 +1,9 @@
+.button{
+    -fx-background-color: #fff;
+    -fx-content-display: left;
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+}
+.button:pressed{
+    -fx-background-color: #d7d7d7;
+}

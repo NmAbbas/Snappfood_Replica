@@ -1,6 +1,9 @@
 package Snapp.Controller;
 
+import Snapp.SnapApplication;
 import javafx.scene.layout.GridPane;
+
+import java.io.IOException;
 
 public class UserHome {
 
@@ -38,4 +41,7 @@ public class UserHome {
 //        gridPane.setValignment(text, VPos.BOTTOM);
 //
 //    }
+    public void openRestaurants() throws IOException {
+        SnapApplication.changeScene("restaurants-list.fxml");
+    }
 }
