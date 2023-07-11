@@ -1,6 +1,6 @@
 package Snapp;
 
-/*import java.sql.*;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DB {
@@ -38,14 +38,58 @@ public class DB {
         }
     }
     static void savefoods(ArrayList<Food> foods) throws SQLException {
-        preparedStatement = connection.prepareStatement("INSERT INTO db.food (id, name, restaurantid,credit)\n" +
-                "VALUES (?, ?, ?,?);");
-        preparedStatement.setString(1, username);
-        preparedStatement.setString(2, pass);
-        preparedStatement.setBoolean(3, isadmin);
-        preparedStatement.setLong(4, credit);
-        preparedStatement.executeUpdate();
+        for(Food f:foods){
+            preparedStatement = connection.prepareStatement("INSERT INTO db.food (id, name, restaurantid,type,price,discount)\n" +
+                    "VALUES (?, ?, ?,?,?,?);");
+            preparedStatement.setInt(1, f.getId());
+            preparedStatement.setString(2, f.getName());
+            preparedStatement.setInt(3, f.getOwner().getId());
+            preparedStatement.setString(4, f.getFoodType().toString());
+            preparedStatement.setDouble(5, f.getPrice());
+            preparedStatement.setDouble(6, f.getDiscount());
+            preparedStatement.executeUpdate();
+        }
     }
+    static ArrayList<Food> loadfoods() throws SQLException, Food.InvalidPriceException, FoodType.UnknownType {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select (id, name, restaurantid,type,price,discount,cookingtime) from db.food ;");
+        ArrayList<Food> foods = new ArrayList<>();
+        while (resultSet.next()){
+            Food f = new Food(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getLong("price"),FoodType.parse(resultSet.getString("type")),resultSet.getLong("cookingtime"),null);
+            f.ownerid=resultSet.getInt("restaurantid");
+            foods.add(f);
+        }
+        return foods;
+    }
+    static void saveRestaurants(ArrayList<Restaurant> restaurants) throws SQLException {
+        for(Restaurant f:restaurants){
+            preparedStatement = connection.prepareStatement("INSERT INTO db.restaurants (id, name, adminid,type)\n" +
+                    "VALUES (?, ?, ?,?,?,?);");
+            preparedStatement.setInt(1, f.getId());
+            preparedStatement.setString(2, f.getName());
+            preparedStatement.setInt(3, f.getOwner().id);
+            preparedStatement.setString(4, f.getFoodtype().toString());
+            preparedStatement.executeUpdate();
+        }
+    }
+    static ArrayList<Restaurant> loadRestaurants() throws SQLException, Food.InvalidPriceException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select (id, name, restaurantid,type,price,discount,cookingtime) from db.food ;");
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+        while (resultSet.next()){
+            String type = resultSet.getString("type");
+            ArrayList<FoodType> foodtype = new ArrayList<>();
+            for(String s:type.substring(1, type.length() - 1).split(", ")){
+                foodtype.add(FoodType.parse(s));
+            }
+            Restaurant f = new Restaurant(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,Admin.getAdminByID(resultSet.getInt("restaurantid")),resultSet.getInt("loc"));
+            f.addFoodtype(foodtype);
+            f.ownerid=resultSet.getInt("restaurantid");
+            restaurants.add(f);
+        }
+        return restaurants;
+    }
+
 //    void saveusers() throws SQLException {
 //        preparedStatement = connection.prepareStatement("delete from users ;");
 //        for (Account u :Account.AccountList){
@@ -75,4 +119,4 @@ public class DB {
 //        preparedStatement.executeUpdate();
 //    }
 
-} // class ends*/
+} // class ends
