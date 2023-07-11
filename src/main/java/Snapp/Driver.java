@@ -76,7 +76,7 @@ public class Driver {
         Account a;
         try {
             a = Account.login(username, pass);
-            a.admintry();
+            a.deliverytry();
             Account.activeUser = a;
             System.out.println("DELIVERY LOGIN SUCCESS");
         } catch (Exception e) {
@@ -335,6 +335,7 @@ public class Driver {
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
+            u3.addCurrency(10000);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
@@ -373,6 +374,7 @@ public class Driver {
                 if (inp.matches("^\\s*login user.*"))
                 {
                     userlogin(parts[2], parts[3]);
+                    printAllRestaurants();
                 } else if (inp.matches("^\\s*login admin.*"))
                 {
                     adminlogin(parts[2], parts[3]);
@@ -382,16 +384,18 @@ public class Driver {
                 } else if (inp.matches("^\\s*add admin.*"))
                 {
                     adminnew(parts[2], parts[3]);
-                } else if (inp.matches("^\\s*logout.*"))
-                {
-                    Account.logout();
-                } else if (inp.matches("^\\s*add delivery.*"))
+                }  else if (inp.matches("^\\s*add delivery.*"))
                 {
                     deliverynew(parts[2], parts[3]);
                 } else if (inp.matches("^\\s*login delivery.*"))
                 {
                     deliverylogin(parts[2], parts[3]);
                 }
+            }
+            else if (inp.matches("^\\s*logout\\s*") && Account.activeUser != null)
+            {
+                Account.logout();
+                System.out.println("LOGGED OUT SUCCESSFULLY");
             }
 
             // admin panel :
@@ -609,6 +613,7 @@ public class Driver {
                         try
                         {
                             User.getActiveUser().getCart().addFood(User.getActiveUser().getActiveFood());
+                            System.out.println("food added to cart successfully!");
                         }
                         catch (Exception e)
                         {
@@ -652,6 +657,16 @@ public class Driver {
                         }
                         else {
                             System.out.println("your food will be delivered in " + User.getActiveUser().getActiveOrder());
+                        }
+                    } else if (inp.matches("^\\s*charge\\s+\\d+\\s*"))
+                    {
+                        try
+                        {
+                            User.getActiveUser().addCurrency(Integer.parseInt(parts[2]));
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e.getMessage());
                         }
                     }
             }
