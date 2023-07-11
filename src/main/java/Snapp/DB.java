@@ -77,7 +77,7 @@ public class DB {
     }
     static ArrayList<Restaurant> loadRestaurants() throws SQLException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select  (id, name, adminid,type) from db.food ;");
+        resultSet = statement.executeQuery("select  (id, name, adminid,type) from db.restaurants ;");
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         while (resultSet.next()){
             String type = resultSet.getString("type");
@@ -99,7 +99,7 @@ public class DB {
 
     static void saveAccounts(ArrayList<Account> accounts) throws SQLException {
         for(Account f:accounts){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.users (id, username, password,salt,isadmin,isdelivery,curreny,location)\n" +
+            preparedStatement = connection.prepareStatement("INSERT INTO db.users (id, username, password,salt,isadmin,isdelivery,currency,location)\n" +
                     "VALUES (?, ?, ?,?,?,?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setString(2, f.getName());
@@ -115,7 +115,7 @@ public class DB {
 
     static ArrayList<Account> loadAccounts() throws SQLException, FoodType.UnknownType,  Account.InvalidPasswordException, Account.InvalidUsernameException, NoSuchAlgorithmException, InvalidKeySpecException {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select (id, username, password,salt,isadmin,isdelivery,curreny,location) from db.food ;");
+        resultSet = statement.executeQuery("select (id, username, password,salt,isadmin,isdelivery,currency,location) from db.users ;");
         ArrayList<Account> accounts = new ArrayList<>();
         while (resultSet.next()){
             Account f;
@@ -205,7 +205,7 @@ public class DB {
     }
     static void saveCooments(ArrayList<Comment> comments) throws SQLException {
         for(Comment f:comments){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, customerid, foodid,restaurantid,message,upper)\n" +
+            preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, foodid,restaurantid,message,upper)\n" +
                     "VALUES (?, ?, ?,?,?,?);");
             preparedStatement.setInt(1, f.getID());
             if(f.getCommenter()!=null) preparedStatement.setInt(2, f.getCommenter().getId());
@@ -218,7 +218,7 @@ public class DB {
 
     static ArrayList<Comment> loadComments() throws SQLException, Food.InvalidFoodID, Comment.CommentDoesntExistException {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select (id, customerid, foodid,restaurantid,message,upper) from db.comments ;");
+        resultSet = statement.executeQuery("select (id, userid, foodid,restaurantid,message,upper) from db.comments ;");
         ArrayList<Comment> comments = new ArrayList<>();
         while (resultSet.next()){
             Comment f = new Comment();
