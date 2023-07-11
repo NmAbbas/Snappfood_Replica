@@ -56,7 +56,7 @@
                </ImageView>
             </graphic>
          </Button>
-         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0" text="رستوران" GridPane.columnIndex="3">
+         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#openRestaurants" prefHeight="100.0" prefWidth="120.0" text="رستوران" GridPane.columnIndex="3">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                   <image>
