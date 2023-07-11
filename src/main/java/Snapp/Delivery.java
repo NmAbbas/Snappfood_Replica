@@ -24,7 +24,7 @@ public class Delivery extends Account
         throw new OrderDoesntExistEXception();
     }
 
-    static Delivery createAccount(String name, String pass)
+    public static Delivery createAccount(String name, String pass)
             throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {
         try
