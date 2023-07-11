@@ -2,6 +2,7 @@ package Snapp;
 enum FoodType {
     FRIED,
     IRANIAN,
+    Unknown,
     ITALIAN;
     // etc
 

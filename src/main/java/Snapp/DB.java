@@ -2,6 +2,7 @@ package Snapp;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DB {
     static Connection connection = null;
