@@ -39,7 +39,7 @@ public class Account {
     }
 
     /* static functions for managing all acounts */
-    static Account createAccount(String name, String pass)
+    public static Account createAccount(String name, String pass)
             throws InvalidUsernameException, InvalidPasswordException,
             NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {

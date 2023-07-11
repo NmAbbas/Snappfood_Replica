@@ -1,5 +1,6 @@
 package Snapp.Controller;
 
+import Snapp.Account;
 import Snapp.SnapApplication;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,8 +13,19 @@ public class AdminLogin {
     public TextField passwordField;
 
     public void checkLogin() throws IOException {
-
-        SnapApplication.changeScene("admin-home.fxml");
+        errorLabel.setOpacity(0.0);
+        try
+        {
+            Account.setActiveUser(Account.login(usernameField.getText(), passwordField.getText()));
+            SnapApplication.changeScene("user-home.fxml");
+        }
+        catch (Account.UsernameNotExists | Account.IncorrectPasswordException e)
+        {
+            errorLabel.setOpacity(1.00);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     public void openAdminSignUp() throws IOException {
         SnapApplication.changeScene("admin-sign-up.fxml");
