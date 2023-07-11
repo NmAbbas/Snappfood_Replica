@@ -3,6 +3,7 @@ package Snapp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -14,9 +15,9 @@ public class SnapApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         window = stage;
-//        FXMLLoader fxmlLoader = new FXMLLoader(SnapApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(FXMLLoader.load(SnapApplication.class.getResource("login.fxml")));
         window.setTitle("Snapp!");
+        window.getIcons().add(new Image(SnapApplication.class.getResourceAsStream("/images/snappFoodIcon.png")));
         window.setScene(scene);
         window.show();
     }

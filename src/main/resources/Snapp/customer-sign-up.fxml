@@ -12,14 +12,14 @@
         <Label fx:id="loginLabel" layoutX="185.0" layoutY="450.0" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/user.png" />
+                <Image url="@../images/user.png" />
             </image>
         </ImageView>
         <TextField layoutX="224.0" layoutY="393.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your new password" />
         <TextField layoutX="224.0" layoutY="327.0" prefHeight="33.0" prefWidth="164.0" promptText="Choose a username" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/password.png" />
+                <Image url="@../images/password.png" />
             </image>
         </ImageView>
         <Label fx:id="snappFoodLabel" stylesheets="@small-snapp-food-label.css" layoutX="240.0" layoutY="46.0" text="Snapp! Food" />
