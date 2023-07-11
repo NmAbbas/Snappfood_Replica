@@ -6,6 +6,7 @@ import Snapp.Order.OrderDoesntExistEXception;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,6 +23,16 @@ public class Delivery extends Account
                 return o;
         throw new OrderDoesntExistEXception();
     }
+
+    static Delivery createAccount(String name, String pass)
+            throws InvalidUsernameException, InvalidPasswordException,
+            NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        Delivery acc = new Delivery(name, pass, nextID++);
+        AccountList.add(acc);
+        return acc;
+    }
+
 
     /* instance variables */
     private Order selectedOrder = null;

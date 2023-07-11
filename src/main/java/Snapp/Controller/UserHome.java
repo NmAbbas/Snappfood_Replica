@@ -1,18 +1,8 @@
 package Snapp.Controller;
 
-import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class CustomerHome {
+public class UserHome {
 
     public GridPane gridPane;
 
