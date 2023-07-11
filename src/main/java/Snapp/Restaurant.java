@@ -7,7 +7,7 @@ public class Restaurant
 {
     /* static Instances for managing restaurants */
     private static int nextID = 0;
-    private static ArrayList<Restaurant> restaurantList = new ArrayList<>();
+    static ArrayList<Restaurant> restaurantList = new ArrayList<>();
     /* static methods for managing restaurants */
     public static Restaurant createRestaurant(String name, FoodType foodtype, Admin owner,int loc)
     {
@@ -50,7 +50,6 @@ public class Restaurant
 
         for(Restaurant rest:r){
             nextID=Math.max(nextID,rest.id);
-            // missing some bs here
         }
     }
 
@@ -98,6 +97,10 @@ public class Restaurant
 
     // <location variable>
 
+
+    public void setOwner(Admin owner) {
+        this.owner = owner;
+    }
 
     int getId() {
         return id;
