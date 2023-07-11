@@ -19,15 +19,10 @@ public class UserLogin {
             Account.setActiveUser(Account.login(usernameField.getText(), passwordField.getText()));
             SnapApplication.changeScene("user-home.fxml");
         }
-        catch (Account.UsernameNotExists e)
+        catch (Account.UsernameNotExists | Account.IncorrectPasswordException e)
         {
             errorLabel.setOpacity(1.00);
-        }
-        catch (Account.IncorrectPasswordException e)
-        {
-            errorLabel.setOpacity(1.00);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }

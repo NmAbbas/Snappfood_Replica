@@ -19,7 +19,7 @@ public class UserSignUp {
         try
         {
             Account.createAccount(usernameField.getText(),passwordField.getText());
-            SnapApplication.changeScene("-home.fxml");
+            SnapApplication.changeScene("user-login.fxml");
         }
         catch (Account.InvalidUsernameException e)
         {
