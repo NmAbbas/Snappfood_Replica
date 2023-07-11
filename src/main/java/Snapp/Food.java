@@ -64,7 +64,7 @@ class Food {
         this.cookingTime = cookingTime;
         this.owner = owner;
         this.comments=new ArrayList<>();
-        owner.addFood(this);
+        if(owner!=null) owner.addFood(this);
     }
     static void LinkBS(ArrayList<Food> foods){         //called after filling all
         for(Food f:foods){

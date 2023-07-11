@@ -25,7 +25,6 @@ public class Driver {
             System.out.println("USER LOGIN SUCCESS");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("wow");
         }
 
     }
@@ -332,26 +331,26 @@ public class Driver {
         // example creation:
         try
         {
-            User u1 = User.createUser("sandy", "P@ss12345678");
-            User u2 = User.createUser("mylegfish", "P@ss12345678");
-            User u3 = User.createUser("patrick", "P@ss12345678");
-            u3.setLocation(3);
-
-            Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
-            Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
-
-            Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
-            d1.setLocation(2);
-
-            Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 1);
-            Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
-
-            Food f1 = Food.createFood("Krabby Patty", 10, FoodType.FRIED, 10000, r1);
-            u1.selectRestaurant(1);
-
-            Comment.createComment("it tastes like shit", u1, null, f1);
-            Comment.createComment("i like it", u2, null, f1);
-            Comment.createComment("uhhhhhhhhhhhh!", u3, null, f1);
+//            User u1 = User.createUser("sandy", "P@ss12345678");
+//            User u2 = User.createUser("mylegfish", "P@ss12345678");
+//            User u3 = User.createUser("patrick", "P@ss12345678");
+//            u3.setLocation(3);
+//
+//            Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
+//            Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
+//
+//            Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
+//            d1.setLocation(2);
+//
+//            Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 5);
+//            Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
+//
+//            Food f1 = Food.createFood("Krabby Patty", 10, FoodType.FRIED, 10000, r1);
+//            u1.selectRestaurant(1);
+//
+//            Comment.createComment("it tastes like shit", u1, null, f1);
+//            Comment.createComment("i like it", u2, null, f1);
+//            Comment.createComment("uhhhhhhhhhhhh!", u3, null, f1);
 
         }
         catch(Exception e)
@@ -375,7 +374,6 @@ public class Driver {
                 if (inp.matches("^\\s*login user.*"))
                 {
                     userlogin(parts[2], parts[3]);
-                    printAllRestaurants();
                 } else if (inp.matches("^\\s*login admin.*"))
                 {
                     adminlogin(parts[2], parts[3]);
@@ -695,6 +693,7 @@ public class Driver {
                         }
                     }
             }
+            if(inp.matches("exit.*")) running=false;
             // map and path :
 
 

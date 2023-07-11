@@ -21,6 +21,7 @@ public class Savior {
     }
     static void saving(){
         try {
+            DB.init();
             DB.clearEverything();
             DB.savefoods(Food.foodList);
             DB.saveRestaurants(Restaurant.restaurantList);

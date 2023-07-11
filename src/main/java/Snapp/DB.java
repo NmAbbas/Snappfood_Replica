@@ -4,7 +4,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DB {
     static Connection connection = null;
@@ -15,7 +14,6 @@ public class DB {
         init();
 //        addaccount("abbas","mewmew","1234",true,2000);
 //        System.out.println(usertaken("mae"));
-        ArrayList<Integer> path = new ArrayList<>();
     }
     public static void init()
     {
@@ -55,7 +53,7 @@ public class DB {
     }
     static ArrayList<Food> loadfoods() throws SQLException, Food.InvalidPriceException, FoodType.UnknownType {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select (id, name, restaurantid,type,price,discount,cookingtime) from db.food ;");
+        resultSet = statement.executeQuery("select id, name, restaurantid,type,price,discount,cookingtime from db.food ;");
         ArrayList<Food> foods = new ArrayList<>();
         while (resultSet.next()){
             Food f = new Food(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getLong("price"),FoodType.parse(resultSet.getString("type")),resultSet.getLong("cookingtime"),null);
@@ -66,18 +64,19 @@ public class DB {
     }
     static void saveRestaurants(ArrayList<Restaurant> restaurants) throws SQLException {
         for(Restaurant f:restaurants){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.restaurants (id, name, adminid,type)\n" +
-                    "VALUES (?, ?, ?,?,?,?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO db.restaurants (id, name, adminid,type,loc)\n" +
+                    "VALUES (?, ?, ?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setString(2, f.getName());
             preparedStatement.setInt(3, f.getOwner().id);
             preparedStatement.setString(4, f.getFoodtype().toString());
+            preparedStatement.setInt(5, f.getLocation());
             preparedStatement.executeUpdate();
         }
     }
     static ArrayList<Restaurant> loadRestaurants() throws SQLException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select  (id, name, adminid,type) from db.restaurants ;");
+        resultSet = statement.executeQuery("select  id, name, adminid,type,loc from db.restaurants ;");
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         while (resultSet.next()){
             String type = resultSet.getString("type");
@@ -85,7 +84,7 @@ public class DB {
             for(String s:type.substring(1, type.length() - 1).split(", ")){
                 foodtype.add(FoodType.parse(s));
             }
-            Restaurant f = new Restaurant(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,Admin.getAdminByID(resultSet.getInt("restaurantid")),resultSet.getInt("loc"));
+            Restaurant f = new Restaurant(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,Admin.getAdminByID(resultSet.getInt("adminid")),resultSet.getInt("loc"));
             f.addFoodtype(foodtype);
             for( Account c: Account.AccountList){
                 if(c.getId()==f.getOwner().getId()){
@@ -107,7 +106,7 @@ public class DB {
             preparedStatement.setString(4, new String(f.getSalt()));
             preparedStatement.setBoolean(5, f.isadmin);
             preparedStatement.setBoolean(6, f.isDelivery);
-            preparedStatement.setInt(7, (f.isIsadmin()?0:((User)f).getCurrency()));
+            preparedStatement.setInt(7, ((f.isIsadmin()||f.isDelivery())?0:((User)f).getCurrency()));
             preparedStatement.setInt(8, f.getLocation());
             preparedStatement.executeUpdate();
         }
@@ -115,13 +114,13 @@ public class DB {
 
     static ArrayList<Account> loadAccounts() throws SQLException, FoodType.UnknownType,  Account.InvalidPasswordException, Account.InvalidUsernameException, NoSuchAlgorithmException, InvalidKeySpecException {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select (id, username, password,salt,isadmin,isdelivery,currency,location) from db.users ;");
+        resultSet = statement.executeQuery("select id, username, password,salt,isadmin,isdelivery,currency,location from db.users ;");
         ArrayList<Account> accounts = new ArrayList<>();
         while (resultSet.next()){
             Account f;
             if(resultSet.getBoolean("isadmin")){ //user is admin(doesnt matter here)
                 f = new Admin();
-                f.setName(resultSet.getString("name"));
+                f.setName(resultSet.getString("username"));
                 f.setId(resultSet.getInt("id"));
                 f.setSalt(resultSet.getString("salt").getBytes());
                 f.setHashedPassword(resultSet.getString("password").getBytes());
@@ -137,7 +136,7 @@ public class DB {
             }
             if(resultSet.getBoolean("isdelivery")){ //user is delivery(doesnt matter here)
                 f = new Delivery();
-                f.setName(resultSet.getString("name"));
+                f.setName(resultSet.getString("username"));
                 f.setId(resultSet.getInt("id"));
                 f.setSalt(resultSet.getString("salt").getBytes());
                 f.setHashedPassword(resultSet.getString("password").getBytes());
@@ -147,7 +146,7 @@ public class DB {
             }
             else{                                   // the point is giving currency
                 f = new User();
-                f.setName(resultSet.getString("name"));
+                f.setName(resultSet.getString("username"));
                 f.setId(resultSet.getInt("id"));
                 f.setSalt(resultSet.getString("salt").getBytes());
                 f.setHashedPassword(resultSet.getString("password").getBytes());
@@ -180,7 +179,7 @@ public class DB {
     }
     static ArrayList<Order> loadOrders() throws SQLException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable, Food.InvalidFoodID {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select (id, customerid, restaurantid,foodcount,foods,cookingtime,cookingstarttime) from db.orders ;");
+        resultSet = statement.executeQuery("select id, customerid, restaurantid,foodcount,foods,cookingtime,cookingstarttime from db.orders ;");
         ArrayList<Order> orders = new ArrayList<>();
         while (resultSet.next()){
             String type = resultSet.getString("type");
@@ -205,20 +204,32 @@ public class DB {
     }
     static void saveCooments(ArrayList<Comment> comments) throws SQLException {
         for(Comment f:comments){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, foodid,restaurantid,message,upper)\n" +
-                    "VALUES (?, ?, ?,?,?,?);");
-            preparedStatement.setInt(1, f.getID());
-            if(f.getCommenter()!=null) preparedStatement.setInt(2, f.getCommenter().getId());
-            if(f.getRestaurant()!=null)preparedStatement.setInt(3, f.getRestaurant().getId());
-            preparedStatement.setString(4, f.getMessage());
-            preparedStatement.setInt(5, f.getUpper().getID());
-            preparedStatement.executeUpdate();
+            if (f.getFood() != null){
+                preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, foodid,message,upper)\n" +
+                        "VALUES (?, ?, ?,?,?);");
+                preparedStatement.setInt(1, f.getID());
+                preparedStatement.setInt(2, f.getCommenter().getId());
+                preparedStatement.setInt(3, f.getFood().getId());
+                preparedStatement.setString(4, f.getMessage());
+                if (f.getUpper() != null) preparedStatement.setInt(5, f.getUpper().getID());
+                preparedStatement.executeUpdate();
+            }
+            if (f.getRestaurant() != null) {
+                preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, restaurantid,message,upper)\n" +
+                        "VALUES (?, ?, ?,?,?);");
+                preparedStatement.setInt(1, f.getID());
+                preparedStatement.setInt(2, f.getCommenter().getId());
+                preparedStatement.setInt(3, f.getRestaurant().getId());
+                preparedStatement.setString(4, f.getMessage());
+                if (f.getUpper() != null) preparedStatement.setInt(5, f.getUpper().getID());
+                preparedStatement.executeUpdate();
+            }
         }
     }
 
     static ArrayList<Comment> loadComments() throws SQLException, Food.InvalidFoodID, Comment.CommentDoesntExistException {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select (id, userid, foodid,restaurantid,message,upper) from db.comments ;");
+        resultSet = statement.executeQuery("select id, userid, foodid,restaurantid,message,upper from db.comments ;");
         ArrayList<Comment> comments = new ArrayList<>();
         while (resultSet.next()){
             Comment f = new Comment();
