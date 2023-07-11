@@ -15,6 +15,7 @@
 #usernameErrorLabel, #passwordErrorLabel{
     -fx-font-size: 12px;
     -fx-alignment: center-right;
+    -fx-text-alignment: right;
     -fx-text-fill: #FF0000FF;
 }
 .button{

@@ -13,9 +13,11 @@ public class UserLogin {
     public TextField usernameField;
     public TextField passwordField;
     public void checkLogin() throws IOException {
+        errorLabel.setOpacity(0.0);
         try
         {
             Account.setActiveUser(Account.login(usernameField.getText(), passwordField.getText()));
+            SnapApplication.changeScene("user-home.fxml");
         }
         catch (Account.UsernameNotExists e)
         {
@@ -29,8 +31,6 @@ public class UserLogin {
         {
             e.printStackTrace();
         }
-        SnapApplication.changeScene("user-home.fxml");
-
     }
     public void openUserSignUp() throws IOException {
         SnapApplication.changeScene("user-sign-up.fxml");
