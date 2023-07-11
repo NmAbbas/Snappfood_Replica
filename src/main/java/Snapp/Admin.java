@@ -11,11 +11,18 @@ public class Admin extends Account {
     }
 
     public static Admin createAccount(String name, String pass)
-            throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
-        Admin admin = new Admin(name, pass, nextID++);
-        admin.setadmin();
-        AccountList.add(admin);
-        return admin;
+            throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException {
+        try
+        {
+            findAccount(name);
+        }
+        catch (Exception e)
+        {
+            Admin admin = new Admin(name, pass, nextID++);
+            AccountList.add(admin);
+            return admin;
+        }
+        throw new UsernameTakenException();
     }
 
     public static Admin getActiveUser()

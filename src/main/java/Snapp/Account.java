@@ -245,7 +245,7 @@ public class Account {
     }
 
     static public class UsernameNotExists extends Exception {
-        UsernameNotExists() {
+        public UsernameNotExists() {
             super("[Error] Username doesn't exist!");
         }
     }

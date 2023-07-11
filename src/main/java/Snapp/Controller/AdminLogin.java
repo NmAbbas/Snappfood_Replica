@@ -13,16 +13,23 @@ public class AdminLogin {
     public TextField passwordField;
 
     public void checkLogin() throws IOException {
-        errorLabel.setOpacity(0.0);
+        errorLabel.setRotate(0.0);
         try
         {
-            Account.setActiveUser(Account.login(usernameField.getText(), passwordField.getText()));
-            SnapApplication.changeScene("user-home.fxml");
+            Account account = Account.login(usernameField.getText(), passwordField.getText());
+            if (account.isIsadmin())
+            {
+                Account.setActiveUser(account);
+                SnapApplication.changeScene("admin-home.fxml");
+            }
+            else
+                throw new Account.UsernameNotExists();
         }
         catch (Account.UsernameNotExists | Account.IncorrectPasswordException e)
         {
             errorLabel.setOpacity(1.00);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
