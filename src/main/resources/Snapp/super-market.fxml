@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@customer-home-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.SuperMarket">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@user-home-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.SuperMarket">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
     <Button layoutX="48.0" layoutY="33.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
         <graphic>
