@@ -137,6 +137,26 @@ public class Account {
         if (!this.isDelivery) throw new UserNotDelivery();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public byte[] getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public boolean isIsadmin() {
+        return isadmin;
+    }
+
+    public boolean isDelivery() {
+        return isDelivery;
+    }
+
     public int getLocation()
     {
         return location;
