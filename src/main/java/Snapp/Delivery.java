@@ -13,7 +13,7 @@ import java.util.TimerTask;
 public class Delivery extends Account
 {
     /* static variables */
-    static final int GRAPH_TIME_COEFFICIENT = 10000;
+    static final int GRAPH_TIME_COEFFICIENT = 10;
     static ArrayList<Order> undeliveredList = new ArrayList<>();
 
     public Delivery() {
@@ -29,13 +29,20 @@ public class Delivery extends Account
         throw new OrderDoesntExistEXception();
     }
 
-    static Delivery createAccount(String name, String pass)
-            throws InvalidUsernameException, InvalidPasswordException,
-            NoSuchAlgorithmException, InvalidKeySpecException
+    public static Delivery createAccount(String name, String pass)
+            throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {
-        Delivery acc = new Delivery(name, pass, nextID++);
-        AccountList.add(acc);
-        return acc;
+        try
+        {
+            findAccount(name);
+        }
+        catch (Exception e)
+        {
+            Delivery delivery = new Delivery(name, pass, nextID++);
+            AccountList.add(delivery);
+            return delivery;
+        }
+        throw new UsernameTakenException();
     }
 
 
@@ -61,6 +68,8 @@ public class Delivery extends Account
     {
         if(isFree())
             this.selectedOrder = selectedOrder;
+        else
+            throw new YouAreNotFreeException();
         try
         {
             Map.path(location, selectedOrder.getRecipient().getLocation());
@@ -71,7 +80,7 @@ public class Delivery extends Account
             this.selectedOrder = null;
             throw e;
         }
-        throw new YouAreNotFreeException();
+
     }
 
     public Timer getTimer()
@@ -117,12 +126,12 @@ public class Delivery extends Account
         try
         {
             path = Map.path(location, destination);
+            nextNode = path.get(1);
         } catch (NoPathException e)
         {
             imFree();
             throw new NoPathException();
         }
-        nextNode = path.get(1);
     }
 
     int goToNext() throws NoPathException
@@ -130,6 +139,8 @@ public class Delivery extends Account
         calcNextNode();
         if(location == destination)
             return 1;       // WE HAVE ARRIVED MY FRIEND!
+        location = nextNode;
+        calcNextNode();
         return 0;           // WE SHOULD STILL CONTINUE
     }
 
@@ -147,8 +158,6 @@ public class Delivery extends Account
 
     void imFree()
     {
-        if(Account.activeUser == this)
-            System.out.println("you delivered the order successfully!");
         selectedOrder = null;
     }
 
@@ -202,7 +211,10 @@ public class Delivery extends Account
                         delivery.getSelectedOrder().setOrderState(OrderState.RECEIVED);
                         delivery.getSelectedOrder().getCostomer().receiveOrder(delivery.getSelectedOrder());
                         delivery.imFree();
+                        if(Account.getActiveUser().getId() == getId())
+                            System.out.println("you delivered the food succesfully!");
                     }
+
                 } catch (NoPathException e)
                 {
                     imFree();
@@ -212,8 +224,11 @@ public class Delivery extends Account
         }
     }
 
-    void advance()
+
+
+    void advance() throws NoPathException
     {
+        calcNextNode();
         try
         {
             timer.schedule(new Advance(this), calcArrivalTime(location, destination));
@@ -223,6 +238,42 @@ public class Delivery extends Account
         {
             imFree();
             throw new RuntimeException(e);
+        }
+    }
+
+    String go() throws NoPathException
+    {
+        try
+        {
+            ArrayList<Integer> path1 = Map.path(location, selectedOrder.getRecipient().getLocation());
+            ArrayList<Integer> path2 = Map.path(selectedOrder.getRecipient().getLocation(), selectedOrder.getCostomer().getLocation());
+            timer.schedule(new Give(this), calcArrivalTime(location, selectedOrder.getRecipient().getLocation()) + calcArrivalTime(selectedOrder.getRecipient().getLocation(), selectedOrder.getCostomer().getLocation()));
+            return path1.toString() + "\t" + path2.toString();
+        }
+
+        catch (NoPathException e)
+        {
+            imFree();
+            throw new RuntimeException(e);
+        }
+    }
+    class Give extends TimerTask
+    {
+        Delivery delivery;
+        Give(Delivery delivery)
+        {
+            super();
+            this.delivery = delivery;
+        }
+
+        @Override
+        public void run() throws RuntimeException
+        {
+            delivery.getSelectedOrder().setOrderState(OrderState.RECEIVED);
+            delivery.getSelectedOrder().getCostomer().receiveOrder(delivery.getSelectedOrder());
+            delivery.imFree();
+            if(Account.getActiveUser().getId() == getId())
+                System.out.println("you delivered the food succesfully!");
         }
     }
 
@@ -239,6 +290,14 @@ public class Delivery extends Account
         YouAreFreeException()
         {
             super("[Error]Sorry you don't have anything to deliver!");
+        }
+    }
+
+    public static class SuccessfullDeliveryException extends Exception
+    {
+        SuccessfullDeliveryException()
+        {
+            super("you delivered the food successfully!");
         }
     }
 }

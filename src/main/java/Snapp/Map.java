@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Map {
     static int INF = Integer.MAX_VALUE;
-    static String mapfilelocation ="a:\\graph.txt";
+    static String mapfilelocation = "C:\\Users\\jck_5\\Desktop\\projects\\Snappfood_Replica\\src\\main\\java\\Snapp\\graph.txt";
 
     static int shortPath(int start, int end, ArrayList<Integer> path) throws NoPathException {
         int ret = -1;

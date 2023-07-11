@@ -24,17 +24,23 @@ public class User extends Account
     {
         super(name, pass, id);
     }
-
     public User() {
-        
-    }
 
-    static User createUser(String name, String pass)
-            throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException
+    }
+    public static User createUser(String name, String pass)
+            throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {
-        User user = new User(name, pass, nextID++);
-        AccountList.add(user);
-        return user;
+        try
+        {
+            findAccount(name);
+        }
+        catch (Exception e)
+        {
+            User user = new User(name, pass, nextID++);
+            AccountList.add(user);
+            return user;
+        }
+        throw new UsernameTakenException();
     }
 
     public static User getActiveUser()
@@ -143,6 +149,14 @@ public class User extends Account
         receivedOrders.add(order);
         deleteActiveOrder();
         notifications.add("your order has been delivered to you!");
+    }
+
+    public Order getReceivedOrderbyId(int id) throws Order.OrderDoesntExistEXception
+    {
+        for(Order o:receivedOrders)
+            if(o.getId() == id)
+                return o;
+        throw new Order.OrderDoesntExistEXception();
     }
 
     public Order getActiveOrder()

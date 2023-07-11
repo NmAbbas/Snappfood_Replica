@@ -7,10 +7,10 @@ import java.security.NoSuchAlgorithmException;
 public class Admin extends Account {
 
     public Admin() {
-        
+
     }
 
-    static Admin createAccount(String name, String pass)
+    public static Admin createAccount(String name, String pass)
             throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
         Admin admin = new Admin(name, pass, nextID++);
         admin.setadmin();

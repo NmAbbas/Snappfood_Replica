@@ -50,6 +50,7 @@ public class Restaurant
 
         for(Restaurant rest:r){
             nextID=Math.max(nextID,rest.id);
+            // missing some bs here
         }
     }
 
@@ -60,14 +61,21 @@ public class Restaurant
     private HashSet<FoodType> foodtype = new HashSet<>();	// this is the restaurant type but the foodtype enum is used for it
     private Admin owner;
     int ownerid;
+    int location;
+    private String imageURL = "/images/hamburger.png";
+    private ArrayList<Order> orderList = new ArrayList<>();
 
     public static int getNextID() {
         return nextID;
     }
 
-    private ArrayList<Order> orderList = new ArrayList<>();
+    public String getImageURL() {
+        return imageURL;
+    }
 
-    int location;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
     public ArrayList<Food> getMenu() {
         return menu;
@@ -110,7 +118,7 @@ public class Restaurant
         this.id = id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
