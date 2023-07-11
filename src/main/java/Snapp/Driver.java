@@ -496,7 +496,7 @@ public class Driver {
                         try{
                         Admin.getActiveUser().getActiveRestaurant().cook(Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])));
                             System.out.println("the order will be cooked in "  +
-                                    Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])).getCookingTime()/(60 * 10000)
+                                    Order.getOrderbyId(Integer.parseInt(parts[2])).getCookingTime()/(60 * 10000)
                                     + " Minutes and sent sir!");
                         } catch (Exception e) {
                             System.out.println(e.getMessage());

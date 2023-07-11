@@ -142,6 +142,8 @@ public class Delivery extends Account
 
     void imFree()
     {
+        if(Account.activeUser == this)
+            System.out.println("you delivered the order successfully!");
         selectedOrder = null;
     }
 
