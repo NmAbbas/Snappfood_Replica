@@ -258,6 +258,23 @@ public class DB {
         preparedStatement = connection.prepareStatement("truncate table db.comments;");
         preparedStatement.executeUpdate();
     }
+    static void close(){
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+
+            }
+    }
 //    void saveusers() throws SQLException {
 //        preparedStatement = connection.prepareStatement("delete from users ;");
 //        for (Account u :Account.AccountList){

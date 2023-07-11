@@ -8,5 +8,6 @@ class Main
         Driver d = new Driver();
         d.phase1drive();
         Savior.saving();
+        DB.close();
     }
 }
