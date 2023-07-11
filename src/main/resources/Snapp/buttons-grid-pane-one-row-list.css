@@ -1,6 +1,8 @@
 .button{
+    -fx-pref-width: 480;
+    -fx-pref-height: 100;
     -fx-background-color: #fff;
-    -fx-content-display: left;
+    -fx-content-display: right;
     -fx-text-alignment: right;
     -fx-alignment: center-right;
 }

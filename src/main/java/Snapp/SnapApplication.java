@@ -26,9 +26,9 @@ public class SnapApplication extends Application {
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
             d1.setLocation(2);
 
-            Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 1);
-            Restaurant r11 = Restaurant.createRestaurant("Krusty Krab2", FoodType.FRIED, a1, 2);
-            Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
+            Restaurant r1 = Restaurant.createRestaurant("زستوران خرچنگی", FoodType.FRIED, a1, 1);
+            Restaurant r11 = Restaurant.createRestaurant("رستوران خرچنگی۲", FoodType.FRIED, a1, 2);
+            Restaurant r2 = Restaurant.createRestaurant("چام باکت", FoodType.FRIED, a2, 1);
 
             Food f1 = Food.createFood("Krabby Patty", 10, FoodType.FRIED, 10000, r1);
             u1.selectRestaurant(1);
