@@ -1,0 +1,6 @@
+.label{
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: #ff73dc;
+    -fx-effect: dropshadow( three-pass-box , rgba(128, 20, 100, 0.7), 1, 0.0 , 1 , 1 );
+}

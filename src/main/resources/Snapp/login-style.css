@@ -1,0 +1,12 @@
+#loginLabel, #signUpLabel, #forgotPasswordLabel{
+    -fx-font-family: "Nazanintar";
+    -fx-alignment: center;
+}
+#loginLabel{
+    -fx-font-size: 18px;
+    -fx-text-fill: #801464;
+}
+#signUpLabel:hover, #forgotPasswordLabel:hover{
+    -fx-text-fill: #429eff;
+    -fx-underline: true;
+}

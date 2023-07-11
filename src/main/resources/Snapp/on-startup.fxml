@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #ff73dc" stylesheets="@on-startup-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.OnSturtup">
+   <children>
+      <Label layoutX="210.0" layoutY="326.0" text="Snapp!" />
+      <Label layoutX="264.0" layoutY="367.0" text="Food" />
+   </children>
+</AnchorPane>
