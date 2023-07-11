@@ -2,6 +2,7 @@ package Snapp.Controller;
 
 import Snapp.Account;
 import Snapp.SnapApplication;
+import Snapp.User;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -18,10 +19,10 @@ public class UserSignUp {
         usernameErrorLabel.setOpacity(0.0);
         try
         {
-            Account.createAccount(usernameField.getText(),passwordField.getText());
+            User.createUser(usernameField.getText(), passwordField.getText());
             SnapApplication.changeScene("user-login.fxml");
         }
-        catch (Account.InvalidUsernameException e)
+        catch (Account.InvalidUsernameException | Account.UsernameTakenException e)
         {
             usernameErrorLabel.setOpacity(1.00);
         }
@@ -33,7 +34,6 @@ public class UserSignUp {
         {
             e.printStackTrace();
         }
-
     }
     public void openLogin() throws IOException {
         SnapApplication.changeScene("user-login.fxml");

@@ -24,7 +24,7 @@
             </image>
         </ImageView>
         <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-      <Label fx:id="usernameErrorLabel" layoutX="225.0" layoutY="368.0" opacity="0.0" prefHeight="18.0" prefWidth="152.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
+      <Label fx:id="usernameErrorLabel" layoutX="165.0" layoutY="368.0" opacity="0.0" prefHeight="20.0" prefWidth="222.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
       <Label fx:id="passwordErrorLabel" layoutX="183.0" layoutY="432.0" opacity="0.0" prefHeight="74.0" prefWidth="206.0" text="رمز قابل قبول نیست.&#10;حداقل باید دارای ۸ کاراکتر و حروف کوچک و بزرگ&#10; و یک علامت و عدد باشد." />
       <Button layoutX="191.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#checkSignUp" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
     </children>

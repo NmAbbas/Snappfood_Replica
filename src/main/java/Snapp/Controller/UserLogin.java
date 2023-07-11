@@ -13,15 +13,16 @@ public class UserLogin {
     public TextField usernameField;
     public TextField passwordField;
     public void checkLogin() throws IOException {
+        errorLabel.setRotate(0.0);
         try
         {
-            Account.setActiveUser(Account.login(usernameField.getText(), passwordField.getText()));
+            Account account = Account.login(usernameField.getText(), passwordField.getText());
+            if (account.isIsadmin() || account.isDelivery())
+                throw new Account.UsernameNotExists();
+            Account.setActiveUser(account);
+            SnapApplication.changeScene("user-home.fxml");
         }
-        catch (Account.UsernameNotExists e)
-        {
-            errorLabel.setOpacity(1.00);
-        }
-        catch (Account.IncorrectPasswordException e)
+        catch (Account.UsernameNotExists | Account.IncorrectPasswordException e)
         {
             errorLabel.setOpacity(1.00);
         }
@@ -29,7 +30,6 @@ public class UserLogin {
         {
             e.printStackTrace();
         }
-
     }
     public void openUserSignUp() throws IOException {
         SnapApplication.changeScene("user-sign-up.fxml");

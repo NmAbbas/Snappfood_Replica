@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@sign-up-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminSignUp">
     <children>
         <Label fx:id="signUpLabel" layoutX="186.0" layoutY="270.0" prefWidth="198.0" text="ایجاد حساب مدیر" />
@@ -23,9 +23,9 @@
                 <Image url="@../images/password.png" />
             </image>
         </ImageView>
-        <Label fx:id="snappFoodLabel" stylesheets="@small-snapp-food-label.css" layoutX="240.0" layoutY="46.0" text="Snapp! Food" />
-        <Label fx:id="usernameErrorLabel" opacity="0.0" layoutX="225.0" layoutY="368.0" prefHeight="18.0" prefWidth="152.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
-        <Label fx:id="passwordErrorLabel" opacity="0.0" layoutX="225.0" layoutY="432.0" prefHeight="18.0" prefWidth="152.0" text="رمز قابل قبول نیست" />
-        <Button layoutX="191.0" layoutY="449.0" onMouseClicked="#checkSignUp" mnemonicParsing="false" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
+        <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
+        <Label fx:id="usernameErrorLabel" layoutX="167.0" layoutY="368.0" opacity="0.0" prefHeight="20.0" prefWidth="219.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
+        <Label fx:id="passwordErrorLabel" layoutX="225.0" layoutY="432.0" opacity="0.0" prefHeight="18.0" prefWidth="152.0" text="رمز قابل قبول نیست" />
+        <Button layoutX="191.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#checkSignUp" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
     </children>
 </AnchorPane>
