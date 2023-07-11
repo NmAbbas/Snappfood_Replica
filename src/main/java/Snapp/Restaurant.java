@@ -1,23 +1,21 @@
 package Snapp;
-
-import Snapp.Order.OrderDoesntExistEXception;
-
 import java.util.*;
+import Snapp.Order.OrderDoesntExistEXception;
 
 
 public class Restaurant
 {
-	/* static Instances for managing restaurants */
-	private static int nextID = 0;
-	private static ArrayList<Restaurant> restaurantList = new ArrayList<>();
-	/* static methods for managing restaurants */
-	public static Restaurant createRestaurant(String name, FoodType foodtype, Admin owner,int loc)
-	{
-		Restaurant r = new Restaurant(name, nextID++, foodtype, owner,loc);
-		restaurantList.add(r);
+    /* static Instances for managing restaurants */
+    private static int nextID = 0;
+    private static ArrayList<Restaurant> restaurantList = new ArrayList<>();
+    /* static methods for managing restaurants */
+    public static Restaurant createRestaurant(String name, FoodType foodtype, Admin owner,int loc)
+    {
+        Restaurant r = new Restaurant(name, nextID++, foodtype, owner,loc);
+        restaurantList.add(r);
         owner.addRestaurant(r);
-		return r;
-	}
+        return r;
+    }
 
     public static void sort(List<Restaurant> restaurants) {
         Collections.sort(restaurants, new restaurantComparator());
@@ -28,6 +26,15 @@ public class Restaurant
         return restaurantList;
     }
 
+    public static Restaurant getRestaurantByID(int id)
+    {
+        for (Restaurant r: restaurantList)
+        {
+            if(r.getId()==id)
+                return r;
+        }
+        return null;
+    }
     public static ArrayList<Restaurant> searchRestaurants(String searchString)
     {
         ArrayList<Restaurant> matchings = new ArrayList<>();
@@ -39,13 +46,21 @@ public class Restaurant
 
         return matchings;
     }
+    public static void LinkBS(ArrayList<Restaurant> r){ //called after filling all
+
+        for(Restaurant rest:r){
+            nextID=Math.max(nextID,rest.id);
+            // missing some bs here
+        }
+    }
 
     private int id;
-	private String name;
-	ArrayList<Food> menu = new ArrayList<>();
-	ArrayList<Comment> commentSection = new ArrayList<>();
-	private HashSet<FoodType> foodtype = new HashSet<>();	// this is the restaurant type but the foodtype enum is used for it
-	private Admin owner;
+    private String name;
+    ArrayList<Food> menu = new ArrayList<>();
+    ArrayList<Comment> commentSection = new ArrayList<>();
+    private HashSet<FoodType> foodtype = new HashSet<>();	// this is the restaurant type but the foodtype enum is used for it
+    private Admin owner;
+    int ownerid;
 
     public static int getNextID() {
         return nextID;
@@ -53,7 +68,7 @@ public class Restaurant
 
     private ArrayList<Order> orderList = new ArrayList<>();
 
-	int location;
+    int location;
 
     public ArrayList<Food> getMenu() {
         return menu;
@@ -72,14 +87,14 @@ public class Restaurant
     }
 
     /* local methods for a single restaurant */
-	private Restaurant(String name, int id, FoodType foodtype, Admin owner,int loc)
-	{
-		this.id = id;
-		this.name = name;
-		this.foodtype.add(foodtype);
-		this.owner = owner;
-		this.location =loc;
-	}
+    Restaurant(String name, int id, FoodType foodtype, Admin owner, int loc)
+    {
+        this.id = id;
+        this.name = name;
+        this.foodtype.add(foodtype);
+        this.owner = owner;
+        this.location =loc;
+    }
 
     // <location variable>
 
@@ -173,19 +188,19 @@ public class Restaurant
         Delivery.undeliveredList.add(order);
     }
 
-	int getLocation(){
-		return this.location;
-	}
-	void setLocation(int loc){
-		this.location=loc;
-	}
-	void editFoodtype(ArrayList<FoodType> f) throws FoodTypeUnchangable {           //clears the previous foodtypes
-            if(this.hasActiveOrder()){
-                throw new FoodTypeUnchangable();
-            }
+    int getLocation(){
+        return this.location;
+    }
+    void setLocation(int loc){
+        this.location=loc;
+    }
+    void editFoodtype(ArrayList<FoodType> f) throws FoodTypeUnchangable {           //clears the previous foodtypes
+        if(this.hasActiveOrder()){
+            throw new FoodTypeUnchangable();
+        }
         this.foodtype.clear();
         this.foodtype.addAll(f);
-	}
+    }
     void addFoodtype(ArrayList<FoodType> f) throws FoodTypeUnchangable {           //just adds to the previous foodtypes
         for(Order o : orderList){
             if(o.getOrderState()==OrderState.GETTING_READY || o.getOrderState()==OrderState.PENDING){

@@ -48,13 +48,14 @@ class Food {
     private boolean activation = true;
     private double discount = 0.0;
     private long cookingTime;
+    int ownerid;
     private Restaurant owner;
     ArrayList<Comment> comments;
     ArrayList<Rating> ratings;
 //    Time discount
 
     /* local methods */
-    private Food(int id, String name, double price, FoodType foodtype, long cookingTime, Restaurant owner)
+    Food(int id, String name, double price, FoodType foodtype, long cookingTime, Restaurant owner)
             throws InvalidPriceException {
         this.id = id;                                   //internal copies which i made(Abbas) use -1 id
         this.name = name;
@@ -64,6 +65,15 @@ class Food {
         this.owner = owner;
         this.comments=new ArrayList<>();
         owner.addFood(this);
+    }
+    void LinkBS(ArrayList<Food> foods){         //called after filling all
+        for(Food f:foods){
+            nextID=Math.max(nextID,f.getId());
+            if(f.getOwner()==null){
+                f.owner=Restaurant.getRestaurantByID(f.ownerid);
+            }
+        }
+
     }
 
     public int getId() {
@@ -215,12 +225,12 @@ class Food {
     }
 
 
-    static public class FoodIsDeactiveException extends Exception 
+    static public class FoodIsDeactiveException extends Exception
     {
-	    Food inactiveFood;
+        Food inactiveFood;
 
         FoodIsDeactiveException(Food inactiveFood)
-       	{
+        {
             super("[Error] Sorry the food:\n" + inactiveFood.id + "\t" + inactiveFood.name + "\n"  + "is inactive!");
             this.inactiveFood = inactiveFood;
         }

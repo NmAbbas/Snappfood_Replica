@@ -1,13 +1,13 @@
 package Snapp;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.security.spec.InvalidKeySpecException;
+import java.security.NoSuchAlgorithmException;
 
 public class Admin extends Account {
 
     static Admin createAccount(String name, String pass)
-            throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
+            throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
         Admin admin = new Admin(name, pass, nextID++);
         admin.setadmin();
         AccountList.add(admin);
@@ -18,15 +18,23 @@ public class Admin extends Account {
     {
         return (Admin) activeUser;
     }
+    static Admin getAdminByID(int id){
+        for(Account a:Account.AccountList){
+            if(a.id==id && a.isadmin){
+                return (Admin)a;
+            }
+        }
+        return null;
+    }
 
 
     private Admin(String name, String pass, int id)
-            throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
+            throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
         super(name, pass, id);
     }
 
 
-	private ArrayList<Restaurant> restaurants = new ArrayList<>();
+    private ArrayList<Restaurant> restaurants = new ArrayList<>();
 
     public ArrayList<Restaurant> getRestaurants() {
         return restaurants;
@@ -44,19 +52,19 @@ public class Admin extends Account {
 
     private Food activeFood = null;
     private Order activeOrder= null;
-	public void addRestaurant(String name,FoodType foodType,int loc)
+    public void addRestaurant(String name,FoodType foodType,int loc)
     {
-		Restaurant r = Restaurant.createRestaurant(name,foodType,this,loc);
-		restaurants.add(r);
-	}
-	public void printRestaurants()
-	{
-		if(restaurants.isEmpty())
-		{
-			System.out.println("you own no restaurant!");
-			return;
-		}
-		Restaurant.sort(restaurants);
+        Snapp.Restaurant r = Restaurant.createRestaurant(name,foodType,this,loc);
+        restaurants.add(r);
+    }
+    public void printRestaurants()
+    {
+        if(restaurants.isEmpty())
+        {
+            System.out.println("you own no restaurant!");
+            return;
+        }
+        Restaurant.sort(restaurants);
 
         System.out.println("your restaurant(s):");
         System.out.println("ID\tNAME");
@@ -80,15 +88,15 @@ public class Admin extends Account {
         return activeRestaurant;
     }
 
-	void addRestaurant(Restaurant r)
-	{
-		if(!restaurants.contains(r))
-			restaurants.add(r);
-	}
-	void addFood(){
+    void addRestaurant(Restaurant r)
+    {
+        if(!restaurants.contains(r))
+            restaurants.add(r);
+    }
+    void addFood(){
 
 //		selected.addFood();
-	}
+    }
     void editFoodtype(ArrayList<FoodType> f) throws Restaurant.FoodTypeUnchangable {
         activeRestaurant.editFoodtype(f);
     }
@@ -101,7 +109,7 @@ public class Admin extends Account {
     void selectFood(int index) throws Food.InvalidFoodID {             //searches in the global list, unique IDs ...
         activeFood = Food.getFoodbyId(index);
     }
-//    void editActiveFood(Food f) throws Food.FoodHasActiveOrder, Food.InvalidFoodID {
+    //    void editActiveFood(Food f) throws Food.FoodHasActiveOrder, Food.InvalidFoodID {
 //        if (!activeRestaurant.foodHasActiveOrder(activeFood.getId())){
 //            activeFood.copyWithKeepingIdentity(f);
 //        }
