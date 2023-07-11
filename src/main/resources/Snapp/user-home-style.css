@@ -1,6 +1,6 @@
 #searchField{
     -fx-font-family: "Nazanintar";
-    -fx-background-image: url('../../../images/search.png');
+    -fx-background-image: url('../images/search.png');
     -fx-background-size: 20 20;
     -fx-background-position: left center;
     -fx-background-repeat: no-repeat;

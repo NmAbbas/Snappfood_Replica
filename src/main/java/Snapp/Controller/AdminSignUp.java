@@ -1,4 +1,4 @@
 package Snapp.Controller;
 
-public class UserLogin {
+public class AdminSignUp {
 }

@@ -22,7 +22,8 @@
             <Image url="@../images/password.png" />
          </image>
       </ImageView>
-      <Label fx:id="snappFoodLabel" layoutX="240.0" stylesheets="@small-snapp-food-label.css" layoutY="46.0" text="Snapp! Food" />
-      <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="437.0" prefWidth="205.0" text="فراموشی رمز" />
+      <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
+      <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="447.0" prefWidth="205.0" text="فراموشی رمز" />
+      <Label fx:id="errorLabel" layoutX="225.0" layoutY="425.0" prefHeight="18.0" prefWidth="164.0" text="خطا" />
    </children>
 </AnchorPane>

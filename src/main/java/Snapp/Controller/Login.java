@@ -1,8 +1,6 @@
 package Snapp.Controller;
 
 import Snapp.SnapApplication;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 
 import java.io.IOException;
 
