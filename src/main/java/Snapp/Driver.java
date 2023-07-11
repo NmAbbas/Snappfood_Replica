@@ -335,11 +335,13 @@ public class Driver {
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
+            u3.setLocation(10);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
 
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
+            d1.setLocation(20);
 
             Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 0);
             Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
