@@ -25,6 +25,7 @@ public class Comment {
     static void createComment(String message, User commenter, Restaurant restaurant, Food food)
     {
         Comment c = new Comment(message, commenter, restaurant, food);
+        food.comments.add(c);
         commentList.add(c);
     }
 
@@ -51,8 +52,10 @@ public class Comment {
         this.commenter = commenter;
         this.upper = null;
         this.restaurant = restaurant;
+        this.food=food;
         if(restaurant != null)
             restaurant.getCommentSection().add(this);
+
         if(food != null)
             food.getComments().add(this);
 

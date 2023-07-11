@@ -19,6 +19,7 @@ public class Admin extends Account {
         catch (Exception e)
         {
             Admin admin = new Admin(name, pass, nextID++);
+            admin.setadmin();
             AccountList.add(admin);
             return admin;
         }

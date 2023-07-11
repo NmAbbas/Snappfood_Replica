@@ -205,24 +205,36 @@ public class DB {
     static void saveCooments(ArrayList<Comment> comments) throws SQLException {
         for(Comment f:comments){
             if (f.getFood() != null){
-                preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, foodid,message,upper)\n" +
-                        "VALUES (?, ?, ?,?,?);");
+                preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, foodid,message)\n" +
+                        "VALUES (?, ?, ?,?);");
                 preparedStatement.setInt(1, f.getID());
                 preparedStatement.setInt(2, f.getCommenter().getId());
                 preparedStatement.setInt(3, f.getFood().getId());
                 preparedStatement.setString(4, f.getMessage());
-                if (f.getUpper() != null) preparedStatement.setInt(5, f.getUpper().getID());
+                if (f.getUpper() != null) {
+                    preparedStatement = connection.prepareStatement("INSERT INTO db.comments (upper)\n" +
+                            "VALUES (?);");
+                    preparedStatement.setInt(1, f.getUpper().getID());
+                    preparedStatement.executeUpdate();
+                }
                 preparedStatement.executeUpdate();
             }
             if (f.getRestaurant() != null) {
-                preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, restaurantid,message,upper)\n" +
-                        "VALUES (?, ?, ?,?,?);");
+                preparedStatement = connection.prepareStatement("INSERT INTO db.comments (id, userid, restaurantid,message)\n" +
+                        "VALUES (?, ?, ?,?);");
                 preparedStatement.setInt(1, f.getID());
                 preparedStatement.setInt(2, f.getCommenter().getId());
                 preparedStatement.setInt(3, f.getRestaurant().getId());
                 preparedStatement.setString(4, f.getMessage());
-                if (f.getUpper() != null) preparedStatement.setInt(5, f.getUpper().getID());
                 preparedStatement.executeUpdate();
+
+                if (f.getUpper() != null) {
+                    preparedStatement = connection.prepareStatement("INSERT INTO db.comments (upper)\n" +
+                            "VALUES (?);");
+                    preparedStatement.setInt(1, f.getUpper().getID());
+                    preparedStatement.executeUpdate();
+                }
+
             }
         }
     }
@@ -233,11 +245,11 @@ public class DB {
         ArrayList<Comment> comments = new ArrayList<>();
         while (resultSet.next()){
             Comment f = new Comment();
-            f.setCommenter(User.getUserByID(resultSet.getInt("customerid")));
+            f.setCommenter(User.getUserByID(resultSet.getInt("userid")));
             f.setFood(Food.getFoodbyId(resultSet.getInt("foodid")));
             f.setID(resultSet.getInt("id"));
             f.setMessage(resultSet.getString("message"));
-            f.setUpper(Comment.getCommentById(resultSet.getInt("upper")));
+            if(resultSet.getInt("upper")!=-1)f.setUpper(Comment.getCommentById(resultSet.getInt("upper")));
             comments.add(f);
         }
         for(Comment c: comments){
