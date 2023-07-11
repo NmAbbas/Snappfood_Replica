@@ -29,7 +29,6 @@ public class UserLogin {
         {
             e.printStackTrace();
         }
-        SnapApplication.changeScene("user-home.fxml");
 
     }
     public void openUserSignUp() throws IOException {
