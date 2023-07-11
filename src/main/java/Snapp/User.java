@@ -67,6 +67,19 @@ public class User extends Account
     {
         this.currency = currency;
     }
+    public void addCurrency(int c)
+    {
+        if(c < 0)
+            this.currency += c;
+    }
+
+    public static class InvalidCurrencyException extends Exception
+    {
+        InvalidCurrencyException()
+        {
+            super("you cannot charge negative currency!");
+        }
+    }
 
     public ArrayList<Restaurant> getPreviousRestaurants()
     {
