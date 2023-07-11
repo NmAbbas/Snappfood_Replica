@@ -62,6 +62,29 @@ public class Driver {
         }
     }
 
+    static void deliverynew(String username, String pass) {
+        Account a;
+        try {
+            Delivery.createAccount(username, pass);
+            System.out.println("DELIVERY CREATION SUCCESS");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    static void deliverylogin(String username, String pass) {
+        Account a;
+        try {
+            a = Account.login(username, pass);
+            a.admintry();
+            Account.activeUser = a;
+            System.out.println("DELIVERY LOGIN SUCCESS");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     // user methods
     static void printRestaurantList(ArrayList<Restaurant> restaurants)
     {
@@ -309,12 +332,14 @@ public class Driver {
         // example creation:
         try
         {
-            User u1 = User.createUser("squidward", "P@ss12345678");
-            User u2 = User.createUser("spongebob", "P@ss12345678");
+            User u1 = User.createUser("sandy", "P@ss12345678");
+            User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
+
+            Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
 
             Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 0);
             Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
@@ -360,6 +385,12 @@ public class Driver {
                 } else if (inp.matches("^\\s*logout.*"))
                 {
                     Account.logout();
+                } else if (inp.matches("^\\s*add delivery.*"))
+                {
+                    deliverynew(parts[2], parts[3]);
+                } else if (inp.matches("^\\s*login delivery.*"))
+                {
+                    deliverylogin(parts[2], parts[3]);
                 }
             }
 
