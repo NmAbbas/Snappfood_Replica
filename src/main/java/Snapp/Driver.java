@@ -249,8 +249,8 @@ public class Driver {
         for(Order o : orders)
         {
             System.out.println(o.getId() + "\t\t" + o.getCostomer().getName() + "\t\t" + o.getRecipient());
+            System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
             for(Food f : o.getFoods()){
-                System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
                 System.out.println("\t\t" +f.getId() + "\t\t" + f.getName() + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
             }
             System.out.println("=================================================");
@@ -335,14 +335,15 @@ public class Driver {
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
-            u3.addCurrency(10000);
+            u3.setLocation(3);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
 
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
+            d1.setLocation(2);
 
-            Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 0);
+            Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 1);
             Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
 
             Food f1 = Food.createFood("Krabby Patty", 10, FoodType.FRIED, 10000, r1);
@@ -494,8 +495,8 @@ public class Driver {
                     {
                         try{
                         Admin.getActiveUser().getActiveRestaurant().cook(Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])));
-                            System.out.println("the order will be cook in "  +
-                                    Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])).getCookingTime()/(60 * 10000)
+                            System.out.println("the order will be cooked in "  +
+                                    Order.getOrderbyId(Integer.parseInt(parts[2])).getCookingTime()/(60 * 10000)
                                     + " Minutes and sent sir!");
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
@@ -515,6 +516,14 @@ public class Driver {
                     try
                     {
                         Delivery.getActiveUser().setSelectedOrder(Delivery.getUndeliveredOrderById(Integer.parseInt(parts[2])));
+                        System.out.println("you started delivering the order successfully! you will arrive in"
+                                + (Delivery.getActiveUser().calcArrivalTime(Delivery.getActiveUser().location, Delivery.getActiveUser().getSelectedOrder().getRecipient().getLocation())
+                                + Delivery.getActiveUser().calcArrivalTime(Delivery.getActiveUser().getSelectedOrder().getCostomer().getLocation(), Delivery.getActiveUser().getSelectedOrder().getRecipient().getLocation()))/1000
+                                + "seconds!");
+                        System.out.println(Map.path(Delivery.getActiveUser().location, Delivery.getActiveUser().getSelectedOrder().getRecipient().getLocation()).toString());
+                        System.out.println(Map.path(Delivery.getActiveUser().getSelectedOrder().getRecipient().getLocation(),
+                                Delivery.getActiveUser().getSelectedOrder().getCostomer().getLocation()).toString());
+                        System.out.println("the path is: " + Delivery.getActiveUser().go());
                     }
                     catch (Exception e)
                     {
@@ -663,6 +672,22 @@ public class Driver {
                         try
                         {
                             User.getActiveUser().addCurrency(Integer.parseInt(parts[2]));
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e.getMessage());
+                        }
+                    } else if (inp.matches("^\\s*show order history\\s*"))
+                    {
+                        printOrders(User.getActiveUser().getReceivedOrders());
+                    } else if (inp.matches("^\\s*select order\\s+\\d+\\s*"))
+                    {
+                        try
+                        {
+                            Order o = User.getActiveUser().getReceivedOrderbyId(Integer.parseInt(parts[2]));
+                            ArrayList<Order> l = new ArrayList<>();
+                            l.add(o);
+                            printOrders(l);
                         }
                         catch (Exception e)
                         {

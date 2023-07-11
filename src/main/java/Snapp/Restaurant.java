@@ -171,10 +171,8 @@ public class Restaurant
     }
 
     public void cook(Order order) {
-        order.setOrderState(OrderState.GETTING_READY);
         order.setCookingStartTime(System.currentTimeMillis());
         order.cook();
-
     }
 
     public void teleportDeliver(Order order) { // if things go wrong change this to deliver and eliminate delivery class

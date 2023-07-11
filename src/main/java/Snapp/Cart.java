@@ -79,7 +79,7 @@ class Cart
             if (!f.isActive())
                 inactive.add(f);
 
-        if (inactive.isEmpty())
+        if (!inactive.isEmpty())
             throw new CartContainsDeactiveFoodsException(inactive);
 
         costomer.pay(price());

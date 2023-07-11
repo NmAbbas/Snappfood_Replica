@@ -1,5 +1,7 @@
 package Snapp;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +75,7 @@ public class DB {
             preparedStatement.executeUpdate();
         }
     }
-    static ArrayList<Restaurant> loadRestaurants() throws SQLException, Food.InvalidPriceException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable {
+    static ArrayList<Restaurant> loadRestaurants() throws SQLException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable {
         statement = connection.createStatement();
         resultSet = statement.executeQuery("select (id, name, restaurantid,type,price,discount,cookingtime) from db.food ;");
         ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -90,6 +92,40 @@ public class DB {
         }
         return restaurants;
     }
+
+    static void saveAccounts(ArrayList<Account> accounts) throws SQLException {
+        for(Account f:accounts){
+            preparedStatement = connection.prepareStatement("INSERT INTO db.users (id, username, password,salt,isadmin,isdelivery,curreny,location)\n" +
+                    "VALUES (?, ?, ?,?,?,?,?,?);");
+            preparedStatement.setInt(1, f.getId());
+            preparedStatement.setString(2, f.getName());
+            preparedStatement.setString(3, new String(f.getHashedPassword()));
+            preparedStatement.setString(4, new String(f.getSalt()));
+            preparedStatement.setBoolean(5, f.isadmin);
+            preparedStatement.setBoolean(6, f.isDelivery);
+            preparedStatement.setInt(7, (f.isIsadmin()?0:((User)f).getCurrency()));
+            preparedStatement.setInt(8, f.getLocation());
+            preparedStatement.executeUpdate();
+        }
+    }
+
+//    static ArrayList<Account> loadAccounts() throws SQLException, FoodType.UnknownType,  Account.InvalidPasswordException, Account.InvalidUsernameException, NoSuchAlgorithmException, InvalidKeySpecException {
+//        statement = connection.createStatement();
+//        resultSet = statement.executeQuery("select (id, username, password,salt,isadmin,isdelivery,curreny,location) from db.food ;");
+//        ArrayList<Account> accounts = new ArrayList<>();
+//        while (resultSet.next()){
+//            String type = resultSet.getString("type");
+//            ArrayList<FoodType> foodtype = new ArrayList<>();
+//            for(String s:type.substring(1, type.length() - 1).split(", ")){
+//                foodtype.add(FoodType.parse(s));
+//            }
+//            Account f = new Account(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,Admin.getAdminByID(resultSet.getInt("restaurantid")),resultSet.getInt("loc"));
+//            f.addFoodtype(foodtype);
+//            f.ownerid=resultSet.getInt("restaurantid");
+//            accounts.add(f);
+//        }
+//        return accounts;
+//    }
 
 //    void saveusers() throws SQLException {
 //        preparedStatement = connection.prepareStatement("delete from users ;");

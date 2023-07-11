@@ -43,6 +43,7 @@ public class Order {
     }
 
     private long cookingStartTime;
+    public static ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Food> orderedFoods = new ArrayList<>();
     private Order(int id, User costomer, ArrayList<Food> orderedFoods,
                   Restaurant recipient) {
@@ -59,8 +60,16 @@ public class Order {
                                    Restaurant recipient) {
         Order order = new Order(nextId++, costomer, orderedFoods, recipient);
         order.recipient.handleOrder(order);
-        recipient.addOrder(order);
+        orders.add(order);
         return order;
+    }
+
+    public static Order getOrderbyId(int id) throws OrderDoesntExistEXception
+    {
+        for(Order o: orders)
+            if(o.getId() == id)
+                return o;
+        throw new OrderDoesntExistEXception();
     }
 
     /* instance methods */
@@ -121,6 +130,7 @@ public class Order {
     }
 
     public void cook() {
+        setOrderState(OrderState.GETTING_READY);
         timer.schedule(new Cook(this), cookingTime);
     }
 
@@ -129,7 +139,7 @@ public class Order {
     }
 
     boolean orderIsActive(){
-        return (this.orderState== PENDING  );
+        return (this.orderState == PENDING );
     }
 
     long estimateTimer() throws Map.NoPathException//is in miliseconds

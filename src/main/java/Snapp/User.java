@@ -12,7 +12,7 @@ public class User extends Account
     /* static methods */
 
     /* instance variables */
-    private int currency = 0;
+    private int currency = 1000;
     private ArrayList<Restaurant> previousRestaurants = new ArrayList<>();
     private ArrayList<Order> receivedOrders = new ArrayList<>();
     private Restaurant activeRestaurant = null;
@@ -134,6 +134,14 @@ public class User extends Account
         notifications.add("your order has been delivered to you!");
     }
 
+    public Order getReceivedOrderbyId(int id) throws Order.OrderDoesntExistEXception
+    {
+        for(Order o:receivedOrders)
+            if(o.getId() == id)
+                return o;
+        throw new Order.OrderDoesntExistEXception();
+    }
+
     public Order getActiveOrder()
     {
         return activeOrder;
@@ -143,6 +151,7 @@ public class User extends Account
     {
         if (currency < price)
             throw new CurrencyNotEnoughException();
+        currency -= price;
     }
 
     int selectRestaurant(int id) // return 1 on success, 0 if doesn,t exist
