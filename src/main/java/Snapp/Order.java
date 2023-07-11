@@ -59,7 +59,6 @@ public class Order {
                                    Restaurant recipient) {
         Order order = new Order(nextId++, costomer, orderedFoods, recipient);
         order.recipient.handleOrder(order);
-        recipient.addOrder(order);
         return order;
     }
 
@@ -121,6 +120,7 @@ public class Order {
     }
 
     public void cook() {
+        setOrderState(OrderState.GETTING_READY);
         timer.schedule(new Cook(this), cookingTime);
     }
 
@@ -129,7 +129,7 @@ public class Order {
     }
 
     boolean orderIsActive(){
-        return (this.orderState== PENDING  );
+        return (this.orderState == PENDING );
     }
 
     long estimateTimer() throws Map.NoPathException//is in miliseconds

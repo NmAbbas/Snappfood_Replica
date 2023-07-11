@@ -249,8 +249,8 @@ public class Driver {
         for(Order o : orders)
         {
             System.out.println(o.getId() + "\t\t" + o.getCostomer().getName() + "\t\t" + o.getRecipient());
+            System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
             for(Food f : o.getFoods()){
-                System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
                 System.out.println("\t\t" +f.getId() + "\t\t" + f.getName() + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
             }
             System.out.println("=================================================");
@@ -335,7 +335,6 @@ public class Driver {
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
-            u3.addCurrency(10000);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
@@ -494,7 +493,7 @@ public class Driver {
                     {
                         try{
                         Admin.getActiveUser().getActiveRestaurant().cook(Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])));
-                            System.out.println("the order will be cook in "  +
+                            System.out.println("the order will be cooked in "  +
                                     Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])).getCookingTime()/(60 * 10000)
                                     + " Minutes and sent sir!");
                         } catch (Exception e) {
