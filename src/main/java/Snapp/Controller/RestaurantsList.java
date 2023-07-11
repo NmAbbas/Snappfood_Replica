@@ -2,12 +2,14 @@ package Snapp.Controller;
 
 import Snapp.Restaurant;
 import Snapp.SnapApplication;
+import Snapp.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,8 +38,23 @@ public class RestaurantsList implements Initializable {
                 buttons[i].setGraphic(imageView);
 //                buttons[i].setGraphicTextGap(buttons[i].getWidth()-80-buttons[i].getText().length()-20);
                 gridPane.addRow(i,buttons[i]);
+                int k = i;
+                buttons[i].setOnAction(e -> {
+                    User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
+                    try
+                    {
+                        SnapApplication.changeScene("restaurant.fxml");
+                    } catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                });
             }
             gridPane.setVgap(10);
         }
+    }
+    public void openUserSignUp() throws IOException
+    {
+        SnapApplication.changeScene("user-sign-up.fxml");
     }
 }
