@@ -7,6 +7,10 @@ public class Comment {
     /* static vars */
     static ArrayList<Comment> commentList = new ArrayList<>();
 
+    public Comment() {
+        
+    }
+
     /* static methods */
     static Comment getCommentById(int id) throws CommentDoesntExistException
     {

@@ -45,8 +45,8 @@ public class Order {
     private long cookingStartTime;
     public static ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Food> orderedFoods = new ArrayList<>();
-    private Order(int id, User costomer, ArrayList<Food> orderedFoods,
-                  Restaurant recipient) {
+    Order(int id, User costomer, ArrayList<Food> orderedFoods,
+          Restaurant recipient) {
         this.id = id;
         this.costomer = costomer;
         this.orderedFoods = orderedFoods;

@@ -25,7 +25,6 @@ public class Driver {
             System.out.println("USER LOGIN SUCCESS");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("wow");
         }
 
     }
@@ -375,7 +374,6 @@ public class Driver {
                 if (inp.matches("^\\s*login user.*"))
                 {
                     userlogin(parts[2], parts[3]);
-                    printAllRestaurants();
                 } else if (inp.matches("^\\s*login admin.*"))
                 {
                     adminlogin(parts[2], parts[3]);
@@ -695,6 +693,7 @@ public class Driver {
                         }
                     }
             }
+            if(inp.matches("exit.*")) running=false;
             // map and path :
 
 

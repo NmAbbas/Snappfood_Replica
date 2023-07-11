@@ -14,7 +14,7 @@ public class User extends Account
     /* instance variables */
     private int currency = 1000;
     private ArrayList<Restaurant> previousRestaurants = new ArrayList<>();
-    private ArrayList<Order> receivedOrders = new ArrayList<>();
+     ArrayList<Order> receivedOrders = new ArrayList<>();
     private Restaurant activeRestaurant = null;
     private Food activeFood = null;
     private Cart cart;
@@ -24,7 +24,9 @@ public class User extends Account
     {
         super(name, pass, id);
     }
+    public User() {
 
+    }
     public static User createUser(String name, String pass)
             throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {
@@ -80,7 +82,14 @@ public class User extends Account
         if(c < 0)
             this.currency += c;
     }
-
+    static User getUserByID(int id){
+        for(Account a:Account.AccountList){
+            if(a.id==id && a.isadmin){
+                return (User)a;
+            }
+        }
+        return null;
+    }
     public static class InvalidCurrencyException extends Exception
     {
         InvalidCurrencyException()

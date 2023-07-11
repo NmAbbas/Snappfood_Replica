@@ -15,6 +15,11 @@ public class Delivery extends Account
     /* static variables */
     static final int GRAPH_TIME_COEFFICIENT = 10;
     static ArrayList<Order> undeliveredList = new ArrayList<>();
+
+    public Delivery() {
+        
+    }
+
     /* static methods */
     static Order getUndeliveredOrderById(int id) throws OrderDoesntExistEXception
     {

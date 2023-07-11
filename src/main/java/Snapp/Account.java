@@ -38,6 +38,10 @@ public class Account {
         hashedPassword = hashPassword(pass);
     }
 
+    public Account() {
+        
+    }
+
     /* static functions for managing all acounts */
     public static Account createAccount(String name, String pass)
             throws InvalidUsernameException, InvalidPasswordException,
@@ -124,6 +128,12 @@ public class Account {
     {
         Account.activeUser = activeUser;
     }
+    static void linkBS(){
+        for(Account a:AccountList){
+            nextID = Math.max(nextID,a.id);
+
+        }
+    }
 
     private void generateSalt()
     {
@@ -146,6 +156,26 @@ public class Account {
     void admintry() throws UserNotAdmin
     {
         if (!this.isadmin) throw new UserNotAdmin();
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setHashedPassword(byte[] hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
+    }
+
+    public void setDelivery(boolean delivery) {
+        isDelivery = delivery;
     }
 
     void deliverytry() throws UserNotDelivery

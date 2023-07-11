@@ -6,6 +6,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class Admin extends Account {
 
+    public Admin() {
+
+    }
+
     public static Admin createAccount(String name, String pass)
             throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException {
         try
@@ -36,7 +40,7 @@ public class Admin extends Account {
     }
 
 
-    private Admin(String name, String pass, int id)
+    Admin(String name, String pass, int id)
             throws Account.InvalidUsernameException, Account.InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException {
         super(name, pass, id);
     }

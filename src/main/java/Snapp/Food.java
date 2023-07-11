@@ -64,13 +64,17 @@ class Food {
         this.cookingTime = cookingTime;
         this.owner = owner;
         this.comments=new ArrayList<>();
-        owner.addFood(this);
+        if(owner!=null) owner.addFood(this);
     }
-    void LinkBS(ArrayList<Food> foods){         //called after filling all
+    static void LinkBS(ArrayList<Food> foods){         //called after filling all
         for(Food f:foods){
             nextID=Math.max(nextID,f.getId());
             if(f.getOwner()==null){
                 f.owner=Restaurant.getRestaurantByID(f.ownerid);
+                Restaurant.getRestaurantByID(f.ownerid).addFood(f);
+            }
+            if(f.getComments()==null){
+                for(Comment c:Comment.commentList) if(c.getFood().getId()==f.id) f.comments.add(c);
             }
         }
 
