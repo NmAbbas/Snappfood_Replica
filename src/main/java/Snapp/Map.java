@@ -6,10 +6,11 @@ import java.util.*;
 
 public class Map {
     static int INF = Integer.MAX_VALUE;
+    static String mapfilelocation ="a:\\graph.txt";
 
     static int shortPath(int start, int end, ArrayList<Integer> path) throws NoPathException {
         int ret = -1;
-        File file = new File("Z:\\win\\desktoop\\untitled\\src\\resouce\\graph.txt");
+        File file = new File(mapfilelocation);
         try {
             Scanner sc = new Scanner(file);
             int c1 = sc.nextInt();
@@ -86,7 +87,7 @@ public class Map {
     static ArrayList<Integer> path(int start, int end) throws NoPathException {
         ArrayList<Integer> path = new ArrayList<>();
         int ret = -1;
-        File file = new File("Z:\\win\\desktoop\\untitled\\src\\resouce\\graph.txt");
+        File file = new File(mapfilelocation);
         try {
             Scanner sc = new Scanner(file);
             int c1 = sc.nextInt();

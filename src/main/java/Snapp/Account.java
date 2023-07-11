@@ -132,6 +132,26 @@ public class Account {
         if (!this.isadmin) throw new UserNotAdmin();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public byte[] getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public boolean isIsadmin() {
+        return isadmin;
+    }
+
+    public boolean isDelivery() {
+        return isDelivery;
+    }
+
     public int getLocation()
     {
         return location;
