@@ -338,12 +338,13 @@ public class Driver {
             u3.setLocation(3);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
-            Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
+            Admin a2 = Admin.createAccount("plankton", "P@ss12345678");
 
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
             d1.setLocation(2);
 
             Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 1);
+            Restaurant r11 = Restaurant.createRestaurant("Krusty Krab2", FoodType.FRIED, a1, 2);
             Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
 
             Food f1 = Food.createFood("Krabby Patty", 10, FoodType.FRIED, 10000, r1);
@@ -352,17 +353,16 @@ public class Driver {
             Comment.createComment("it tastes like shit", u1, null, f1);
             Comment.createComment("i like it", u2, null, f1);
             Comment.createComment("uhhhhhhhhhhhh!", u3, null, f1);
-
+            ////////
+            //////
+            /////
+            ///
+            //
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
-        ////////
-        //////
-        /////
-        ///
-        //
 
         while (running)
         {
