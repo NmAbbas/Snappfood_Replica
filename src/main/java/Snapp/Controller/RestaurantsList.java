@@ -16,7 +16,7 @@ public class RestaurantsList implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (Restaurant.getRestaurantList().size() != 0) {
+       if (Restaurant.getRestaurantList().size() != 0) {
             gridPane.setPrefHeight();
             for (Restaurant temp : Restaurant.getRestaurantList()){
                 gridPane

@@ -48,7 +48,7 @@ public class Account {
         return acc;
     }
 
-    static Account login(String name, String pass) throws IncorrectPasswordException, NoSuchAlgorithmException,
+    public static Account login(String name, String pass) throws IncorrectPasswordException, NoSuchAlgorithmException,
             InvalidKeySpecException, UsernameNotExists, UserAlreadySignedin
     {
         if (activeUser != null) throw new UserAlreadySignedin();
