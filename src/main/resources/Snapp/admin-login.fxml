@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" stylesheets="@login-style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminLogin">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@login-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminLogin">
     <children>
         <Label fx:id="loginLabel" layoutX="186.0" layoutY="270.0" prefWidth="198.0" text="ورود مدیر" />
-        <Label fx:id="signUpLabel" layoutX="185.0" layoutY="690.0" prefWidth="205.0" text="ایجاد حساب کاربری" />
+        <Label fx:id="signUpLabel" layoutX="185.0" layoutY="690.0" onMouseClicked="#openAdminSignUp" prefWidth="205.0" text="ایجاد حساب کاربری" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/user.png" />
             </image>
         </ImageView>
-        <TextField layoutX="224.0" layoutY="383.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your password" />
-        <TextField layoutX="224.0" layoutY="327.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your username" />
+        <TextField fx:id="passwordField" layoutX="224.0" layoutY="383.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your password" />
+        <TextField fx:id="usernameField" layoutX="224.0" layoutY="327.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your username" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/password.png" />
             </image>
         </ImageView>
-        <Label fx:id="snappFoodLabel" stylesheets="@small-snapp-food-label.css" layoutX="240.0" layoutY="46.0" text="Snapp! Food" />
-        <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="437.0" prefWidth="205.0" text="فراموشی رمز" />
-        <Label fx:id="errorLabel" layoutX="225.0" layoutY="425.0" prefHeight="18.0" prefWidth="164.0" text="خطا" />
+        <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
+        <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="520.0" prefWidth="205.0" text="فراموشی رمز" />
+        <Label fx:id="errorLabel" layoutX="225.0" layoutY="425.0" opacity="0.0" prefHeight="18.0" prefWidth="164.0" text="نام‌کاربری یا رمز عبور اشتباه است!" />
+        <Button layoutX="191.0" layoutY="449.0" onMouseClicked="#checkLogin" mnemonicParsing="false" prefHeight="26.0" prefWidth="198.0" text="ورود" />
+        <ImageView fitHeight="42.0" fitWidth="42.0" onMouseClicked="#openLogin" layoutX="483.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/arrow.png" />
+            </image>
+        </ImageView>
+
     </children>
 </AnchorPane>

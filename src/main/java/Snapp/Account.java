@@ -132,6 +132,11 @@ public class Account {
         if (!this.isadmin) throw new UserNotAdmin();
     }
 
+    void deliverytry() throws UserNotDelivery
+    {
+        if (!this.isDelivery) throw new UserNotDelivery();
+    }
+
     public int getId() {
         return id;
     }
@@ -213,6 +218,12 @@ public class Account {
 
     static public class UserNotAdmin extends Exception {
         UserNotAdmin() {
+            super("[Error] User is normal, not an admin!");
+        }
+    }
+
+    static public class UserNotDelivery extends Exception {
+        UserNotDelivery() {
             super("[Error] User is normal, not an admin!");
         }
     }

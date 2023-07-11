@@ -76,7 +76,7 @@ public class Driver {
         Account a;
         try {
             a = Account.login(username, pass);
-            a.admintry();
+            a.deliverytry();
             Account.activeUser = a;
             System.out.println("DELIVERY LOGIN SUCCESS");
         } catch (Exception e) {
@@ -249,8 +249,8 @@ public class Driver {
         for(Order o : orders)
         {
             System.out.println(o.getId() + "\t\t" + o.getCostomer().getName() + "\t\t" + o.getRecipient());
+            System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
             for(Food f : o.getFoods()){
-                System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
                 System.out.println("\t\t" +f.getId() + "\t\t" + f.getName() + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
             }
             System.out.println("=================================================");
@@ -335,11 +335,13 @@ public class Driver {
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
+            u3.setLocation(10);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("Plankton", "P@ss12345678");
 
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
+            d1.setLocation(20);
 
             Restaurant r1 = Restaurant.createRestaurant("Krusty Krab", FoodType.FRIED, a1, 0);
             Restaurant r2 = Restaurant.createRestaurant("Chum Bucket", FoodType.FRIED, a2, 1);
@@ -373,6 +375,7 @@ public class Driver {
                 if (inp.matches("^\\s*login user.*"))
                 {
                     userlogin(parts[2], parts[3]);
+                    printAllRestaurants();
                 } else if (inp.matches("^\\s*login admin.*"))
                 {
                     adminlogin(parts[2], parts[3]);
@@ -382,16 +385,18 @@ public class Driver {
                 } else if (inp.matches("^\\s*add admin.*"))
                 {
                     adminnew(parts[2], parts[3]);
-                } else if (inp.matches("^\\s*logout.*"))
-                {
-                    Account.logout();
-                } else if (inp.matches("^\\s*add delivery.*"))
+                }  else if (inp.matches("^\\s*add delivery.*"))
                 {
                     deliverynew(parts[2], parts[3]);
                 } else if (inp.matches("^\\s*login delivery.*"))
                 {
                     deliverylogin(parts[2], parts[3]);
                 }
+            }
+            else if (inp.matches("^\\s*logout\\s*") && Account.activeUser != null)
+            {
+                Account.logout();
+                System.out.println("LOGGED OUT SUCCESSFULLY");
             }
 
             // admin panel :
@@ -490,7 +495,7 @@ public class Driver {
                     {
                         try{
                         Admin.getActiveUser().getActiveRestaurant().cook(Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])));
-                            System.out.println("the order will be cook in "  +
+                            System.out.println("the order will be cooked in "  +
                                     Admin.getActiveUser().getActiveRestaurant().getActiveOrderbyId(Integer.parseInt(parts[2])).getCookingTime()/(60 * 10000)
                                     + " Minutes and sent sir!");
                         } catch (Exception e) {
@@ -609,6 +614,7 @@ public class Driver {
                         try
                         {
                             User.getActiveUser().getCart().addFood(User.getActiveUser().getActiveFood());
+                            System.out.println("food added to cart successfully!");
                         }
                         catch (Exception e)
                         {
@@ -652,6 +658,16 @@ public class Driver {
                         }
                         else {
                             System.out.println("your food will be delivered in " + User.getActiveUser().getActiveOrder());
+                        }
+                    } else if (inp.matches("^\\s*charge\\s+\\d+\\s*"))
+                    {
+                        try
+                        {
+                            User.getActiveUser().addCurrency(Integer.parseInt(parts[2]));
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e.getMessage());
                         }
                     }
             }

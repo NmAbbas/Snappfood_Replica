@@ -171,7 +171,6 @@ public class Restaurant
     }
 
     public void cook(Order order) {
-        order.setOrderState(OrderState.GETTING_READY);
         order.setCookingStartTime(System.currentTimeMillis());
         order.cook();
 

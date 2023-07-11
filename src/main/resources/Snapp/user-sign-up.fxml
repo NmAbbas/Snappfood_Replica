@@ -6,24 +6,26 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@sign-up-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.UserSignUp">
     <children>
         <Label fx:id="signUpLabel" layoutX="186.0" layoutY="270.0" prefWidth="198.0" text="ایجاد حساب مشتری" />
-        <Label fx:id="loginLabel" layoutX="185.0" layoutY="450.0" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
+        <Label fx:id="loginLabel" layoutX="185.0" layoutY="500.0" onMouseClicked="#openLogin" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/user.png" />
             </image>
         </ImageView>
-        <TextField layoutX="224.0" layoutY="393.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your new password" />
-        <TextField layoutX="224.0" layoutY="327.0" prefHeight="33.0" prefWidth="164.0" promptText="Choose a username" />
+        <TextField fx:id="passwordField" layoutX="224.0" layoutY="393.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your new password" />
+        <TextField fx:id="usernameField" layoutX="224.0" layoutY="327.0" prefHeight="33.0" prefWidth="164.0" promptText="Choose a username" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/password.png" />
             </image>
         </ImageView>
         <Label fx:id="snappFoodLabel" stylesheets="@small-snapp-food-label.css" layoutX="240.0" layoutY="46.0" text="Snapp! Food" />
-      <Label fx:id="usernameErrorLabel" layoutX="225.0" layoutY="368.0" prefHeight="18.0" prefWidth="152.0" text="خطا" />
-      <Label fx:id="passwordErrorLabel" layoutX="225.0" layoutY="432.0" prefHeight="18.0" prefWidth="152.0" text="خطا" />
+      <Label fx:id="usernameErrorLabel" opacity="0.0" layoutX="225.0" layoutY="368.0" prefHeight="18.0" prefWidth="152.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
+      <Label fx:id="passwordErrorLabel" opacity="0.0" layoutX="225.0" layoutY="432.0" prefHeight="18.0" prefWidth="152.0" text="رمز قابل قبول نیست" />
+      <Button layoutX="191.0" layoutY="449.0" onMouseClicked="#checkSignUp" mnemonicParsing="false" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
     </children>
 </AnchorPane>

@@ -16,3 +16,21 @@
     -fx-alignment: center-right;
     -fx-text-fill: #FF0000FF;
 }
+.button{
+    -fx-font-family: "Nazanintar";
+    -fx-background-color: linear-gradient(#ff73dc, #e561bd);
+    -fx-background-radius: 12;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: black;
+    -fx-border-color: linear-gradient(#ff73dc, #E561BDFF);
+    -fx-border-radius: 10;
+    -fx-border-width: 3;
+    -fx-effect: innershadow( three-pass-box , rgba(128, 20, 100, 0.7), 6, 0.0 , 0 , 2 );
+}
+.button:hover{
+    -fx-border-color: black;
+}
+.button:pressed{
+    -fx-border-width: 2;
+    -fx-background-color: linear-gradient(#E561BDFF, #ff73dc);
+}
