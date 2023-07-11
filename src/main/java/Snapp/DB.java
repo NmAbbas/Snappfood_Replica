@@ -1,6 +1,6 @@
 package Snapp;
 
-import java.sql.*;
+/*import java.sql.*;
 import java.util.ArrayList;
 
 public class DB {
@@ -75,4 +75,4 @@ public class DB {
 //        preparedStatement.executeUpdate();
 //    }
 
-} // class ends
+} // class ends*/

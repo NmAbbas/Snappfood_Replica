@@ -8,7 +8,7 @@
    <children>
        <Label layoutX="200.0" layoutY="126.0" text="Snapp!" />
        <Label layoutX="254.0" layoutY="167.0" text="Food" />
-      <Button layoutX="191.0" layoutY="350.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="ورود مشتری" />
-      <Button layoutX="191.0" layoutY="468.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="ورود مدیر" />
+      <Button layoutX="191.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openUserLogin" prefHeight="70.0" prefWidth="200.0" text="ورود مشتری" />
+      <Button layoutX="191.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#openAdminLogin" prefHeight="70.0" prefWidth="200.0" text="ورود مدیر" />
    </children>
 </AnchorPane>
