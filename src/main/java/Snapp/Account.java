@@ -41,13 +41,29 @@ public class Account {
     /* static functions for managing all acounts */
     public static Account createAccount(String name, String pass)
             throws InvalidUsernameException, InvalidPasswordException,
-            NoSuchAlgorithmException, InvalidKeySpecException
+            NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {
-        Account acc = new Account(name, pass, nextID++);
-        AccountList.add(acc);
-        return acc;
+        try
+        {
+            findAccount(name);
+        }
+        catch (Exception e)
+        {
+            Account acc = new Account(name, pass, nextID++);
+            AccountList.add(acc);
+            return acc;
+        }
+        throw new UsernameTakenException();
+
     }
 
+    public static class UsernameTakenException extends Exception
+    {
+        UsernameTakenException()
+        {
+            super("[Error] user name is already taken");
+        }
+    }
     public static Account login(String name, String pass) throws IncorrectPasswordException, NoSuchAlgorithmException,
             InvalidKeySpecException, UsernameNotExists, UserAlreadySignedin
     {

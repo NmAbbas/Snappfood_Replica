@@ -24,13 +24,20 @@ public class Delivery extends Account
         throw new OrderDoesntExistEXception();
     }
 
-    public static Delivery createAccount(String name, String pass)
-            throws InvalidUsernameException, InvalidPasswordException,
-            NoSuchAlgorithmException, InvalidKeySpecException
+    static Delivery createAccountcreateUser(String name, String pass)
+            throws InvalidUsernameException, InvalidPasswordException, NoSuchAlgorithmException, InvalidKeySpecException, UsernameTakenException
     {
-        Delivery acc = new Delivery(name, pass, nextID++);
-        AccountList.add(acc);
-        return acc;
+        try
+        {
+            findAccount(name);
+        }
+        catch (Exception e)
+        {
+            Delivery delivery = new Delivery(name, pass, nextID++);
+            AccountList.add(delivery);
+            return delivery;
+        }
+        throw new UsernameTakenException();
     }
 
 
