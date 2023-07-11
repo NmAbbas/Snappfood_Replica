@@ -8,6 +8,27 @@ public class Restaurant
     /* static Instances for managing restaurants */
     private static int nextID = 0;
     private static ArrayList<Restaurant> restaurantList = new ArrayList<>();
+    ArrayList<Food> menu = new ArrayList<>();
+    ArrayList<Comment> commentSection = new ArrayList<>();
+    int ownerid;
+    int location;
+    private int id;
+    private String name;
+    private String imageURL = "/images/hamburger.png";
+    private HashSet<FoodType> foodtype = new HashSet<>();	// this is the restaurant type but the foodtype enum is used for it
+    private Admin owner;
+    private ArrayList<Order> orderList = new ArrayList<>();
+
+    /* local methods for a single restaurant */
+    Restaurant(String name, int id, FoodType foodtype, Admin owner, int loc)
+    {
+        this.id = id;
+        this.name = name;
+        this.foodtype.add(foodtype);
+        this.owner = owner;
+        this.location =loc;
+    }
+
     /* static methods for managing restaurants */
     public static Restaurant createRestaurant(String name, FoodType foodtype, Admin owner,int loc)
     {
@@ -35,6 +56,7 @@ public class Restaurant
         }
         return null;
     }
+
     public static ArrayList<Restaurant> searchRestaurants(String searchString)
     {
         ArrayList<Restaurant> matchings = new ArrayList<>();
@@ -46,6 +68,7 @@ public class Restaurant
 
         return matchings;
     }
+
     public static void LinkBS(ArrayList<Restaurant> r){ //called after filling all
 
         for(Restaurant rest:r){
@@ -54,24 +77,25 @@ public class Restaurant
         }
     }
 
-    private int id;
-    private String name;
-    ArrayList<Food> menu = new ArrayList<>();
-    ArrayList<Comment> commentSection = new ArrayList<>();
-    private HashSet<FoodType> foodtype = new HashSet<>();	// this is the restaurant type but the foodtype enum is used for it
-    private Admin owner;
-    int ownerid;
-
     public static int getNextID() {
         return nextID;
     }
 
-    private ArrayList<Order> orderList = new ArrayList<>();
+    public String getImageURL() {
+        return imageURL;
+    }
 
-    int location;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
     public ArrayList<Food> getMenu() {
         return menu;
+    }
+
+    public void setMenu(ArrayList<Food> menu)
+    {
+        this.menu = menu;
     }
 
     public ArrayList<Comment> getCommentSection() {
@@ -82,22 +106,11 @@ public class Restaurant
         return foodtype;
     }
 
+    // <location variable>
+
     public Admin getOwner() {
         return owner;
     }
-
-    /* local methods for a single restaurant */
-    Restaurant(String name, int id, FoodType foodtype, Admin owner, int loc)
-    {
-        this.id = id;
-        this.name = name;
-        this.foodtype.add(foodtype);
-        this.owner = owner;
-        this.location =loc;
-    }
-
-    // <location variable>
-
 
     int getId() {
         return id;
@@ -107,7 +120,7 @@ public class Restaurant
         this.id = id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -128,34 +141,10 @@ public class Restaurant
         Food.deleteFood(food);
     }
 
-
-    public void setMenu(ArrayList<Food> menu)
-    {
-        this.menu = menu;
-    }
-
     void removeFoodById(int fid) {
         // find the food using the Food class id search
         // and get the reference to the food object corresponing
         // to the id and then pass it to removeFood()
-    }
-
-    public static class restaurantComparator
-            implements Comparator<Restaurant> {
-        @Override
-        public int compare(Restaurant lhs, Restaurant rhs) {
-            if (lhs.getName().compareTo(rhs.getName()) > 0)
-                return 1;
-            if (rhs.getName().compareTo(lhs.getName()) > 0)
-                return -1;
-            if (lhs.getId() > rhs.getId())
-                return 1;
-            if (rhs.getId() > lhs.getId())
-                return -1;
-
-            return 0;
-
-        }
     }
 
     public void handleOrder(Order order) {
@@ -189,9 +178,11 @@ public class Restaurant
     int getLocation(){
         return this.location;
     }
+
     void setLocation(int loc){
         this.location=loc;
     }
+
     void editFoodtype(ArrayList<FoodType> f) throws FoodTypeUnchangable {           //clears the previous foodtypes
         if(this.hasActiveOrder()){
             throw new FoodTypeUnchangable();
@@ -199,6 +190,7 @@ public class Restaurant
         this.foodtype.clear();
         this.foodtype.addAll(f);
     }
+
     void addFoodtype(ArrayList<FoodType> f) throws FoodTypeUnchangable {           //just adds to the previous foodtypes
         for(Order o : orderList){
             if(o.getOrderState()==OrderState.GETTING_READY || o.getOrderState()==OrderState.PENDING){
@@ -207,6 +199,7 @@ public class Restaurant
         }
         this.foodtype.addAll(f);
     }
+
     ArrayList<Order> getActiveOrders(){
         ArrayList<Order> a = new ArrayList<>();
         for(Order o : this.orderList){
@@ -216,16 +209,11 @@ public class Restaurant
         }
         return a;
     }
+
     void addOrder(Order o){
         this.orderList.add(o);
     }
 
-
-    static public class FoodTypeUnchangable extends Exception {     //check if restaurant has an active order
-        FoodTypeUnchangable() {
-            super("[Error] Can't chnage foodtype while there is an active order!");
-        }
-    }
     boolean hasActiveOrder(){
         for(Order o : orderList){
             if(o.getOrderState()==OrderState.GETTING_READY || o.getOrderState()==OrderState.PENDING){
@@ -234,6 +222,7 @@ public class Restaurant
         }
         return false;
     }
+
     boolean foodHasActiveOrder(int index) throws Food.InvalidFoodID {  //check if a particular food has an active order
         for(Order o : orderList){
             if(o.getOrderState()==OrderState.GETTING_READY || o.getOrderState()==OrderState.PENDING){
@@ -264,21 +253,43 @@ public class Restaurant
         throw new FoodDoesntExistException();
     }
 
-    private class FoodDoesntExistException extends Exception
-    {
-        FoodDoesntExistException()
-        {
-            super("[Error] this food doesn't exist in this restaurant!");
-        }
-    }
-
-
-
     void loadComments(){
         if(this.commentSection.size()==0){
             for(Comment c : Comment.commentList){
                 if(c.restaurant.getId()==this.id && c.food==null) this.commentSection.add(c);
             }
+        }
+    }
+
+    public static class restaurantComparator
+            implements Comparator<Restaurant> {
+        @Override
+        public int compare(Restaurant lhs, Restaurant rhs) {
+            if (lhs.getName().compareTo(rhs.getName()) > 0)
+                return 1;
+            if (rhs.getName().compareTo(lhs.getName()) > 0)
+                return -1;
+            if (lhs.getId() > rhs.getId())
+                return 1;
+            if (rhs.getId() > lhs.getId())
+                return -1;
+
+            return 0;
+
+        }
+    }
+
+    static public class FoodTypeUnchangable extends Exception {     //check if restaurant has an active order
+        FoodTypeUnchangable() {
+            super("[Error] Can't chnage foodtype while there is an active order!");
+        }
+    }
+
+    private class FoodDoesntExistException extends Exception
+    {
+        FoodDoesntExistException()
+        {
+            super("[Error] this food doesn't exist in this restaurant!");
         }
     }
 
