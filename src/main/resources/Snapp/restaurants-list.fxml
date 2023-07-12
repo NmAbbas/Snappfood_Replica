@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@user-home-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.RestaurantsList">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@restaurant-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.RestaurantsList">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
     <TextField fx:id="searchField" alignment="CENTER_RIGHT" layoutX="75.0" layoutY="101.0" prefHeight="30.0" prefWidth="430.0" promptText="در اسنپ فود جست‌وجو کنید" />
     <Button layoutX="35.0" layoutY="40.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0">
