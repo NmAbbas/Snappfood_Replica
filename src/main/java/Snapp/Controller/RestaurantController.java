@@ -1,7 +1,6 @@
 package Snapp.Controller;
 
 import Snapp.Restaurant;
-import Snapp.Food;
 import Snapp.SnapApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
@@ -25,29 +24,27 @@ public class RestaurantController implements Initializable {
             Button[] buttons = new Button[User.getActiveUser().getActiveRestaurant().getMenu().size()];
             //Food 0
             buttons[0] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(0).getImageURL())));
+            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
-            //todo
 //            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0],0,0);
             //Restaurant 1->
             for (int i = 1; i < Restaurant.getRestaurantList().size(); i++){
-                buttons[i] = new Button(Restaurant.getRestaurantList().get(i).getName());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(i).getImageURL())));
+                buttons[i] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
+                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
-                //todo
 //                buttons[i].setGraphicTextGap(buttons[i].getWidth()-80-buttons[i].getText().length()-20);
                 gridPane.addRow(i,buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
+                    User.getActiveUser().setActiveFood(User.getActiveUser().getActiveRestaurant().getMenu().get(k));
                     try
                     {
-                        SnapApplication.changeScene("restaurant-view.fxml");
+                        SnapApplication.changeScene("user-food-view.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();
@@ -56,6 +53,5 @@ public class RestaurantController implements Initializable {
             }
             gridPane.setVgap(10);
         }
-
     }
 }
