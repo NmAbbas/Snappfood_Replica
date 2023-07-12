@@ -84,7 +84,7 @@ public class User extends Account
     }
     static User getUserByID(int id){
         for(Account a:Account.AccountList){
-            if(a.id==id && a.isadmin){
+            if(a.id==id && !a.isadmin){
                 return (User)a;
             }
         }

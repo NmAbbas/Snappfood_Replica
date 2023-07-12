@@ -84,7 +84,8 @@ public class DB {
             for(String s:type.substring(1, type.length() - 1).split(", ")){
                 foodtype.add(FoodType.parse(s));
             }
-            Restaurant f = new Restaurant(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,Admin.getAdminByID(resultSet.getInt("adminid")),resultSet.getInt("loc"));
+            Restaurant f = new Restaurant(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,null,resultSet.getInt("loc"));
+            f.ownerid = resultSet.getInt("adminid");
             f.addFoodtype(foodtype);
             for( Account c: Account.AccountList){
                 if(c.getId()==f.getOwner().getId()){
@@ -134,7 +135,7 @@ public class DB {
                     }
                 }
             }
-            if(resultSet.getBoolean("isdelivery")){ //user is delivery(doesnt matter here)
+            else if(resultSet.getBoolean("isdelivery")){ //user is delivery(doesnt matter here)
                 f = new Delivery();
                 f.setName(resultSet.getString("username"));
                 f.setId(resultSet.getInt("id"));
@@ -258,6 +259,46 @@ public class DB {
         }
         return comments;
     }
+
+    static void saveCarts(ArrayList<Cart> carts) throws SQLException {
+        for(Cart f:carts){
+            if(f!=null){
+                int count = f.getFoods().size();
+                byte[] foo = new byte[count];
+                for (int i = 0; i < count; ++i) {
+                    foo[i] = (byte) f.getFoods().get(i).getId();
+                }
+                preparedStatement = connection.prepareStatement("INSERT INTO db.carts (userid, restaurantid, foods,foodscount)\n" +
+                        "VALUES (?, ?, ?,?);");
+                preparedStatement.setInt(1, f.getCostomer().getId());
+                preparedStatement.setInt(2, f.getRecipient().getId());
+                preparedStatement.setString(3, foo.toString());
+                preparedStatement.setInt(4, count);
+                preparedStatement.executeUpdate();
+            }
+        }
+    }
+    static void loadCarts() throws SQLException, Food.InvalidFoodID, Food.FoodIsDeactiveException {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select userid, restaurantid, foods,foodscount from db.carts ;");
+        ArrayList<Cart> carts = new ArrayList<>();
+        while (resultSet.next()){
+            String type = resultSet.getString("type");
+            ArrayList<Food> foods = new ArrayList<>();
+            byte[] ids = new byte[resultSet.getByte("foodcount")];
+            for(byte id:ids){
+                foods.add(Food.getFoodbyId(id));
+            }
+            Cart f = new Cart(Restaurant.getRestaurantByID(resultSet.getInt("restaurantid")),User.getUserByID(resultSet.getInt("userid")));
+            for(byte b :resultSet.getString("foods").getBytes() ){
+                f.addFood(Food.getFoodbyId(b));
+            }
+            carts.add(f);
+        }
+        for(Cart c:carts){
+            User.getUserByID(c.getCostomer().getId()).setCart(c);
+        }
+    }
     static void clearEverything() throws SQLException {
         preparedStatement = connection.prepareStatement("truncate table db.food;");
         preparedStatement.executeUpdate();
@@ -268,6 +309,8 @@ public class DB {
         preparedStatement = connection.prepareStatement("truncate table db.orders;");
         preparedStatement.executeUpdate();
         preparedStatement = connection.prepareStatement("truncate table db.comments;");
+        preparedStatement.executeUpdate();
+        preparedStatement = connection.prepareStatement("truncate table db.carts;");
         preparedStatement.executeUpdate();
     }
     static void close(){

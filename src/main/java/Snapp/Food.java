@@ -73,9 +73,7 @@ class Food {
                 f.owner=Restaurant.getRestaurantByID(f.ownerid);
                 Restaurant.getRestaurantByID(f.ownerid).addFood(f);
             }
-            if(f.getComments()==null){
-                for(Comment c:Comment.commentList) if(c.getFood().getId()==f.id) f.comments.add(c);
-            }
+            for(Comment c:Comment.commentList) if(c.getFood().getId()==f.id) f.comments.add(c);
         }
 
     }

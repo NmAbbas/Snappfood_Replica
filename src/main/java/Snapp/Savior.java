@@ -1,6 +1,7 @@
 package Snapp;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Savior {
     static void loading(){
@@ -14,6 +15,7 @@ public class Savior {
             Food.LinkBS(Food.foodList);
             Restaurant.LinkBS(Restaurant.restaurantList);
             Account.linkBS();
+            DB.loadCarts();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,6 +30,14 @@ public class Savior {
             DB.saveAccounts(Account.AccountList);
             DB.saveOrders(Order.orders);
             DB.saveCooments(Comment.commentList);
+            ArrayList<Cart> carts = new ArrayList<>();
+            for(Account a:Account.AccountList){
+                if(!a.isDelivery&&!a.isadmin){
+                    carts.add(((User)a).getCart());
+                }
+            }
+            DB.saveCarts(carts);
+            DB.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
