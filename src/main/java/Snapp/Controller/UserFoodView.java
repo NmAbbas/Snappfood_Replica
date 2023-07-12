@@ -8,8 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +20,7 @@ public class UserFoodView implements Initializable {
     public Label cookingTimeLabel;
     public Button addToCartButton;
     public Label foodNameLabel;
+    public GridPane gridPane;
 
     public void addToCart() {
         if (User.getActiveUser().getActiveFood().isActive()){
@@ -38,5 +38,8 @@ public class UserFoodView implements Initializable {
             addToCartButton.getStyleClass().add("food-not-active");
             addToCartButton.setText("این غذا موجود نیست");
         }
+
+        //add comments to food
+
     }
 }
