@@ -24,7 +24,7 @@ public class UserFoodView implements Initializable {
 
     public void addToCart() {
         if (User.getActiveUser().getActiveFood().isActive()){
-
+            //todo
         }
     }
 
@@ -40,6 +40,5 @@ public class UserFoodView implements Initializable {
         }
 
         //add comments to food
-        //heelo
     }
 }
