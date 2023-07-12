@@ -466,6 +466,9 @@ public class Driver {
                     {
                         if (inp.matches("^\\s*display ratings.*")) {
                             System.out.println("Rating : " + Rating.overallRating(Admin.getActiveUser().getActiveFood().ratings));
+                        }else if (inp.matches("^\\s*display ratings.*") && Admin.getActiveUser().getActiveFood() == null
+                                && Admin.getActiveUser().getActiveRestaurant() != null) {
+                            System.out.println("Rating : " + Rating.overallRating(Admin.getActiveUser().getActiveRestaurant().ratings));
                         }
                         else if (inp.matches("^\\s*display comments.*")) {
                             printCommentList(Admin.getActiveUser().getActiveFood().getComments());
@@ -686,6 +689,35 @@ public class Driver {
                             ArrayList<Order> l = new ArrayList<>();
                             l.add(o);
                             printOrders(l);
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    else if (inp.matches("^\\s*display ratings.*") && User.getActiveUser().getActiveFood() != null) {
+                        System.out.println("Rating : " + Rating.overallRating(User.getActiveUser().getActiveFood().ratings));
+                    } else if (inp.matches("^\\s*display ratings.*") && User.getActiveUser().getActiveFood() == null
+                            && User.getActiveUser().getActiveRestaurant() != null) {
+                        System.out.println("Rating : " + Rating.overallRating(User.getActiveUser().getActiveRestaurant().ratings));
+                    } else if (inp.matches("^\\s*add ratings \\d+\\s*") && User.getActiveUser().getActiveFood() != null)
+                    {
+                        try
+                        {
+                            User.getActiveUser().addRatingToFood(User.getActiveUser().getActiveFood(), Double.parseDouble(parts[2]));
+                            System.out.println("rating added successfully!");
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e.getMessage());
+                        }
+                    } else if (inp.matches("^\\s*add ratings \\d+\\s*") && User.getActiveUser().getActiveFood() == null
+                    && User.getActiveUser().getActiveRestaurant() != null)
+                    {
+                        try
+                        {
+                            User.getActiveUser().addRatingToRestaurant(User.getActiveUser().getActiveRestaurant(), Double.parseDouble(parts[2]));
+                            System.out.println("rating added successfully!");
                         }
                         catch (Exception e)
                         {

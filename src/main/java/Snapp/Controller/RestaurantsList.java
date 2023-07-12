@@ -1,5 +1,6 @@
 package Snapp.Controller;
 
+import Snapp.Cart;
 import Snapp.Restaurant;
 import Snapp.SnapApplication;
 import Snapp.User;
@@ -29,6 +30,17 @@ public class RestaurantsList implements Initializable {
             buttons[0].setGraphic(imageView);
 //            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0],0,0);
+            buttons[0].setOnAction(e -> {
+                User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(0));
+                try
+                {
+                    User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
+                    SnapApplication.changeScene("restaurant-view.fxml");
+                } catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
+            });
             //Restaurant 1->
             for (int i = 1; i < Restaurant.getRestaurantList().size(); i++){
                 buttons[i] = new Button(Restaurant.getRestaurantList().get(i).getName());
@@ -43,7 +55,7 @@ public class RestaurantsList implements Initializable {
                     User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
                     try
                     {
-                        SnapApplication.changeScene("restaurant.fxml");
+                        SnapApplication.changeScene("restaurant-view.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();
@@ -52,9 +64,5 @@ public class RestaurantsList implements Initializable {
             }
             gridPane.setVgap(10);
         }
-    }
-    public void openUserSignUp() throws IOException
-    {
-        SnapApplication.changeScene("user-sign-up.fxml");
     }
 }
