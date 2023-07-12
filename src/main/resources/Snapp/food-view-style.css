@@ -30,6 +30,6 @@
     -fx-background-color: #8f8f8f;
 }
 .food-not-active:pressed{
+    -fx-border-width: 3;
     -fx-background-color: #8f8f8f;
-    /*-fx-background-color: #d7d7d7;*/
 }

@@ -23,7 +23,9 @@ public class UserFoodView implements Initializable {
     public Label foodNameLabel;
 
     public void addToCart() {
-//        if ()
+        if (User.getActiveUser().getActiveFood().isActive()){
+
+        }
     }
 
     @Override
