@@ -196,6 +196,36 @@ public class User extends Account
         return false;
     }
 
+    void addRatingToRestaurant(Restaurant restaurant, double rating) throws YouHaveAlreadyRated
+    {
+        for (Rating r: restaurant.getRatings())
+        {
+            if(r.getUser() == this)
+                throw new YouHaveAlreadyRated();
+        }
+
+        restaurant.getRatings().add(new Rating(rating, this));
+    }
+
+    void addRatingToFood(Food food, double rating) throws YouHaveAlreadyRated
+    {
+        for (Rating r: food.getRatings())
+        {
+            if(r.getUser() == this)
+                throw new YouHaveAlreadyRated();
+        }
+
+        food.getRatings().add(new Rating(rating, this));
+    }
+
+    static public class YouHaveAlreadyRated extends Exception
+    {
+        public YouHaveAlreadyRated()
+        {
+            super("you have already rated this!");
+        }
+    }
+
 
     static public class CurrencyNotEnoughException extends Exception
     {

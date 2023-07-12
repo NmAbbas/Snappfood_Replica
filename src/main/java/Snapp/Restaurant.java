@@ -61,6 +61,34 @@ public class Restaurant
     private Admin owner;
     int ownerid;
     int location;
+
+    public ArrayList<Rating> getRatings()
+    {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings)
+    {
+        this.ratings = ratings;
+    }
+
+    ArrayList<Rating> ratings;
+
+    public Rating avgRating() throws NoRatingRestaurantException
+    {
+        if(ratings.size() == 0)
+            throw new NoRatingRestaurantException();
+        return Rating.avgRatingList(ratings);
+    }
+
+    public class NoRatingRestaurantException extends Exception
+    {
+        NoRatingRestaurantException()
+        {
+            super("No rating exists for this restaurant");
+        }
+    }
+
     private String imageURL = "/images/hamburger.png";
     private ArrayList<Order> orderList = new ArrayList<>();
 

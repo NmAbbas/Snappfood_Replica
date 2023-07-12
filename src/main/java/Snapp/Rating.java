@@ -3,12 +3,25 @@ package Snapp;
 import java.util.ArrayList;
 
 public class Rating {
-    private int rating;
+    private double rating;
     private User rater;
 
-    Rating(int rating, User rater) {
+    Rating(double rating, User rater) {
         this.rating = rating;
         this.rater = rater;
+    }
+
+    public static Rating avgRatingList(ArrayList<Rating> ratings)
+    {
+        Rating avg = new Rating(0, null);
+        for (Rating r: ratings)
+        {
+            avg.rating += r.rating;
+        }
+
+        avg.rating /= ratings.size();
+
+        return avg;
     }
 
     User getUser() {
@@ -23,7 +36,7 @@ public class Rating {
         return (double) res /total;
     }
 
-    int getRating() {
+    double getRating() {
         return rating;
     }
 }
