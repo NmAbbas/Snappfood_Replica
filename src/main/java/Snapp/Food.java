@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-class Food {
+public class Food {
     /* static vars */
     static int nextID = 0;
     static ArrayList<Food> foodList = new ArrayList<>();
@@ -53,6 +53,16 @@ class Food {
     ArrayList<Comment> comments;
     ArrayList<Rating> ratings;
 //    Time discount
+
+    public ArrayList<Rating> getRatings()
+    {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings)
+    {
+        this.ratings = ratings;
+    }
 
     /* local methods */
     Food(int id, String name, double price, FoodType foodtype, long cookingTime, Restaurant owner)
