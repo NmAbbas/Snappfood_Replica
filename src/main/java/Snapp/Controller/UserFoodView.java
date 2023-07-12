@@ -23,8 +23,16 @@ public class UserFoodView implements Initializable {
     public GridPane gridPane;
 
     public void addToCart() {
-        if (User.getActiveUser().getActiveFood().isActive()){
-            //todo
+        if (!User.getActiveUser().getActiveFood().isActive())
+            return;
+        try
+        {
+            User.getActiveUser().getCart().addFood(User.getActiveUser().getActiveFood());
+            System.out.println("food added to cart successfully!"); // change label
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 

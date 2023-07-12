@@ -1,5 +1,6 @@
 package Snapp.Controller;
 
+import Snapp.Cart;
 import Snapp.Restaurant;
 import Snapp.SnapApplication;
 import Snapp.User;
@@ -33,6 +34,7 @@ public class RestaurantsList implements Initializable {
                 User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(0));
                 try
                 {
+                    User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
                     SnapApplication.changeScene("restaurant-view.fxml");
                 } catch (IOException ex)
                 {

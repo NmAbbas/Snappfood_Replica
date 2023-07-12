@@ -5,7 +5,7 @@ import Snapp.User.CurrencyNotEnoughException;
 
 import java.util.ArrayList;
 
-class Cart 
+public class Cart
 {
     private Restaurant recipient;
     private User costomer;
@@ -39,7 +39,7 @@ class Cart
         this.costomer = costomer;
     }
 
-    Cart(Restaurant recipient, User costomer)
+    public Cart(Restaurant recipient, User costomer)
     {
         this.recipient = recipient;
         this.costomer = costomer;
