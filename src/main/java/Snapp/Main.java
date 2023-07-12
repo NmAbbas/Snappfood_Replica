@@ -9,5 +9,6 @@ class Main
         d.phase1drive();
         Savior.saving();
         DB.close();
+        return;
     }
 }

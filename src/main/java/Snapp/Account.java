@@ -143,9 +143,10 @@ public class Account {
     }
 
     private byte[] hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        return factory.generateSecret(spec).getEncoded();
+//        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+//        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+//        return factory.generateSecret(spec).getEncoded();
+        return password.getBytes();
     }
 
     void setadmin()

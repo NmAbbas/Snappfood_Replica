@@ -50,7 +50,6 @@ public class Restaurant
 
         for(Restaurant rest:r){
             nextID=Math.max(nextID,rest.id);
-            // missing some bs here
         }
     }
 
