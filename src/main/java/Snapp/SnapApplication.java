@@ -30,7 +30,7 @@ public class SnapApplication extends Application {
             Restaurant r11 = Restaurant.createRestaurant("رستوران خرچنگی۲", FoodType.FRIED, a1, 2);
             Restaurant r2 = Restaurant.createRestaurant("چام باکت", FoodType.FRIED, a2, 1);
 
-            Food f1 = Food.createFood("Krabby Patty", 10, FoodType.FRIED, 10000, r1);
+            Food f1 = Food.createFood("همبرگر خرچنگی", 10, FoodType.FRIED, 10000, r1);
             u1.selectRestaurant(1);
 
             Comment.createComment("it tastes like shit", u1, null, f1);

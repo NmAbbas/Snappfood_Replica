@@ -31,7 +31,7 @@ public class RestaurantController implements Initializable {
 //            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0],0,0);
             //Restaurant 1->
-            for (int i = 1; i < Restaurant.getRestaurantList().size(); i++){
+            for (int i = 1; i < User.getActiveUser().getActiveRestaurant().getMenu().size(); i++){
                 buttons[i] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
                 imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
                 imageView.setFitWidth(80);
