@@ -43,7 +43,7 @@ public class RestaurantsList implements Initializable {
                     User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
                     try
                     {
-                        SnapApplication.changeScene("restaurant.fxml");
+                        SnapApplication.changeScene("restaurant-view.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();

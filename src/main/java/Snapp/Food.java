@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-class Food {
+public class Food {
     /* static vars */
     static int nextID = 0;
     static ArrayList<Food> foodList = new ArrayList<>();
