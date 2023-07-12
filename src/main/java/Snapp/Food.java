@@ -51,7 +51,33 @@ class Food {
     int ownerid;
     private Restaurant owner;
     ArrayList<Comment> comments;
+
+    public ArrayList<Rating> getRatings()
+    {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings)
+    {
+        this.ratings = ratings;
+    }
+
     ArrayList<Rating> ratings;
+
+    public Rating avgRating() throws NoRatingFoodException
+    {
+        if(ratings.size() == 0)
+            throw new NoRatingFoodException();
+        return Rating.avgRatingList(ratings);
+    }
+
+    public class NoRatingFoodException extends Exception
+    {
+        NoRatingFoodException()
+        {
+            super("No rating exists for this food");
+        }
+    }
 //    Time discount
 
     /* local methods */
