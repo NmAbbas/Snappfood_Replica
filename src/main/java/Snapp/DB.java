@@ -40,14 +40,15 @@ public class DB {
     }
     static void savefoods(ArrayList<Food> foods) throws SQLException {
         for(Food f:foods){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.food (id, name, restaurantid,type,price,discount)\n" +
-                    "VALUES (?, ?, ?,?,?,?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO db.food (id, name, restaurantid,type,price,discount,cookingtime)\n" +
+                    "VALUES (?, ?, ?,?,?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setString(2, f.getName());
             preparedStatement.setInt(3, f.getOwner().getId());
             preparedStatement.setString(4, f.getFoodType().toString());
             preparedStatement.setDouble(5, f.getPrice());
             preparedStatement.setDouble(6, f.getDiscount());
+            preparedStatement.setLong(7, f.getCookingTime());
             preparedStatement.executeUpdate();
         }
     }

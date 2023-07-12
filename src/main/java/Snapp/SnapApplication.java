@@ -15,6 +15,7 @@ public class SnapApplication extends Application {
     public void start(Stage stage) throws IOException {// example creation:
         try
         {
+//            Savior.loading();
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
@@ -36,6 +37,7 @@ public class SnapApplication extends Application {
             Comment.createComment("it tastes like shit", u1, null, f1);
             Comment.createComment("i like it", u2, null, f1);
             Comment.createComment("uhhhhhhhhhhhh!", u3, null, f1);
+
 
         }
         catch(Exception e)
@@ -62,5 +64,6 @@ public class SnapApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+        Savior.saving();
     }
 }
