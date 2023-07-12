@@ -30,6 +30,16 @@ public class RestaurantController implements Initializable {
             buttons[0].setGraphic(imageView);
 //            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0],0,0);
+            buttons[0].setOnAction(e -> {
+                User.getActiveUser().setActiveFood(User.getActiveUser().getActiveRestaurant().getMenu().get(0));
+                try
+                {
+                    SnapApplication.changeScene("user-food-view.fxml");
+                } catch (IOException ex)
+                {
+                    ex.printStackTrace();
+                }
+            });
             //Restaurant 1->
             for (int i = 1; i < User.getActiveUser().getActiveRestaurant().getMenu().size(); i++){
                 buttons[i] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
