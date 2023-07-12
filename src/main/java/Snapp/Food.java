@@ -7,6 +7,32 @@ public class Food {
     /* static vars */
     static int nextID = 0;
     static ArrayList<Food> foodList = new ArrayList<>();
+    int ownerid;
+    ArrayList<Comment> comments;
+    ArrayList<Rating> ratings;
+    /* local vars */
+    private int id;
+    private String name;
+    private double price;
+    private FoodType foodtype;
+    private boolean activation = true;
+    private double discount = 0.0;
+    private long cookingTime;
+    private String imageURL = "/images/hamburger.png";
+    private Restaurant owner;
+
+    /* local methods */
+    Food(int id, String name, double price, FoodType foodtype, long cookingTime, Restaurant owner)
+            throws InvalidPriceException {
+        this.id = id;                                   //internal copies which i made(Abbas) use -1 id
+        this.name = name;
+        this.setPrice(price);
+        this.foodtype = foodtype;
+        this.cookingTime = cookingTime;
+        this.owner = owner;
+        this.comments=new ArrayList<>();
+        if(owner!=null) owner.addFood(this);
+    }
 
     /* static methods */
     public static Food createFood(String name, double price, FoodType foodtype, long cookingTime, Restaurant owner)
@@ -40,42 +66,6 @@ public class Food {
         throw new InvalidFoodID();
     }
 
-    /* local vars */
-    private int id;
-    private String name;
-    private double price;
-    private FoodType foodtype;
-    private boolean activation = true;
-    private double discount = 0.0;
-    private long cookingTime;
-    int ownerid;
-    private Restaurant owner;
-    ArrayList<Comment> comments;
-    ArrayList<Rating> ratings;
-//    Time discount
-
-    public ArrayList<Rating> getRatings()
-    {
-        return ratings;
-    }
-
-    public void setRatings(ArrayList<Rating> ratings)
-    {
-        this.ratings = ratings;
-    }
-
-    /* local methods */
-    Food(int id, String name, double price, FoodType foodtype, long cookingTime, Restaurant owner)
-            throws InvalidPriceException {
-        this.id = id;                                   //internal copies which i made(Abbas) use -1 id
-        this.name = name;
-        this.setPrice(price);
-        this.foodtype = foodtype;
-        this.cookingTime = cookingTime;
-        this.owner = owner;
-        this.comments=new ArrayList<>();
-        if(owner!=null) owner.addFood(this);
-    }
     static void LinkBS(ArrayList<Food> foods){         //called after filling all
         for(Food f:foods){
             nextID=Math.max(nextID,f.getId());
@@ -88,6 +78,25 @@ public class Food {
             }
         }
 
+    }
+//    Time discount
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public ArrayList<Rating> getRatings()
+    {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings)
+    {
+        this.ratings = ratings;
     }
 
     public int getId() {
@@ -137,20 +146,6 @@ public class Food {
         return activation;
     }
 
-    public class CancelDiscount extends TimerTask
-    {
-        Food food;
-        CancelDiscount(Food food)
-        {
-            super();
-            this.food = food;
-        }
-        @Override
-        public void run()
-        {
-            food.discount = 0;
-        }
-    }
     public double getDiscount()
     {
         return discount;
@@ -168,12 +163,12 @@ public class Food {
         return owner;
     }
 
-    public void setCookingTime(long cookingTime) {
-        this.cookingTime = cookingTime;
-    }
-
     public long getCookingTime() {
         return cookingTime;
+    }
+
+    public void setCookingTime(long cookingTime) {
+        this.cookingTime = cookingTime;
     }
 
     public ArrayList<Comment> getComments()
@@ -195,11 +190,20 @@ public class Food {
         this.discount=f.discount;
         this.price = f.price;
     }
+
     Comment getCommentById(int id) throws CommentIdInvalid {
         for(Comment c:comments){
             if(c.ID==id) return c;
         }
         throw new CommentIdInvalid();
+    }
+
+    void loadComments(){
+        if(this.comments.size()==0){
+            for(Comment c : Comment.commentList){
+                if(c.restaurant==null && c.food.getId()==this.id) this.comments.add(c);
+            }
+        }
     }
 
 
@@ -249,11 +253,19 @@ public class Food {
             this.inactiveFood = inactiveFood;
         }
     }
-    void loadComments(){
-        if(this.comments.size()==0){
-            for(Comment c : Comment.commentList){
-                if(c.restaurant==null && c.food.getId()==this.id) this.comments.add(c);
-            }
+
+    public class CancelDiscount extends TimerTask
+    {
+        Food food;
+        CancelDiscount(Food food)
+        {
+            super();
+            this.food = food;
+        }
+        @Override
+        public void run()
+        {
+            food.discount = 0;
         }
     }
 }
