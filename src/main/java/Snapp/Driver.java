@@ -641,6 +641,9 @@ public class Driver {
                     {
                         User.getActiveUser().setActiveFood(null);
                         System.out.println("DONE");
+                    } else if (inp.matches("^\\s*show\\s+cart\\s+status\\s*") && User.getActiveUser().getActiveRestaurant() != null)
+                    {
+                        printCart(User.getActiveUser().getCart());
                     } else if (inp.matches("^\\s*confirm\\s+order\\s*") && User.getActiveUser().getActiveRestaurant() != null)
                     {
                         if(User.getActiveUser().hasActiveOrder())
