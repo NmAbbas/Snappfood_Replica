@@ -31,6 +31,7 @@ public class Food {
         this.cookingTime = cookingTime;
         this.owner = owner;
         this.comments=new ArrayList<>();
+        this.ratings = new ArrayList<>();
         if(owner!=null) owner.addFood(this);
     }
 

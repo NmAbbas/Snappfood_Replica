@@ -25,7 +25,7 @@ public class Comment {
     static void createComment(String message, User commenter, Restaurant restaurant, Food food)
     {
         Comment c = new Comment(message, commenter, restaurant, food);
-        food.comments.add(c);
+//        food.comments.add(c);
         commentList.add(c);
     }
 

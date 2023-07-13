@@ -284,9 +284,8 @@ public class DB {
         resultSet = statement.executeQuery("select userid, restaurantid, foods,foodscount from db.carts ;");
         ArrayList<Cart> carts = new ArrayList<>();
         while (resultSet.next()){
-            String type = resultSet.getString("type");
             ArrayList<Food> foods = new ArrayList<>();
-            byte[] ids = new byte[resultSet.getByte("foodcount")];
+            byte[] ids = new byte[resultSet.getByte("foodscount")];
             for(byte id:ids){
                 foods.add(Food.getFoodbyId(id));
             }

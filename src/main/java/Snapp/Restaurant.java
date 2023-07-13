@@ -72,7 +72,7 @@ public class Restaurant
         this.ratings = ratings;
     }
 
-    ArrayList<Rating> ratings;
+    ArrayList<Rating> ratings = new ArrayList<>();
 
     public Rating avgRating() throws NoRatingRestaurantException
     {

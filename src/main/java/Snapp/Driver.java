@@ -23,6 +23,7 @@ public class Driver {
             a = Account.login(username, pass);
             Account.activeUser = a;
             System.out.println("USER LOGIN SUCCESS");
+            printAllRestaurants();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -360,7 +361,8 @@ public class Driver {
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("initial data was read from DB successfully");
+            System.out.println("===========================================");
         }
 
         while (running)
@@ -474,14 +476,14 @@ public class Driver {
                             printCommentList(Admin.getActiveUser().getActiveFood().getComments());
                         }
                         else if (inp.matches("^\\s*add new response.*")) {
-                            addReply(parts[3], parts[4]);
+                            addReply(parts[3], inp.split("response\\s+\\d+\\s+")[1].trim());
                         }
                     }
                     if(inp.matches("^\\s*display comments.*")&& Admin.getActiveUser().getActiveFood()==null) {
                         printCommentList(Admin.getActiveUser().getActiveFood().getComments());
                     }
                     else if(inp.matches("^\\s*edit response.*")) {
-                        editReply(parts[2],parts[3]);
+                        editReply(parts[2],inp.split("response\\s+\\d+\\s+")[1].trim());
                     }
                     else if(inp.matches("^\\s*display open orders.*")) {
                         printOrders(Admin.getActiveUser().getActiveOrders());
