@@ -16,6 +16,7 @@ public class Savior {
             Restaurant.LinkBS(Restaurant.restaurantList);
             Account.linkBS();
             DB.loadCarts();
+            DB.loadRatings();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,6 +36,12 @@ public class Savior {
                 if(!a.isDelivery&&!a.isadmin){
                     carts.add(((User)a).getCart());
                 }
+            }
+            for(Restaurant r : Restaurant.getRestaurantList()) {
+                DB.saveRestaurantRatings(r);
+            }
+            for(Food f : Food.foodList) {
+                DB.saveFoodRatings(f);
             }
             DB.saveCarts(carts);
             DB.close();

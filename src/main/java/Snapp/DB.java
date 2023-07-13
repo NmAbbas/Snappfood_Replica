@@ -300,6 +300,41 @@ public class DB {
             User.getUserByID(c.getCostomer().getId()).setCart(c);
         }
     }
+    static void loadRatings() throws SQLException, Food.InvalidFoodID, Food.FoodIsDeactiveException, User.YouHaveAlreadyRated {
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select userid, restaurantid,foodid,value from db.ratings ;");
+        while (resultSet.next()) {
+            int restid = resultSet.getInt("restaurantid");
+            if(resultSet.wasNull()){
+                User.getUserByID(resultSet.getInt("userid")).addRatingToFood(Food.getFoodbyId(resultSet.getInt("foodid")),resultSet.getDouble("value"));
+            }
+            else{
+                User.getUserByID(resultSet.getInt("userid")).addRatingToRestaurant(Restaurant.getRestaurantByID(restid),resultSet.getDouble("value"));
+            }
+
+        }
+    }
+    static void saveFoodRatings(Food food) throws SQLException {
+        for(Rating r:food.ratings){
+                preparedStatement = connection.prepareStatement("INSERT INTO db.ratings (userid, foodid, value)\n" +
+                        "VALUES (?, ?, ?);");
+                preparedStatement.setInt(1, r.getUser().getId());
+                preparedStatement.setInt(2, food.getId());
+                preparedStatement.setDouble(3, r.getRating());
+                preparedStatement.executeUpdate();
+            }
+        }
+    static void saveRestaurantRatings(Restaurant restaurant) throws SQLException {
+        for(Rating r:restaurant.ratings){
+            preparedStatement = connection.prepareStatement("INSERT INTO db.ratings (userid, restaurantid, value)\n" +
+                    "VALUES (?, ?, ?);");
+            preparedStatement.setInt(1, r.getUser().getId());
+            preparedStatement.setInt(2, restaurant.getId());
+            preparedStatement.setDouble(3, r.getRating());
+            preparedStatement.executeUpdate();
+        }
+    }
+
     static void clearEverything() throws SQLException {
         preparedStatement = connection.prepareStatement("truncate table db.food;");
         preparedStatement.executeUpdate();
@@ -312,6 +347,8 @@ public class DB {
         preparedStatement = connection.prepareStatement("truncate table db.comments;");
         preparedStatement.executeUpdate();
         preparedStatement = connection.prepareStatement("truncate table db.carts;");
+        preparedStatement.executeUpdate();
+        preparedStatement = connection.prepareStatement("truncate table db.ratings;");
         preparedStatement.executeUpdate();
     }
     static void close(){
@@ -331,33 +368,5 @@ public class DB {
 
             }
     }
-//    void saveusers() throws SQLException {
-//        preparedStatement = connection.prepareStatement("delete from users ;");
-//        for (Account u :Account.AccountList){
-//            addaccount(u.name,u.pass,u.isadmin,u.credit);
-//        }
-//    }
-//    void saveusers() throws SQLException {
-//        preparedStatement = connection.prepareStatement("delete from users ;");
-//        for (Account u :Account.AccountList){
-//            addaccount(u.name,u.pass,u.isadmin,u.credit);
-//        }
-//    }
-//    static boolean usertaken(String username) throws SQLException {
-//        preparedStatement = connection.prepareStatement("select username from users where username=?;");
-//        preparedStatement.setString(1, username);
-//        resultSet = preparedStatement.executeQuery();
-//        return resultSet.next();
-//    }
-//    static void updateUser(Account u){
-//        preparedStatement = connection.prepareStatement("update db.users  set(name=?, username=?, password=?, isadmin=?,credit=?)\n" +
-//                " where (username = ?);");
-//        preparedStatement.setString(1, u.name);
-//        preparedStatement.setString(2, u.);
-//        preparedStatement.setString(3, pass);
-//        preparedStatement.setBoolean(4, isadmin);
-//        preparedStatement.setLong(5, credit);
-//        preparedStatement.executeUpdate();
-//    }
 
 } // class ends
