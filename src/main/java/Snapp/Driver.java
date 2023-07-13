@@ -706,8 +706,13 @@ public class Driver {
                     {
                         try
                         {
-                            User.getActiveUser().addRatingToFood(User.getActiveUser().getActiveFood(), Double.parseDouble(parts[2]));
-                            System.out.println("rating added successfully!");
+                            if(User.getActiveUser().hasEverOrderedFood(User.getActiveUser().getActiveFood())) {
+                                User.getActiveUser().addRatingToFood(User.getActiveUser().getActiveFood(), Double.parseDouble(parts[2]));
+                                System.out.println("rating added successfully!");
+                            }
+                            else{
+                                System.out.println("[Error]you can't rate a food you have not ordered!");
+                            }
                         }
                         catch (Exception e)
                         {
