@@ -3,16 +3,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.RestaurantsList">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-    <Button onMouseClicked="#openCart" layoutX="35.0" layoutY="40.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0">
+    <Button layoutX="35.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#openCart" prefHeight="20.0" prefWidth="50.0">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -48,7 +48,7 @@
             </ImageView>
         </graphic>
     </Button>
-    <ScrollPane layoutX="39.0" layoutY="146.0" prefHeight="532.0" prefWidth="518.0">
+    <ScrollPane layoutX="39.0" layoutY="240.0" prefHeight="438.0" prefWidth="518.0">
         <content>
             <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@grid-pane-one-row-list.css">
                 <columnConstraints>
@@ -65,5 +65,12 @@
             <Image url="@../images/arrow.png" />
         </image>
     </ImageView>
+   <ImageView fx:id="imageView" fitHeight="107.0" fitWidth="123.0" layoutX="46.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/hamburger.png" />
+      </image>
+   </ImageView>
+   <Label fx:id="restaurantNameLabel" layoutX="158.0" layoutY="144.0" prefHeight="27.0" prefWidth="190.0" text="نام رستوران" />
+   <Label fx:id="foodTypeLabel" layoutX="165.0" layoutY="182.0" prefHeight="27.0" prefWidth="190.0" text="نوع غذا" />
 
 </AnchorPane>

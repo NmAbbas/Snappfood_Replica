@@ -3,6 +3,7 @@ package Snapp.Controller;
 import Snapp.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RestaurantsList implements Initializable {
+
+    public Label restaurantNameLabel;
+    public Label foodTypeLabel;
 
     public enum Command
     {
@@ -68,6 +72,15 @@ public class RestaurantsList implements Initializable {
 
     public void showRestaurantList(ArrayList<Restaurant> restaurants)
     {
+        String ftype = "";
+        for (FoodType f: User.getActiveUser().getActiveRestaurant().getFoodtype())
+        {
+            ftype += f.toString() + ", ";
+        }
+        ftype = ftype.substring(0, ftype.length() - 2);
+        foodTypeLabel.setText(ftype);
+        restaurantNameLabel.setText(User.getActiveUser().getActiveRestaurant().getName());
+
         if (restaurants.size() != 0) {
             gridPane.setPrefHeight(135*restaurants.size());
             Button[] buttons = new Button[restaurants.size()];

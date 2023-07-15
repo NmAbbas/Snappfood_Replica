@@ -1,6 +1,7 @@
 package Snapp.Controller;
 
 import Snapp.Admin;
+import Snapp.FoodType;
 import Snapp.SnappApplication;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,6 +35,14 @@ public class AdminRestaurantPanel implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String ftype = "";
+        for (FoodType f: Admin.getActiveUser().getActiveRestaurant().getFoodtype())
+        {
+            ftype += f.toString() + ", ";
+        }
+        ftype = ftype.substring(0, ftype.length() - 2);
+        foodTypeLabel.setText(ftype);
+        restaurantNameLabel.setText(Admin.getActiveUser().getActiveRestaurant().getName());
         if (Admin.getActiveUser().getActiveRestaurant().getMenu().size() != 0){
             ImageView imageView;
             gridPane.setPrefHeight(135*(Admin.getActiveUser().getActiveRestaurant().getMenu().size()+1));
