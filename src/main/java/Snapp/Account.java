@@ -80,6 +80,22 @@ public class Account {
 
         throw new IncorrectPasswordException(); // user exists but the password is incorrect
     }
+    public static Account forgotpass(String name, String newpass,String qanswer) throws IncorrectPasswordException,
+             UsernameNotExists, UserAlreadySignedin
+    {
+        if (activeUser != null) throw new UserAlreadySignedin();
+        Account acc = findAccount(name);
+        if (qanswer.equals(acc.answer)) {
+            acc.setHashedPassword(acc.hashPassword(newpass));
+            return acc;
+        }
+
+        throw new IncorrectPasswordException(); // user exists but the password is incorrect
+    }
+    public static String getQuestion(String name) throws UsernameNotExists {
+        Account acc = findAccount(name);
+        return acc.question;
+    }
 
     static void logout()
     {
@@ -144,7 +160,7 @@ public class Account {
         random.nextBytes(salt);
     }
 
-    private byte[] hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private byte[] hashPassword(String password)  {
 //        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
 //        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 //        return factory.generateSecret(spec).getEncoded();
@@ -260,6 +276,11 @@ public class Account {
     static public class IncorrectPasswordException extends Exception {
         IncorrectPasswordException() {
             super("[Error] Incorrect password!");
+        }
+    }
+    static public class IncorrectAnswerException extends Exception {
+        IncorrectAnswerException() {
+            super("[Error] Incorrect answer!");
         }
     }
 

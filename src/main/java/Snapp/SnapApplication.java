@@ -21,9 +21,14 @@ public class SnapApplication extends Application {
             User u3 = User.createUser("patrick", "P@ss12345678");
             u3.setLocation(3);
             DiscountCard.giveDiscountCardToUser(u3, 450);
+            u1.setQuestion("how are you?");
+            u1.setAnswer("GOOD");
+
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("plankton", "P@ss12345678");
+            a2.setQuestion("how are you?");
+            a2.setAnswer("GOOD");
 
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
             d1.setLocation(2);

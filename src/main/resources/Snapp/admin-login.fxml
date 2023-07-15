@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@login-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminLogin">
     <children>
         <Label fx:id="loginLabel" layoutX="186.0" layoutY="270.0" prefWidth="198.0" text="ورود مدیر" />
-        <Label fx:id="signUpLabel" layoutX="185.0" layoutY="690.0" onMouseClicked="#openAdminSignUp" prefWidth="205.0" text="ایجاد حساب کاربری" />
+        <Label fx:id="signUpLabel" layoutX="188.0" layoutY="741.0" onMouseClicked="#openAdminSignUp" prefWidth="205.0" text="ایجاد حساب کاربری" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/user.png" />
@@ -24,14 +24,17 @@
             </image>
         </ImageView>
         <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-        <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="520.0" prefWidth="205.0" text="فراموشی رمز" />
+        <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="520.0" onMouseClicked="#forgotpass1" prefWidth="205.0" text="فراموشی رمز" />
         <Label fx:id="errorLabel" layoutX="225.0" layoutY="425.0" opacity="0.0" prefHeight="18.0" prefWidth="164.0" text="نام‌کاربری یا رمز عبور اشتباه است!" />
-        <Button layoutX="191.0" layoutY="449.0" onMouseClicked="#checkLogin" mnemonicParsing="false" prefHeight="26.0" prefWidth="198.0" text="ورود" />
-        <ImageView fitHeight="42.0" fitWidth="42.0" onMouseClicked="#openLogin" layoutX="483.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+        <Button layoutX="191.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#checkLogin" prefHeight="26.0" prefWidth="198.0" text="ورود" />
+        <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openLogin" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/arrow.png" />
             </image>
         </ImageView>
+      <Label fx:id="qLabel" layoutX="204.0" layoutY="586.0" opacity="0.0" prefHeight="27.0" prefWidth="187.0" text="question :" />
+      <TextField fx:id="AnswerField" layoutX="226.0" layoutY="620.0" opacity="0.0" prefHeight="33.0" prefWidth="164.0" promptText="Answer the question" />
+      <Button fx:id="f2" layoutX="192.0" layoutY="674.0" mnemonicParsing="false" onMouseClicked="#forgotpass2" opacity="0.0" prefHeight="26.0" prefWidth="198.0" text="فراموشی و تغییر رمز" />
 
     </children>
 </AnchorPane>
