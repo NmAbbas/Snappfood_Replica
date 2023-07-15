@@ -28,10 +28,10 @@ public class AdminFoodView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         foodNameLabel.setText(Admin.getActiveUser().getActiveFood().getName());
-        foodImageView.setImage(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getActiveFood().getImageURL())));
-        cookingTimeLabel.setText(User.getActiveUser().getActiveFood().getCookingTime() / 1000 +" s");
-        priceLabel.setText(String.valueOf(User.getActiveUser().getActiveFood().getPrice()));
-        if (!User.getActiveUser().getActiveFood().isActive()){
+        foodImageView.setImage(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveFood().getImageURL())));
+        cookingTimeLabel.setText(Admin.getActiveUser().getActiveFood().getCookingTime() / 1000 +" s");
+        priceLabel.setText(String.valueOf(Admin.getActiveUser().getActiveFood().getPrice()));
+        if (!Admin.getActiveUser().getActiveFood().isActive()){
             addToCartButton.getStyleClass().add("food-not-active");
             addToCartButton.setText("این غذا موجود نیست");
         }
@@ -39,7 +39,7 @@ public class AdminFoodView implements Initializable {
         //add comments to food
 
         //your comment
-        Comment thisUserComment = Comment.checkIfHasCommentedInList(User.getActiveUser().getActiveFood().getComments(),User.getActiveUser().getId());
+        Comment thisUserComment = Comment.checkIfHasCommentedInList(Admin.getActiveUser().getActiveFood().getComments(),Admin.getActiveUser().getId());
         if (thisUserComment == null){
             Button addYourCommentButton = new Button();
             ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream("/images/add.png")));
@@ -70,7 +70,7 @@ public class AdminFoodView implements Initializable {
                     gridPane.add(anchorPane,0,0);
                     addButton.setOnAction(event -> {
                         try{
-                            Comment.createComment(textField.getText(),User.getActiveUser(),null,User.getActiveUser().getActiveFood());
+                            Comment.createComment(textField.getText(),User.getActiveUser(),null,Admin.getActiveUser().getActiveFood());
                             Label yourCommentName = new Label(User.getActiveUser().getName());
                             AnchorPane commentAnchorPane = new AnchorPane(yourCommentName);
                             AnchorPane.setTopAnchor(yourCommentName, 15.0);
