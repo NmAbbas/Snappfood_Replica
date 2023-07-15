@@ -50,7 +50,7 @@
     </Button>
     <ScrollPane layoutX="39.0" layoutY="108.0" prefHeight="570.0" prefWidth="518.0">
         <content>
-            <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@buttons-grid-pane-one-row-list.css">
+            <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@grid-pane-one-row-list.css">
                 <columnConstraints>
                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0" />
                 </columnConstraints>

@@ -22,9 +22,9 @@
     -fx-text-fill: #801464;
     -fx-alignment:center-right;
 }
-#cookingTimeTextLabel,#cookingTimeLabel{
+#cookingTimeTextLabel,#cookingTimeLabel,#addedToCartLabel{
     -fx-text-fill: #000;
-    -fx-font-size: 14;
+    -fx-font-size: 14px;
 }
 .food-not-active{
     -fx-background-color: #8f8f8f;

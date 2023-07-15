@@ -1,0 +1,27 @@
+.button{
+    -fx-pref-width: 480;
+    -fx-pref-height: 100;
+    -fx-background-color: #fff;
+    -fx-content-display: right;
+    -fx-text-alignment: right;
+    -fx-alignment: center-right;
+}
+.button:pressed{
+    -fx-background-color: #d7d7d7;
+}
+.label{
+    -fx-wrap-text: true;
+    -fx-max-width: 400;
+    -fx-font-family: "Nazanintar";
+    -fx-text-alignment: right;
+    -fx-font-size: 14px;
+    /*-fx-text-fill: #801464;*/
+    -fx-alignment:center-right;
+}
+.text-field{
+    -fx-font-family: "Nazanintar";
+    -fx-pref-height: 80;
+    -fx-pref-width: 400;
+    -fx-alignment: top-right;
+    -fx-text-alignment: right;
+}
