@@ -48,15 +48,14 @@ public class UserCart implements Initializable {
             totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
         //discount card
         if (User.getActiveUser().getDiscountCards().size() != 0) {
-//            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
-//            for (DiscountCard temp : User.getActiveUser().getDiscountCards()){
-//                discountCardsForComboBox.add(temp.getId()+". "+temp.getDiscount());
-//            }
-//            comboBox = new ComboBox(FXCollections.observableArrayList(discountCardsForComboBox));
-//            User.getActiveUser().getDiscountCards().get((Integer.parseInt((String)comboBox.getValue()).split("\.")[0]))
-            comboBox = new ComboBox(FXCollections.observableArrayList(User.getActiveUser().getDiscountCards()));
-            System.out.println(((DiscountCard)comboBox.getValue()).getId());
-//            ((DiscountCard)comboBox.getValue());
+            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
+            for (DiscountCard temp : User.getActiveUser().getDiscountCards()){
+                discountCardsForComboBox.add(temp.getId()+". "+temp.getDiscount());
+            }
+            comboBox = new ComboBox(FXCollections.observableArrayList(discountCardsForComboBox));
+            if (comboBox.getValue() != null) {
+                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((((String)comboBox.getValue()).split("\\."))[0])));
+            }
 
         }
         //foods
