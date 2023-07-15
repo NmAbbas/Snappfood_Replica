@@ -147,16 +147,30 @@ public class Admin extends Account {
         activeFood.setDiscount(discount, time);
     }
     void addResponse(int commentID, String message) throws Food.CommentIdInvalid {
-        activeFood.getCommentById(commentID).addReply(message,this);
+        try
+        {
+            activeFood.getCommentById(commentID).addReply(message,this);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     void editResponse(int commentID,String newmessage) throws Food.CommentIdInvalid {
-        Comment c = activeFood.getCommentById(commentID).getReply();
-        if(c==null){
-            activeFood.getCommentById(commentID).addReply(newmessage,this);
+        try
+        {
+            Comment c = activeFood.getCommentById(commentID).getReply();
+            if(c==null){
+                activeFood.getCommentById(commentID).addReply(newmessage,this);
+            }
+            else{
+                c.editmessage(newmessage);
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
-        else{
-            c.editmessage(newmessage);
-        }
+
     }
     ArrayList<Order> getActiveOrders(){
         return activeRestaurant.getActiveOrders();

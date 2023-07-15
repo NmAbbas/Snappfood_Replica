@@ -608,7 +608,8 @@ public class Driver {
                             }
                             else
                                 System.out.println("[Error]you can't comment on a food you have not ordered!");
-                        }catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             System.out.println(e.getMessage());
                         }

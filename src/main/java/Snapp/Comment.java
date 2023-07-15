@@ -11,7 +11,7 @@ public class Comment {
         
     }
 
-    Comment checkIfHasCommentedInList(ArrayList<Comment> comments, int userID)
+    public static Comment checkIfHasCommentedInList(ArrayList<Comment> comments, int userID)
     {
         for (Comment c : comments)
             if(c.getCommenter().getId() == userID)
