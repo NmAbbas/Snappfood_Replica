@@ -56,7 +56,7 @@ public class Cart
         foods.add(food);
     }
 
-    public int remvoeFood(Food f)
+    public int removeFood(Food f)
     {
         if (foods.contains(f))
             return 0;

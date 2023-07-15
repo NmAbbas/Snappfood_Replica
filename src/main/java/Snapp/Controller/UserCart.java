@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,8 +50,8 @@ public class UserCart implements Initializable {
                 gridPane.addRow(i, buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(i));
-                    gridPane.getChildren().remove(i,0);
+                    User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(k));
+                    gridPane.getChildren().remove(k,0);
                 });
             }
             gridPane.setVgap(10);
