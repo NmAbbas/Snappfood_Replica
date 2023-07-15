@@ -766,7 +766,10 @@ public class Driver {
                         }
                     }
             }
-            if(inp.matches("exit.*")) running=false;
+            else if(inp.matches("exit.*")) running=false;
+            else
+                System.out.println("INVALID COMMADND");
+
             // map and path :
 
 

@@ -156,7 +156,7 @@ public class Food {
         if (discount > 50 || discount < 0)
             throw new InvalidDiscountException();
         Timer timer = new Timer();
-        this.discount = discount;
+        this.discount = discount / 100.0;
         timer.schedule(new CancelDiscount(this), dTime);
     }
 
