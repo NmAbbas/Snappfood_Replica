@@ -19,7 +19,7 @@ public class RestaurantsList implements Initializable {
         ALL, RESTAURANT, CAFE, SUPER, RECOMEND, NEAR;
     }
 
-    public Command command = Command.ALL;
+    public static Command command = Command.ALL;
     public GridPane gridPane;
     public void openCart() throws IOException {
         SnappApplication.changeScene("user-cart.fxml");
