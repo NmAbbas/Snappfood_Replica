@@ -112,7 +112,7 @@ public class Comment {
     void editmessage(String message){
         this.message=message;
     }
-    Comment getReply(){
+    public Comment getReply(){
         return this.reply;
     }
 
