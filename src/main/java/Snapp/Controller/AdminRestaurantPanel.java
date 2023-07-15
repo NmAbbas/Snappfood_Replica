@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AdminRestaurantPanel implements Initializable
@@ -52,7 +53,7 @@ public class AdminRestaurantPanel implements Initializable
             ImageView imageView;
             for (int i = 0; i < Admin.getActiveUser().getActiveRestaurant().getMenu().size(); i++){
                 buttons[i] = new Button(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
-                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
+                imageView = new ImageView(new Image(Objects.requireNonNull(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL()))));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
