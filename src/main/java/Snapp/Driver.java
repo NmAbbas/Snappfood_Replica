@@ -256,6 +256,16 @@ public class Driver {
         }
     }
 
+    static void printDiscounts(ArrayList<DiscountCard> discountCards)
+    {
+        System.out.println("DISCOUNT CARDS:");
+        System.out.println("ID\t\tDISCOUNT");
+        for (DiscountCard d: discountCards)
+        {
+            System.out.println(d.getId() + "\t\t" + d.getDiscount());
+        }
+    }
+
     static void printOrdersLocation(ArrayList<Order> orders)
     {
         System.out.println("menu:");
@@ -678,11 +688,46 @@ public class Driver {
                             {
                                 User.getActiveUser().getCart().buy();
                                 System.out.println("order confirmed succcessfully");
+                                int disc = DiscountCard.giveDiscountCardToUser(User.getActiveUser(), User.getActiveUser().getCart().price());
+                                if(disc > 0)
+                                {
+                                    System.out.println("you got a " + disc + "% discount card!");
+                                }
                             }
                             catch (Exception e)
                             {
                                 System.out.println(e.getMessage());
                             }
+                        }
+
+                    } else if (inp.matches("^\\s*use\\s+discount\\s+card\\s+\\d+\\s*"))
+                    {
+                        if(User.getActiveUser().getCart() == null)
+                        {
+                            System.out.println("you should first choose a restaurant!");
+                        }
+                        else
+                        {
+                            try
+                            {
+                                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCardById(Integer.parseInt(parts[3])));
+                            }
+                            catch (Exception e)
+                            {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                    } else if (inp.matches("\\s*show\\s+discount\\s+cards\\s*"))
+                    {
+                        printDiscounts(User.getActiveUser().getDiscountCards());
+                    } else if (inp.matches("\\s*deselect\\s+discount\\s+card\\s*"))
+                    {
+                        if(User.getActiveUser().getCart() == null || User.getActiveUser().getCart().getDiscountCard() == null)
+                            System.out.println("[Error] you don't have any discount card selected!");
+                        else
+                        {
+                            User.getActiveUser().getCart().setDiscountCard(null);
+                            System.out.println("discount card deselcted successfully");
                         }
                     } else if (inp.matches("^\\s*show estimated delivery timer\\s*"))
                     {
