@@ -54,6 +54,7 @@ public class UserFoodView implements Initializable {
         //add comments to food
 
         //add your comment button
+        //todo manage that a person have added a comment yet, or not.
         Button addYourCommentButton = new Button();
         ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream("/images/add.png")));
         imageView.setFitWidth(30);
@@ -83,8 +84,8 @@ public class UserFoodView implements Initializable {
                 gridPane.add(anchorPane,0,0);
                 addButton.setOnAction(event -> {
                     try{
-                        Comment.createComment(textField.getText(),User.getActiveUser(),User.getActiveUser().getActiveRestaurant(),User.getActiveUser().getActiveFood());
-
+                        Comment.createComment(textField.getText(),User.getActiveUser(),null,User.getActiveUser().getActiveFood());
+                        //todo manage that a person have added a comment yet, or not.
                     } catch (Exception exception)
                     {
                         exception.printStackTrace();
@@ -102,6 +103,7 @@ public class UserFoodView implements Initializable {
             Label[] names = new Label[User.getActiveUser().getActiveFood().getComments().size()];
             Label[] comments = new Label[User.getActiveUser().getActiveFood().getComments().size()];
             // adding Comments
+            //todo manage that a person have added a comment yet, or not.
             for (int i = 0; i < User.getActiveUser().getActiveFood().getComments().size(); i++) {
                 names[i] = new Label(User.getActiveUser().getActiveFood().getComments().get(i).getCommenter().getName());
                 anchorPanes[i] = new AnchorPane(names[i]);
