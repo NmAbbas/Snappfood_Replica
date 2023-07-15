@@ -35,7 +35,7 @@ public class RestaurantsList implements Initializable {
                 try
                 {
                     User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
-                    SnapApplication.changeScene("restaurant-view.fxml");
+                    SnapApplication.changeScene("user-food-list.fxml");
                 } catch (IOException ex)
                 {
                     ex.printStackTrace();
@@ -55,7 +55,7 @@ public class RestaurantsList implements Initializable {
                     User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
                     try
                     {
-                        SnapApplication.changeScene("restaurant-view.fxml");
+                        SnapApplication.changeScene("user-food-list.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();

@@ -1,6 +1,5 @@
 package Snapp.Controller;
 
-import Snapp.Restaurant;
 import Snapp.SnapApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RestaurantController implements Initializable {
+public class UserFoodList implements Initializable {
 
     public GridPane gridPane;
 
