@@ -47,6 +47,11 @@
                </ImageView>
             </graphic>
          </Button>
+         <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openLogin" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/arrow.png" />
+            </image>
+         </ImageView>
          <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0" text="سوپرمارکت" GridPane.columnIndex="2">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
