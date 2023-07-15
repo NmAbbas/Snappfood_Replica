@@ -18,6 +18,7 @@ public class User extends Account
      ArrayList<Order> receivedOrders = new ArrayList<>();
     private Restaurant activeRestaurant = null;
     private Food activeFood = null;
+    private ArrayList<DiscountCard> discountCards = new ArrayList<>();
     private Cart cart;
     private Order activeOrder = null;
     /* instance methods */
@@ -42,6 +43,16 @@ public class User extends Account
             return user;
         }
         throw new UsernameTakenException();
+    }
+
+    public ArrayList<DiscountCard> getDiscountCards()
+    {
+        return discountCards;
+    }
+
+    public void setDiscountCards(ArrayList<DiscountCard> discountCards)
+    {
+        this.discountCards = discountCards;
     }
 
     public static User getActiveUser()
@@ -165,10 +176,10 @@ public class User extends Account
         return activeOrder;
     }
 
-    void pay(int price) throws CurrencyNotEnoughException
+    void pay(int price) throws DiscountCardDoesntExist
     {
         if (currency < price)
-            throw new CurrencyNotEnoughException();
+            throw new DiscountCardDoesntExist();
         currency -= price;
     }
 
@@ -233,6 +244,24 @@ public class User extends Account
         CurrencyNotEnoughException()
         {
             super("[Error] sorry you don't have enough currency, please charge your account!");
+        }
+    }
+
+    public DiscountCard getDiscountCardById(int id) throws DiscountCardDoesntExist
+    {
+        for (DiscountCard dis: discountCards)
+        {
+            if(dis.getId() == id)
+                return dis;
+        }
+        throw new DiscountCardDoesntExist();
+    }
+
+    static public class DiscountCardDoesntExist extends Exception
+    {
+        DiscountCardDoesntExist()
+        {
+            super("[Error] discount card with selected id doesn't exist or you don't own it!");
         }
     }
 
