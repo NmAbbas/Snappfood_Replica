@@ -63,4 +63,11 @@
         </content>
     </ScrollPane>
 
+
+    <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openHome" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/arrow.png" />
+        </image>
+    </ImageView>
+
 </AnchorPane>

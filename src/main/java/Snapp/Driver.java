@@ -810,7 +810,7 @@ public class Driver {
                     }
             }
             else
-                System.out.println("INVALID COMMADND");
+                System.out.println("INVALID COMMAND");
             if(inp.matches("exit.*")) running=false;
 
 
