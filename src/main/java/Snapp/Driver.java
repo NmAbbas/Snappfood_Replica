@@ -284,7 +284,7 @@ public class Driver {
         System.out.println("ID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
         for(Food f : menu)
         {
-            System.out.println(f.getId() + "\t\t" + f.getName() + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
+            System.out.println(f.getId() + "\t\t" + f.getName()+(f.isActive()?"":"(D)") + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
         }
     }
 
@@ -302,7 +302,7 @@ public class Driver {
 
         for (Comment c : comments)
         {
-            hierarchicalCommentPrint(c, 0);
+            if (c.getUpper()==null) hierarchicalCommentPrint(c, 0);
         }
     }
 
@@ -327,12 +327,10 @@ public class Driver {
             System.out.println("no foods have been selected!");
             return;
         }
-        System.out.println("ID\t\tFOOD");
+        System.out.println("ID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
         for (Food f:cart.getFoods())
-            System.out.println(f.getId() + "\t\t" + f.getName());
+            System.out.println(f.getId() + "\t\t" + f.getName()+(f.isActive()?"":"(D)") + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
     }
-
-
 
 
 
@@ -811,9 +809,10 @@ public class Driver {
                         }
                     }
             }
-            else if(inp.matches("exit.*")) running=false;
             else
                 System.out.println("INVALID COMMADND");
+            if(inp.matches("exit.*")) running=false;
+
 
             // map and path :
 

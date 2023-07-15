@@ -90,7 +90,7 @@ public class Comment {
         }
         if(food != null)
         {
-            if(checkIfHasCommentedInList(food.getComments(), commenter.getId()) != null)
+            if(checkIfHasCommentedInList(food.getComments(), commenter.getId()) != null&& !commenter.isadmin)
                 throw new HasCommentedBeforeException();
             food.getComments().add(this);
         }

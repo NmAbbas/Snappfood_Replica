@@ -19,6 +19,9 @@ public class RestaurantsList implements Initializable {
     public void openCart() throws IOException {
         SnapApplication.changeScene("user-cart.fxml");
     }
+    public void openHome() throws IOException {
+        SnapApplication.changeScene("user-home.fxml");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

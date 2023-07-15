@@ -4,11 +4,11 @@ class Main
 {
     public static void main(String[] args)
     {
-        //Savior.loading();
+        Savior.loading();
         Driver d = new Driver();
         d.phase1drive();
-        //Savior.saving();
-        //DB.close();
+        Savior.saving();
+        DB.close();
         return;
     }
 }

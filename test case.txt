@@ -6,7 +6,42 @@ select food 0
 add new comment mewmew
 edit comment 1 mewmew
 display ratings
+add ratings 4
 add this food to cart
 show cart status
 confirm order
 show estimated delivery timer
+logout
+
+login admin Mr.Krabs P@ss12345678
+list restaurants
+select restaurant 0
+show location
+set location 5
+show foodtype
+edit foodtype IRANIAN
+add foodtype IRANIAN
+show menu
+edit food 0 name mewmew
+edit food 0 price 25.5
+add food cake 100 IRANIAN 10
+deactivate food 2
+activate food 2
+discount food 2 20 100000
+display comments
+select food 0
+add new response 0 wow
+
+
+
+logout
+
+login user sandy P@ss12345678
+select restaurant 1
+select food 2
+add this food to cart
+
+
+captcha
+forgot password
+sort food
