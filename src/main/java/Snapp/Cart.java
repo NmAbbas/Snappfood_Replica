@@ -15,7 +15,7 @@ public class Cart
     {
         int price = 0;
         for (Food f : foods)
-            price += f.getPrice();
+            price += f.getPrice() * (1.00 - f.getDiscount());
         return price;
     }
 
