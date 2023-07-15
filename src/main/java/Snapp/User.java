@@ -238,6 +238,42 @@ public class User extends Account
         }
     }
 
+    public ArrayList<Restaurant> kNearestRestaurants(int k)
+    {
+        ArrayList<Restaurant> near = new ArrayList<>();
+        Restaurant.getRestaurantList().sort((Restaurant r1, Restaurant r2)-> {
+            int t1, t2;
+            try
+            {
+                t1 = Map.ETA(location, r1.location);
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+            try
+            {
+                t2 = Map.ETA(location, r1.location);
+            }
+            catch (Exception e)
+            {
+                return 1;
+            }
+
+            if(t1 >= t2)
+            {
+                return 1;
+            }
+            else
+                return -1;
+        });
+
+        for (int i = Restaurant.getRestaurantList().size(), j = 0; i >= 0 && j< k; i--, j++)
+        {
+            near.add(Restaurant.getRestaurantList().get(i));
+        }
+        return near;
+    }
 
     static public class CurrencyNotEnoughException extends Exception
     {

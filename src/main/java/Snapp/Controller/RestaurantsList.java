@@ -17,7 +17,7 @@ public class RestaurantsList implements Initializable {
 
     public enum Command
     {
-        ALL, RESTAURANT, CAFE, SUPER, RECOMEND;
+        ALL, RESTAURANT, CAFE, SUPER, RECOMEND, NEAr;
     }
 
     public Command command = Command.ALL;
