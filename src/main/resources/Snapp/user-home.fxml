@@ -26,7 +26,7 @@
        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0" style="-fx-text-alignment: center;" text="رستوران‌های&#10;اطراف">
+         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#nearCommand" prefHeight="100.0" prefWidth="120.0" style="-fx-text-alignment: center;" text="رستوران‌های&#10;اطراف">
             <graphic>
                <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -38,7 +38,7 @@
                <Font size="9.0" />
             </font>
          </Button>
-         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0" text="کافه" GridPane.columnIndex="1">
+         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cafeCommand" prefHeight="100.0" prefWidth="120.0" text="کافه" GridPane.columnIndex="1">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -47,7 +47,7 @@
                </ImageView>
             </graphic>
          </Button>
-         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="120.0" text="سوپرمارکت" GridPane.columnIndex="2">
+         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#superCommand" prefHeight="100.0" prefWidth="120.0" text="سوپرمارکت" GridPane.columnIndex="2">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -56,7 +56,7 @@
                </ImageView>
             </graphic>
          </Button>
-         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#openRestaurants" prefHeight="100.0" prefWidth="120.0" text="رستوران" GridPane.columnIndex="3">
+         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#restaurantCommand" onMouseClicked="#openRestaurants" prefHeight="100.0" prefWidth="120.0" text="رستوران" GridPane.columnIndex="3">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                   <image>
