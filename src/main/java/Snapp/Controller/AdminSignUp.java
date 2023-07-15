@@ -2,8 +2,7 @@ package Snapp.Controller;
 
 import Snapp.Account;
 import Snapp.Admin;
-import Snapp.SnapApplication;
-import Snapp.User;
+import Snapp.SnappApplication;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -29,7 +28,7 @@ public class AdminSignUp implements Initializable {
         try
         {
             Admin.createAccount(usernameField.getText(), passwordField.getText());
-            SnapApplication.changeScene("admin-login.fxml");
+            SnappApplication.changeScene("admin-login.fxml");
         }
         catch (Account.InvalidUsernameException | Account.UsernameTakenException e)
         {
@@ -45,7 +44,7 @@ public class AdminSignUp implements Initializable {
         }
     }
     public void openLogin() throws IOException {
-        SnapApplication.changeScene("admin-login.fxml");
+        SnappApplication.changeScene("admin-login.fxml");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

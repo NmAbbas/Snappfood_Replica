@@ -2,7 +2,7 @@ package Snapp.Controller;
 
 import Snapp.Cart;
 import Snapp.Restaurant;
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class RestaurantsList implements Initializable {
     public GridPane gridPane;
     public void openCart() throws IOException {
-        SnapApplication.changeScene("user-cart.fxml");
+        SnappApplication.changeScene("user-cart.fxml");
     }
 
     @Override
@@ -27,18 +27,17 @@ public class RestaurantsList implements Initializable {
             Button[] buttons = new Button[Restaurant.getRestaurantList().size()];
             //Restaurant 0
             buttons[0] = new Button(Restaurant.getRestaurantList().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(0).getImageURL())));
+            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
-//            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0],0,0);
             buttons[0].setOnAction(e -> {
                 User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(0));
                 try
                 {
                     User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
-                    SnapApplication.changeScene("user-food-list.fxml");
+                    SnappApplication.changeScene("user-food-list.fxml");
                 } catch (IOException ex)
                 {
                     ex.printStackTrace();
@@ -47,18 +46,17 @@ public class RestaurantsList implements Initializable {
             //Restaurant 1->
             for (int i = 1; i < Restaurant.getRestaurantList().size(); i++){
                 buttons[i] = new Button(Restaurant.getRestaurantList().get(i).getName());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(i).getImageURL())));
+                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
-//                buttons[i].setGraphicTextGap(buttons[i].getWidth()-80-buttons[i].getText().length()-20);
                 gridPane.addRow(i,buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
                     User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
                     try
                     {
-                        SnapApplication.changeScene("user-food-list.fxml");
+                        SnappApplication.changeScene("user-food-list.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();

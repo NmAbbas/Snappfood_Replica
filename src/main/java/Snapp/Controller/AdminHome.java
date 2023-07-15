@@ -2,12 +2,14 @@ package Snapp.Controller;
 
 import Snapp.Admin;
 import Snapp.Restaurant;
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
+import Snapp.User;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -19,34 +21,41 @@ public class AdminHome implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (Admin.getActiveUser().getRestaurants().size() != 0)
+            gridPane.setPrefHeight(250*Admin.getActiveUser().getRestaurants().size());
+        //add Button
         Button addButton = new Button();
-        addButton.setPrefWidth(480);
-        addButton.setPrefHeight(100);
-        ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream("/images/add.png")));
+        ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream("/images/add.png")));
         imageView.setFitWidth(80);
-        imageView.setFitHeight(80);
+        imageView.setFitWidth(80);
         addButton.setGraphic(imageView);
         gridPane.add(addButton,0,0);
+        addButton.setOnAction(e -> {
+            try
+            {
+                SnappApplication.changeScene("admin-new-restaurant.fxml");
+            } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        });
 
         if (Admin.getActiveUser().getRestaurants().size() != 0){
-            System.out.println(Admin.getActiveUser().getRestaurants().size());
-            gridPane.setPrefHeight(135*Admin.getActiveUser().getRestaurants().size());
+//            gridPane.setPrefHeight(135*Admin.getActiveUser().getRestaurants().size());
             Button[] buttons = new Button[Admin.getActiveUser().getRestaurants().size()];
             for (int i = 0; i < Admin.getActiveUser().getRestaurants().size(); i++){
                 buttons[i] = new Button(Admin.getActiveUser().getRestaurants().get(i).getName());
-                buttons[i].setPrefWidth(480);
-                buttons[i].setPrefHeight(100);
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Admin.getActiveUser().getRestaurants().get(i).getImageURL())));
+                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getRestaurants().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
-                gridPane.addRow(i,buttons[i]);
+                gridPane.addRow(i+1,buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    Admin.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
+                    Admin.getActiveUser().setActiveRestaurant(Admin.getActiveUser().getRestaurants().get(k));
                     try
                     {
-                        SnapApplication.changeScene("admin-restaurant-panel.fxml");
+                        SnappApplication.changeScene("admin-restaurant-panel.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();
@@ -56,4 +65,5 @@ public class AdminHome implements Initializable {
             gridPane.setVgap(10);
         }
     }
+
 }
