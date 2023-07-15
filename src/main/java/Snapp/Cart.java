@@ -11,7 +11,7 @@ public class Cart
     private User costomer;
     private ArrayList<Food> foods = new ArrayList<>();
 
-    int price() 
+    public int price()
     {
         int price = 0;
         for (Food f : foods)

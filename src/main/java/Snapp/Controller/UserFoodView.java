@@ -32,7 +32,6 @@ public class UserFoodView implements Initializable {
         {
             User.getActiveUser().getCart().addFood(User.getActiveUser().getActiveFood());
             addedToCartLabel.setOpacity(1.0);
-//            System.out.println("food added to cart successfully!"); // change label
         }
         catch (Exception e)
         {
