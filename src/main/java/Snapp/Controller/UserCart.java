@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -29,41 +28,31 @@ public class UserCart implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
         if (User.getActiveUser().getCart().getFoods().size() != 0) {
-            gridPane.setPrefHeight(135 * User.getActiveUser().getActiveRestaurant().getMenu().size());
-            Button[] buttons = new Button[User.getActiveUser().getActiveRestaurant().getMenu().size()];
+            gridPane.setPrefHeight(135 * User.getActiveUser().getCart().getFoods().size());
+            Button[] buttons = new Button[User.getActiveUser().getCart().getFoods().size()];
             //Food 0
-            buttons[0] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
+            buttons[0] = new Button(User.getActiveUser().getCart().getFoods().get(0).getName()+"\n"+User.getActiveUser().getCart().getFoods().get(0).getPrice());
+            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getCart().getFoods().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
-//            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0], 0, 0);
             buttons[0].setOnAction(e -> {
-                User.getActiveUser().setActiveFood(User.getActiveUser().getActiveRestaurant().getMenu().get(0));
-                try {
-                    SnapApplication.changeScene("user-food-view.fxml");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(0));
+                gridPane.getChildren().remove(0,0);
             });
-            //Restaurant 1->
-            for (int i = 1; i < User.getActiveUser().getActiveRestaurant().getMenu().size(); i++) {
-                buttons[i] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
+            //Food 1->
+            for (int i = 1; i < User.getActiveUser().getCart().getFoods().size(); i++) {
+                buttons[i] = new Button(User.getActiveUser().getCart().getFoods().get(i).getName()+"\n"+User.getActiveUser().getCart().getFoods().get(i).getPrice());
+                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getCart().getFoods().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
-//                buttons[i].setGraphicTextGap(buttons[i].getWidth()-80-buttons[i].getText().length()-20);
                 gridPane.addRow(i, buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    User.getActiveUser().setActiveFood(User.getActiveUser().getActiveRestaurant().getMenu().get(k));
-                    try {
-                        SnapApplication.changeScene("user-food-view.fxml");
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                    User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(i));
+                    gridPane.getChildren().remove(i,0);
                 });
             }
             gridPane.setVgap(10);
