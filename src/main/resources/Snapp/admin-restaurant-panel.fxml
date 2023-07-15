@@ -80,7 +80,7 @@
             <Image url="@../images/arrow.png" />
         </image>
     </ImageView>
-   <ImageView fx:id="imageView" fitHeight="107.0" fitWidth="123.0" layoutX="49.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="restaurantImage" fitHeight="107.0" fitWidth="123.0" layoutX="49.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../images/hamburger.png" />
       </image>

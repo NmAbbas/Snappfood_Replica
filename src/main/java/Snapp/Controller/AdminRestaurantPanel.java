@@ -2,17 +2,16 @@ package Snapp.Controller;
 
 import Snapp.Admin;
 import Snapp.SnappApplication;
+import Snapp.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AdminRestaurantPanel implements Initializable
@@ -21,7 +20,7 @@ public class AdminRestaurantPanel implements Initializable
     public GridPane gridPane;
     public Label restaurantNameLabel;
     public Label foodTypeLabel;
-    public ImageView imageView;
+    public ImageView restaurantImage;
 
     public void removeRestaurant() {
         try {
@@ -34,6 +33,9 @@ public class AdminRestaurantPanel implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        restaurantNameLabel.setText(Admin.getActiveUser().getActiveRestaurant().getName());
+        foodTypeLabel.setText(Admin.getActiveUser().getActiveRestaurant().getFoodtype().toString());
+        restaurantImage.setImage(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getImageURL())));
         if (Admin.getActiveUser().getActiveRestaurant().getMenu().size() != 0){
             ImageView imageView;
             gridPane.setPrefHeight(135*(Admin.getActiveUser().getActiveRestaurant().getMenu().size()+1));

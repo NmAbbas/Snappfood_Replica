@@ -10,17 +10,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@food-view-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.UserFoodView">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@food-view-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminFoodView">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-    <Button onMouseClicked="#openCart" layoutX="35.0" layoutY="40.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0">
-        <graphic>
-            <ImageView fitHeight="34.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../images/shopping-cart.png" />
-                </image>
-            </ImageView>
-        </graphic>
-    </Button>
     <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="453.0" layoutY="692.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="100.0" text="خانه">
         <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -65,7 +56,7 @@
          <Image url="@../images/hamburger.png" />
       </image></ImageView>
    <Label fx:id="foodNameLabel" layoutX="233.0" layoutY="121.0" prefHeight="52.0" prefWidth="317.0" />
-   <Button fx:id="addToCartButton" layoutX="201.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#addToCart" prefHeight="50.0" prefWidth="213.0" text="افزودن به سبد خرید" />
+   <Button fx:id="addToCartButton" layoutX="201.0" layoutY="230.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="213.0" text="اصلاح" />
    <Label fx:id="cookingTimeTextLabel" layoutX="488.0" layoutY="182.0" prefHeight="28.0" prefWidth="68.0" text="زمان پخت:" />
    <Label layoutX="527.0" layoutY="241.0" prefHeight="28.0" prefWidth="46.0" text="قیمت:" />
    <Label fx:id="priceLabel" layoutX="430.0" layoutY="239.0" prefHeight="30.0" prefWidth="94.0" />
