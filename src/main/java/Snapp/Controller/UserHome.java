@@ -1,13 +1,22 @@
 package Snapp.Controller;
 
 import Snapp.SnappApplication;
+import Snapp.User;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.net.PortUnreachableException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class UserHome {
+public class UserHome implements Initializable {
 
     public GridPane gridPane;
+    public Label CREDIT;
+    public Button ADDCREDIT;
 
     public void openRestaurants() throws IOException {
         SnappApplication.changeScene("restaurants-list.fxml");
@@ -46,5 +55,14 @@ public class UserHome {
     public void recommendCommand()
     {
         RestaurantsList.command = RestaurantsList.Command.RECOMEND;
+    }
+    public void addcredit() throws IOException {
+        User.getActiveUser().setCurrency(User.getActiveUser().getCurrency()+10);
+        SnappApplication.changeScene("user-home.fxml");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        CREDIT.setText(String.valueOf(User.getActiveUser().getCurrency()));
     }
 }
