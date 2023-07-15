@@ -2,8 +2,10 @@ package Snapp;
 public enum FoodType {
     FRIED,
     IRANIAN,
+    CAFE,
+    SUPER_MARKET,
     Unknown,
-    ITALIAN;
+    ;
     // etc
 
     public static FoodType parse(String s) throws UnknownType {
@@ -14,8 +16,11 @@ public enum FoodType {
             case "IRANIAN" -> {
                 return IRANIAN;
             }
-            case "ITALIAN" -> {
-                return ITALIAN;
+            case "CAFE" -> {
+                return CAFE;
+            }
+            case "SUPER MARKET" -> {
+                return SUPER_MARKET;
             }
         }
         throw new UnknownType();

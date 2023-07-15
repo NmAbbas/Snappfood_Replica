@@ -1,9 +1,6 @@
 package Snapp.Controller;
 
-import Snapp.Cart;
-import Snapp.Restaurant;
-import Snapp.SnappApplication;
-import Snapp.User;
+import Snapp.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -17,6 +14,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RestaurantsList implements Initializable {
+
+    public enum Command
+    {
+        ALL, RESTAURANT, CAFE, SUPER, RECOMEND;
+    }
+
+    public Command command = Command.ALL;
     public GridPane gridPane;
     public void openCart() throws IOException {
         SnappApplication.changeScene("user-cart.fxml");
@@ -27,50 +31,36 @@ public class RestaurantsList implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showRestaurantList(Restaurant.getRestaurantList());
-       /* if (Restaurant.getRestaurantList().size() != 0) {
-            gridPane.setPrefHeight(135*Restaurant.getRestaurantList().size());
-            Button[] buttons = new Button[Restaurant.getRestaurantList().size()];
-            //Restaurant 0
-            buttons[0] = new Button(Restaurant.getRestaurantList().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(0).getImageURL())));
-            imageView.setFitWidth(80);
-            imageView.setFitWidth(80);
-            buttons[0].setGraphic(imageView);
-            gridPane.add(buttons[0],0,0);
-            buttons[0].setOnAction(e -> {
-                User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(0));
+
+        switch (command)
+        {
+            case ALL -> {
+                showRestaurantList(Restaurant.getRestaurantList());
+            }
+
+            case RECOMEND -> {
                 try
                 {
-                    User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
-                    SnappApplication.changeScene("user-food-list.fxml");
-                } catch (IOException ex)
-                {
-                    ex.printStackTrace();
+                    showRestaurantList(Restaurant.getRestaurantsOfType(User.getActiveUser().recommend()));
                 }
-            });
-            //Restaurant 1->
-            for (int i = 1; i < Restaurant.getRestaurantList().size(); i++){
-                buttons[i] = new Button(Restaurant.getRestaurantList().get(i).getName());
-                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(i).getImageURL())));
-                imageView.setFitWidth(80);
-                imageView.setFitWidth(80);
-                buttons[i].setGraphic(imageView);
-                gridPane.addRow(i,buttons[i]);
-                int k = i;
-                buttons[i].setOnAction(e -> {
-                    User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
-                    try
-                    {
-                        SnappApplication.changeScene("user-food-list.fxml");
-                    } catch (IOException ex)
-                    {
-                        ex.printStackTrace();
-                    }
-                });
+                catch (Exception e)
+                {
+                    showRestaurantList(Restaurant.getRestaurantList());
+                }
             }
-            gridPane.setVgap(10);
-        } */
+            case SUPER -> {
+                showRestaurantList(Restaurant.getRestaurantsOfType(FoodType.SUPER_MARKET));
+            }
+            case CAFE -> {
+                showRestaurantList(Restaurant.getRestaurantsOfType(FoodType.CAFE));
+            }
+            case RESTAURANT -> {
+                ArrayList<Restaurant> rs = Restaurant.getRestaurantsOfType(FoodType.FRIED);
+                rs.addAll(Restaurant.getRestaurantsOfType(FoodType.IRANIAN));
+
+                showRestaurantList(rs);
+            }
+        }
     }
 
     public void showRestaurantList(ArrayList<Restaurant> restaurants)
