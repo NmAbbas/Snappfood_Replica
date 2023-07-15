@@ -1,5 +1,5 @@
 package Snapp;
-enum FoodType {
+public enum FoodType {
     FRIED,
     IRANIAN,
     Unknown,

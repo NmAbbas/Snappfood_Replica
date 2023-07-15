@@ -9,20 +9,19 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@admin-new-restaurant-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminNewRestaurant">
    <children>
-      <Label fx:id="loginLabel" layoutX="201.0" layoutY="120.0" prefWidth="198.0" text="اضافه کردن رستوران جدید" />
-      <Label fx:id="signUpLabel" layoutX="185.0" layoutY="690.0" onMouseClicked="#openUserSignUp" prefWidth="205.0" text="ایجاد حساب کاربری" />
-      <TextField fx:id="passwordField" layoutX="300.0" layoutY="249.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your password" />
-      <TextField fx:id="usernameField" layoutX="300.0" layoutY="176.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter your username" />
-      <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-      <Label fx:id="forgotPasswordLabel" layoutX="183.0" layoutY="555.0" prefWidth="205.0" text="فراموشی رمز" />
-      <Label fx:id="errorLabel" layoutX="225.0" layoutY="425.0" opacity="0.0" prefHeight="18.0" prefWidth="164.0" text="نام‌کاربری یا رمز عبور اشتباه است!" />
-      <Button layoutX="189.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#checkLogin" prefHeight="26.0" prefWidth="198.0" text="ورود" />
-      <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openLogin" pickOnBounds="true" preserveRatio="true">
+      <Label  layoutX="201.0" layoutY="120.0" prefWidth="198.0" text="اضافه کردن رستوران جدید" />
+      <TextField fx:id="foodTypeField" layoutX="300.0" layoutY="249.0" prefHeight="33.0" prefWidth="164.0" promptText="FRIED,ITALIAN,PERSIAN" />
+      <TextField fx:id="nameField" layoutX="300.0" layoutY="176.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter a name" />
+      <Label layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
+      <Button layoutX="189.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#addRestaurant" prefHeight="26.0" prefWidth="198.0" text="اضافه کردن" />
+      <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openAdminHome" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/arrow.png" />
          </image>
       </ImageView>
-      <Label layoutX="475.0" layoutY="184.0" text="نام رستوران" />
-      <Label layoutX="476.0" layoutY="257.0" text="نام رستوران" />
+      <Label layoutX="475.0" layoutY="177.0" text="نام رستوران" />
+      <Label layoutX="486.0" layoutY="250.0" text="نوع غذا" />
+      <TextField fx:id="addressField" layoutX="300.0" layoutY="319.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter a number" />
+      <Label layoutX="491.0" layoutY="320.0" text="آدرس" />
    </children>
 </AnchorPane>
