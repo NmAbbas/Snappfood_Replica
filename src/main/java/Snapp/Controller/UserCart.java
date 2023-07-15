@@ -3,20 +3,24 @@ package Snapp.Controller;
 import Snapp.DiscountCard;
 import Snapp.SnapApplication;
 import Snapp.User;
+import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserCart implements Initializable {
     public Label totalCostLabel;
 
     public GridPane gridPane;
+    public ComboBox comboBox;
 
     public void pay()
     {
@@ -40,7 +44,21 @@ public class UserCart implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
+        if (User.getActiveUser().getCart().price() != 0)
+            totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
+        //discount card
+        if (User.getActiveUser().getDiscountCards().size() != 0) {
+            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
+            for (DiscountCard temp : User.getActiveUser().getDiscountCards()){
+                discountCardsForComboBox.add(temp.getId()+". "+temp.getDiscount());
+            }
+            comboBox = new ComboBox(FXCollections.observableArrayList(discountCardsForComboBox));
+            if (comboBox.getValue() != null) {
+                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((((String)comboBox.getValue()).split("\\."))[0])));
+            }
+
+        }
+        //foods
         if (User.getActiveUser().getCart().getFoods().size() != 0) {
             gridPane.setPrefHeight(135 * User.getActiveUser().getCart().getFoods().size());
             Button[] buttons = new Button[User.getActiveUser().getCart().getFoods().size()];

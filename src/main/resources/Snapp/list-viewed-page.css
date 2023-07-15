@@ -22,3 +22,6 @@
     -fx-text-fill: #801464;
     -fx-alignment:center-right;
 }
+.combo-box{
+    -fx-font-family: "Nazanintar";
+}
