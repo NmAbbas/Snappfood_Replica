@@ -23,8 +23,8 @@
       <Label layoutX="486.0" layoutY="250.0" text="نوع غذا" />
       <TextField fx:id="addressField" layoutX="300.0" layoutY="319.0" prefHeight="33.0" prefWidth="164.0" promptText="Enter a number" />
       <Label layoutX="491.0" layoutY="320.0" text="آدرس" />
-      <Button layoutX="38.0" layoutY="259.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="156.0" text="آپلود تصویر" />
-      <ImageView fitHeight="106.0" fitWidth="113.0" layoutX="63.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="38.0" layoutY="259.0" mnemonicParsing="false" onAction="#openFileChooser" prefHeight="48.0" prefWidth="156.0" text="آپلود تصویر" />
+      <ImageView fx:id="imgPreview" fitHeight="106.0" fitWidth="113.0" layoutX="63.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/hamburger.png" />
          </image>
