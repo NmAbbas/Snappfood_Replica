@@ -20,6 +20,7 @@ public class SnapApplication extends Application {
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
             u3.setLocation(3);
+            DiscountCard.giveDiscountCardToUser(u3, 450);
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("plankton", "P@ss12345678");

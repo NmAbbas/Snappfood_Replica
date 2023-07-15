@@ -1,5 +1,6 @@
 package Snapp.Controller;
 
+import Snapp.DiscountCard;
 import Snapp.SnapApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
@@ -17,8 +18,22 @@ public class UserCart implements Initializable {
 
     public GridPane gridPane;
 
-    public void pay(){
+    public void pay()
+    {
 
+        try
+        {
+            User.getActiveUser().getCart().buy();
+            //TODO "order confirmed succcessfully"
+            int disc = DiscountCard.giveDiscountCardToUser(User.getActiveUser(), User.getActiveUser().getCart().price());
+            if (disc > 0)
+            {
+                //TODO "you have a new discount card"
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     public void reset() {
     }
@@ -38,7 +53,7 @@ public class UserCart implements Initializable {
             gridPane.add(buttons[0], 0, 0);
             buttons[0].setOnAction(e -> {
                 User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(0));
-                gridPane.getChildren().remove(0,0);
+                gridPane.getChildren().remove(0);
             });
             //Food 1->
             for (int i = 1; i < User.getActiveUser().getCart().getFoods().size(); i++) {
@@ -51,7 +66,7 @@ public class UserCart implements Initializable {
                 int k = i;
                 buttons[i].setOnAction(e -> {
                     User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(k));
-                    gridPane.getChildren().remove(k,0);
+                    gridPane.getChildren().remove(k);
                 });
             }
             gridPane.setVgap(10);

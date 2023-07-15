@@ -10,7 +10,7 @@ public class DiscountCard
     private User owner;
     private double discount;
 
-    static int giveDiscountCardToUser(User owner, double paidCash)
+    public static int giveDiscountCardToUser(User owner, double paidCash)
     {
         int disSize = ((int)paidCash - 100) / 10;
         if(disSize > 80)
