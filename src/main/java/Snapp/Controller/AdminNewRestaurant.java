@@ -31,10 +31,10 @@ public class AdminNewRestaurant {
             Restaurant r =Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
             if(imgFile != null)
             {
-//                myFile
+                r.setImageURL("/images/"+imgFile.getName());
             }
             else
-                r.setImageURL("images/hamburger.png");
+                r.setImageURL("/images/hamburger.png");
             SnappApplication.changeScene("admin-home.fxml");
 
         } catch (FoodType.UnknownType | IOException e) {
