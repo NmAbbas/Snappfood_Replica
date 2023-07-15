@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import java.io.File;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,11 +31,7 @@ public class AdminNewRestaurant {
             Restaurant r =Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
             if(imgFile != null)
             {
-                System.out.println("1----" + imgFile.toPath());
-                File myImg = new File(SnappApplication.class.ge.toString());
-                System.out.println("2-----" + SnappApplication.class.getResourceAsStream(r.toString()).toString());
-                Files.copy(imgFile.toPath(),myImg.toPath());
-                r.setImageURL(SnappApplication.class.getResourceAsStream("/images/" + r.toString()).toString());
+                myFile
             }
             else
                 r.setImageURL("images/hamburger.png");
