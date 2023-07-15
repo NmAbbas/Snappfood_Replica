@@ -4,6 +4,7 @@ import Snapp.Admin;
 import Snapp.SnappApplication;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +19,10 @@ public class AdminRestaurantPanel implements Initializable
 {
 
     public GridPane gridPane;
+    public Label restaurantNameLabel;
+    public Label foodTypeLabel;
+    public ImageView imageView;
+
     public void removeRestaurant() {
         try {
             Admin.getActiveUser().getRestaurants().remove(Admin.getActiveUser().getActiveRestaurant());
