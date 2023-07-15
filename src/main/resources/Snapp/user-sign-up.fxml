@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@sign-up-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.UserSignUp">
     <children>
         <Label fx:id="signUpLabel" layoutX="186.0" layoutY="270.0" prefWidth="198.0" text="ایجاد حساب مشتری" />
-        <Label fx:id="loginLabel" layoutX="185.0" layoutY="577.0" onMouseClicked="#openLogin" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
+        <Label fx:id="loginLabel" layoutX="193.0" layoutY="663.0" onMouseClicked="#openLogin" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/user.png" />
@@ -26,6 +26,8 @@
         <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
       <Label fx:id="usernameErrorLabel" layoutX="165.0" layoutY="368.0" opacity="0.0" prefHeight="20.0" prefWidth="222.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
       <Label fx:id="passwordErrorLabel" layoutX="183.0" layoutY="432.0" opacity="0.0" prefHeight="74.0" prefWidth="206.0" text="رمز قابل قبول نیست.&#10;حداقل باید دارای ۸ کاراکتر و حروف کوچک و بزرگ&#10; و یک علامت و عدد باشد." />
-      <Button layoutX="191.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#checkSignUp" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
+      <Button layoutX="196.0" layoutY="599.0" mnemonicParsing="false" onMouseClicked="#checkSignUp" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
+      <ImageView fx:id="cap" fitHeight="81.0" fitWidth="198.0" layoutX="192.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="capField" layoutX="226.0" layoutY="561.0" prefHeight="25.0" prefWidth="164.0" />
     </children>
 </AnchorPane>

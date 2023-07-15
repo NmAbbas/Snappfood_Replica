@@ -5,6 +5,7 @@ import Snapp.SnapApplication;
 import Snapp.User;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -12,8 +13,9 @@ public class UserLogin {
     public Label errorLabel;
     public TextField usernameField;
     public TextField passwordField;
+    public ImageView cap;
     public void checkLogin() throws IOException {
-        errorLabel.setRotate(0.0);
+        errorLabel.setOpacity(0.0);
         try
         {
             Account account = Account.login(usernameField.getText(), passwordField.getText());
