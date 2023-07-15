@@ -65,7 +65,7 @@ public class Restaurant
     public static void LinkBS(ArrayList<Restaurant> r){ //called after filling all
 
         for(Restaurant rest:r){
-            nextID=Math.max(nextID,rest.id);
+            nextID=Math.max(nextID,rest.id+1);
         }
     }
 

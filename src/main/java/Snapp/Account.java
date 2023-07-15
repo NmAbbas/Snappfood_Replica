@@ -24,6 +24,8 @@ public class Account {
     protected boolean isadmin = false;
     protected boolean isDelivery = false;
     protected int location;
+    protected String question;
+    protected String answer;
 
     /* account functions: */
     protected Account(String name, String pass, int id)
@@ -182,6 +184,22 @@ public class Account {
     void deliverytry() throws UserNotDelivery
     {
         if (!this.isDelivery) throw new UserNotDelivery();
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public int getId() {

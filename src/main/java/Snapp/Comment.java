@@ -145,6 +145,7 @@ public class Comment {
         this.reply = reply;
     }
 
+
     public static Comment getActiveComment()
     {
         return activeComment;

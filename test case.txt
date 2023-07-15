@@ -1,3 +1,12 @@
 login user sandy P@ss12345678
 search restaurants Ch
 select restaurant 0
+search food k
+select food 0
+add new comment mewmew
+edit comment 1 mewmew
+display ratings
+add this food to cart
+show cart status
+confirm order
+show estimated delivery timer
