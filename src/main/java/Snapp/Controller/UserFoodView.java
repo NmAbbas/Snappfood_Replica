@@ -38,6 +38,9 @@ public class UserFoodView implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+    public void openCart() throws IOException {
+        SnapApplication.changeScene("user-cart.fxml");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

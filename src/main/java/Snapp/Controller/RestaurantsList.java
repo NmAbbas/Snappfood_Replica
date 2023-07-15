@@ -16,6 +16,9 @@ import java.util.ResourceBundle;
 
 public class RestaurantsList implements Initializable {
     public GridPane gridPane;
+    public void openCart() throws IOException {
+        SnapApplication.changeScene("user-cart.fxml");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

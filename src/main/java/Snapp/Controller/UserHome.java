@@ -15,4 +15,7 @@ public class UserHome {
     public void openLogin() throws IOException {
         SnapApplication.changeScene("login.fxml");
     }
+    public void openCart() throws IOException {
+        SnapApplication.changeScene("user-cart.fxml");
+    }
 }
