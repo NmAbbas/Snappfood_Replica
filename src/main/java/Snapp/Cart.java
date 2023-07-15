@@ -18,7 +18,7 @@ public class Cart
         for (Food f : foods)
             price += f.getPrice() * (1.00 - f.getDiscount());
         if(discountCard != null)
-            price *= discountCard.getDiscount();
+            price *= (1.00 - discountCard.getDiscount());
         return price;
     }
 

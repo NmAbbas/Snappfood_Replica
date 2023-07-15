@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -64,6 +63,7 @@ public class RestaurantsList implements Initializable {
                 showRestaurantList(User.getActiveUser().kNearestRestaurants(5));
             }
         }
+
     }
 
     public void showRestaurantList(ArrayList<Restaurant> restaurants)

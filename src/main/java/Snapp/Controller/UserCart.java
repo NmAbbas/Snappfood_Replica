@@ -3,6 +3,8 @@ package Snapp.Controller;
 import Snapp.DiscountCard;
 import Snapp.SnappApplication;
 import Snapp.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,13 +14,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class UserCart implements Initializable {
     public Label totalCostLabel;
 
     public GridPane gridPane;
-    public ComboBox comboBox;
+    public ComboBox<String> comboBox;
     public Label payedLabel;
 
     public void pay()
@@ -45,23 +49,24 @@ public class UserCart implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (User.getActiveUser().getCart().price() != 0)
             totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+        comboBox.setItems(list);
+
         //discount card
-//        if (User.getActiveUser().getDiscountCards().size() != 0) {
-////            comboBox = new ComboBox<String>();
-////            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
-//            String[] discountCardsForComboBox = new String[User.getActiveUser().getDiscountCards().size()];
-//            for (int i = 0; i < User.getActiveUser().getDiscountCards().size(); i++){
-////                comboBox.getItems().add(temp.getId()+". "+temp.getDiscount());
-////                discountCardsForComboBox.add(temp.getId()+". "+temp.getDiscount());
-//                discountCardsForComboBox[i] = User.getActiveUser().getDiscountCards().get(i).getId()+". "+User.getActiveUser().getDiscountCards().get(i).getDiscount();
-////                System.out.println(temp.getId()+". "+temp.getDiscount());
-//            }
-//            comboBox = new ComboBox(FXCollections.observableArrayList(discountCardsForComboBox));
-//            if (comboBox.getValue() != null) {
-//                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((((String)comboBox.getValue()).split("\\."))[0])));
-//            }
-//
-//        }
+        if (User.getActiveUser().getDiscountCards().size() != 0) {
+            for (int i = 0; i < User.getActiveUser().getDiscountCards().size(); i++){
+                list.add(User.getActiveUser().getDiscountCards().get(i).getId()+". "+User.getActiveUser().getDiscountCards().get(i).getDiscount());
+            }
+            if (comboBox.getValue() != null) {
+                System.out.println("here");
+                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((comboBox.getValue().split("\\."))[0])));
+                if (User.getActiveUser().getCart().price() != 0)
+                    totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
+
+            }
+
+        }
         //foods
         if (User.getActiveUser().getCart().getFoods().size() != 0) {
             gridPane.setPrefHeight(135 * User.getActiveUser().getCart().getFoods().size());

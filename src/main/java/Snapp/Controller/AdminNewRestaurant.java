@@ -16,7 +16,8 @@ public class AdminNewRestaurant {
 
     public void addRestaurant() {
         try {
-            Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
+            Restaurant r =Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
+            r.setImageURL();
             SnappApplication.changeScene("admin-home.fxml");
 
         } catch (FoodType.UnknownType | IOException e) {
