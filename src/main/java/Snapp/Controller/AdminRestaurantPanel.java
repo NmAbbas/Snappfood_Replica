@@ -33,6 +33,7 @@ public class AdminRestaurantPanel implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         restaurantNameLabel.setText(Admin.getActiveUser().getActiveRestaurant().getName());
         foodTypeLabel.setText(Admin.getActiveUser().getActiveRestaurant().getFoodtype().toString());
         restaurantImage.setImage(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getImageURL())));
