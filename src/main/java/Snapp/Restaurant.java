@@ -40,7 +40,7 @@ public class Restaurant
         ArrayList<Restaurant> matchings = new ArrayList<>();
         for (Restaurant r: restaurantList)
         {
-            if(r.getName().contains(searchString))
+            if(r.getName().toLowerCase().contains(searchString.toLowerCase()))
                 matchings.add(r);
         }
 
@@ -286,7 +286,7 @@ public class Restaurant
         ArrayList<Food> matching = new ArrayList<>();
         for (Food f : menu)
         {
-            if(f.getName().contains(searchString))
+            if(f.getName().toLowerCase().contains(searchString.toLowerCase()))
                 matching.add(f);
         }
         return matching;

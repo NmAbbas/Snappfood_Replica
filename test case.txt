@@ -1,0 +1,3 @@
+login user sandy P@ss12345678
+search restaurants Ch
+select restaurant 0

@@ -369,6 +369,11 @@ public class Driver {
         {
             String inp = scanner.nextLine();
             String[] parts = inp.split("\\s+");
+//            if(Account.activeUser!=null) System.out.print(Account.activeUser);
+//            if(Admin.getActiveUser().getActiveRestaurant()!=null) System.out.print(Account.activeUser);
+//            if(Account.activeUser!=null) System.out.print(Account.activeUser);
+
+
 
             // user handling :
             if (Account.activeUser == null)
@@ -541,7 +546,7 @@ public class Driver {
             {
                     if (inp.matches("^\\s*search\\s+restaurants.*"))
                     {
-                        printRestaurantList(Restaurant.searchRestaurants(inp.split("restaurants+")[1].trim()));
+                        printRestaurantList(Restaurant.searchRestaurants(inp.split("restaurants\\s+")[1].trim()));
                     } else if (inp.matches("^\\s*select\\s+restaurant\\s+\\d+\\s*") )
                     {
                         if(userRestaurantSelect(Integer.parseInt(parts[2])) == 1)
