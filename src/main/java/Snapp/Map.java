@@ -2,15 +2,17 @@ package Snapp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.*;
 
 public class Map {
     static int INF = Integer.MAX_VALUE;
-    static String mapfilelocation = "C:\\Users\\jck_5\\Desktop\\projects\\Snappfood_Replica\\src\\main\\java\\Snapp\\graph.txt";
+    static URL url = Map.class.getResource("graph.txt");
 
     static int shortPath(int start, int end, ArrayList<Integer> path) throws NoPathException {
         int ret = -1;
-        File file = new File(mapfilelocation);
+        File file = new File(url.getPath());
+
         try {
             Scanner sc = new Scanner(file);
             int c1 = sc.nextInt();
@@ -87,7 +89,7 @@ public class Map {
     static ArrayList<Integer> path(int start, int end) throws NoPathException {
         ArrayList<Integer> path = new ArrayList<>();
         int ret = -1;
-        File file = new File(mapfilelocation);
+        File file = new File(url.getPath());
         try {
             Scanner sc = new Scanner(file);
             int c1 = sc.nextInt();

@@ -11,6 +11,14 @@ public class Comment {
         
     }
 
+    public static Comment checkIfHasCommentedInList(ArrayList<Comment> comments, int userID)
+    {
+        for (Comment c : comments)
+            if(c.getCommenter().getId() == userID)
+                return c;
+        return null;
+    }
+
     /* static methods */
     static Comment getCommentById(int id) throws CommentDoesntExistException
     {
@@ -22,7 +30,7 @@ public class Comment {
         throw new CommentDoesntExistException();
     }
 
-    public static void createComment(String message, User commenter, Restaurant restaurant, Food food)
+    public static void createComment(String message, User commenter, Restaurant restaurant, Food food) throws HasCommentedBeforeException
     {
         Comment c = new Comment(message, commenter, restaurant, food);
 //        food.comments.add(c);
@@ -46,7 +54,7 @@ public class Comment {
     Restaurant restaurant = null;
     Food food = null;
 
-    public Comment(String message, Account commenter,Restaurant restaurant, Food food) {
+    public Comment(String message, Account commenter,Restaurant restaurant, Food food) throws HasCommentedBeforeException{
         this.ID=nextID++;
         this.message = message;
         this.commenter = commenter;
@@ -54,14 +62,21 @@ public class Comment {
         this.restaurant = restaurant;
         this.food=food;
         if(restaurant != null)
+        {
+            checkIfHasCommentedInList(restaurant.getCommentSection(), commenter.getId());
             restaurant.getCommentSection().add(this);
+        }
 
         if(food != null)
+        {
+            if(checkIfHasCommentedInList(food.getComments(), commenter.getId()) != null)
+                throw new HasCommentedBeforeException();
             food.getComments().add(this);
+        }
 
     }
 
-    private Comment(String message, Comment upper, Account commenter,Restaurant restaurant, Food food) {
+    private Comment(String message, Comment upper, Account commenter,Restaurant restaurant, Food food) throws HasCommentedBeforeException{
         this.ID=nextID++;
         this.message = message;
         this.upper = upper;
@@ -69,14 +84,29 @@ public class Comment {
         this.restaurant = restaurant;
         this.food = food;
         if(restaurant != null)
+        {
+            checkIfHasCommentedInList(restaurant.getCommentSection(), commenter.getId());
             restaurant.getCommentSection().add(this);
+        }
         if(food != null)
+        {
+            if(checkIfHasCommentedInList(food.getComments(), commenter.getId()) != null)
+                throw new HasCommentedBeforeException();
             food.getComments().add(this);
+        }
         commentList.add(this);
     }
 
+    public class HasCommentedBeforeException extends Exception
+    {
+        HasCommentedBeforeException()
+        {
+            super("[Error] you have already made a comment!");
+        }
+    }
 
-    void addReply(String comment, Account c) {
+
+    void addReply(String comment, Account c)  throws HasCommentedBeforeException {
         this.reply = new Comment(comment, this, c,this.restaurant, this.food);
     }
     void editmessage(String message){
