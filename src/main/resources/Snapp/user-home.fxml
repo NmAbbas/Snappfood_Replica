@@ -121,5 +121,7 @@
          <Image url="@../images/arrow.png" />
       </image>
    </ImageView>
+   <Label fx:id="CREDIT" layoutX="79.0" layoutY="126.0" prefHeight="42.0" prefWidth="84.0" text="Label" />
+   <Button fx:id="ADDCREDIT" layoutX="169.0" layoutY="123.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="84.0" text="+" textAlignment="CENTER" onMouseClicked="#addcredit" />
 
 </AnchorPane>

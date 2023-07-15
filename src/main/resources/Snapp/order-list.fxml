@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.RestaurantsList">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.OrderList">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
     <Button layoutX="35.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#openCart" prefHeight="20.0" prefWidth="50.0">
         <graphic>
@@ -67,10 +67,9 @@
     </ImageView>
    <ImageView fx:id="imageView" fitHeight="107.0" fitWidth="123.0" layoutX="46.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/hamburger.png" />
+         <Image url="@../images/order.png" />
       </image>
    </ImageView>
-   <Label fx:id="restaurantNameLabel" layoutX="158.0" layoutY="144.0" prefHeight="27.0" prefWidth="190.0" text="نام رستوران" />
-   <Label fx:id="foodTypeLabel" layoutX="165.0" layoutY="182.0" prefHeight="27.0" prefWidth="190.0" text="نوع غذا" />
+   <Label layoutX="358.0" layoutY="144.0" prefHeight="27.0" prefWidth="190.0" text="لیست سفارش ها" />
 
 </AnchorPane>

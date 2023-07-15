@@ -13,19 +13,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class RestaurantsList implements Initializable {
+public class OrderList
+{
+/*
 
-    public Label restaurantNameLabel;
-    public Label foodTypeLabel;
 
-    public enum Command
-    {
-        ALL, RESTAURANT, CAFE, SUPER, RECOMEND, NEAR;
-    }
-
-    public static Command command = Command.ALL;
+    public static RestaurantsList.Command command = RestaurantsList.Command.ALL;
     public GridPane gridPane;
-    public void openCart() throws IOException {
+    public void openCart() throws IOException
+    {
         SnappApplication.changeScene("user-cart.fxml");
     }
     public void openHome() throws IOException {
@@ -70,7 +66,7 @@ public class RestaurantsList implements Initializable {
 
     }
 
-    public void showRestaurantList(ArrayList<Restaurant> restaurants)
+    public void showOrderList(ArrayList<Order> orders)
     {
         String ftype = "";
         for (FoodType f: User.getActiveUser().getActiveRestaurant().getFoodtype())
@@ -81,18 +77,18 @@ public class RestaurantsList implements Initializable {
         foodTypeLabel.setText(ftype);
         restaurantNameLabel.setText(User.getActiveUser().getActiveRestaurant().getName());
 
-        if (restaurants.size() != 0) {
-            gridPane.setPrefHeight(135*restaurants.size());
-            Button[] buttons = new Button[restaurants.size()];
+        if (orders.size() != 0) {
+            gridPane.setPrefHeight(135*orders.size());
+            Button[] buttons = new Button[orders.size()];
             //Restaurant 0
-            buttons[0] = new Button(restaurants.get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(restaurants.get(0).getImageURL())));
+            buttons[0] = new Button(orders.get(0).getName());
+            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(orders.get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
             gridPane.add(buttons[0],0,0);
             buttons[0].setOnAction(e -> {
-                User.getActiveUser().setActiveRestaurant(restaurants.get(0));
+                User.getActiveUser().setActiveRestaurant(orders.get(0));
                 try
                 {
                     User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
@@ -103,16 +99,16 @@ public class RestaurantsList implements Initializable {
                 }
             });
             //Restaurant 1->
-            for (int i = 1; i < restaurants.size(); i++){
-                buttons[i] = new Button(restaurants.get(i).getName());
-                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(restaurants.get(i).getImageURL())));
+            for (int i = 1; i < orders.size(); i++){
+                buttons[i] = new Button(orders.get(i).getName());
+                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream("images\order")));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
                 gridPane.addRow(i,buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    User.getActiveUser().setActiveRestaurant(restaurants.get(k));
+                    User.getActiveUser().;
                     try
                     {
                         SnappApplication.changeScene("user-food-list.fxml");
@@ -124,5 +120,5 @@ public class RestaurantsList implements Initializable {
             }
             gridPane.setVgap(10);
         }
-    }
+    }*/
 }
