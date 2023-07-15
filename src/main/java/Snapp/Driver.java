@@ -592,20 +592,26 @@ public class Driver {
                         }
                     } else if (inp.matches("^\\s*add\\s+new\\s+comment.*"))
                     {
-                        if(User.getActiveUser().getActiveRestaurant() == null)
-                            System.out.println("[Error]you should select a restaurant first!");
-                        else if(User.getActiveUser().getActiveFood() == null)
+                        try
                         {
-                            Comment.createComment(inp.split("comment")[1].trim(), User.getActiveUser(), User.getActiveUser().getActiveRestaurant(), null);
-                            System.out.println("comment created successfully");
-                        }
-                        else if (User.getActiveUser().hasEverOrderedFood(User.getActiveUser().getActiveFood()))
+                            if(User.getActiveUser().getActiveRestaurant() == null)
+                                System.out.println("[Error]you should select a restaurant first!");
+                            else if(User.getActiveUser().getActiveFood() == null)
+                            {
+                                Comment.createComment(inp.split("comment")[1].trim(), User.getActiveUser(), User.getActiveUser().getActiveRestaurant(), null);
+                                System.out.println("comment created successfully");
+                            }
+                            else if (User.getActiveUser().hasEverOrderedFood(User.getActiveUser().getActiveFood()))
+                            {
+                                Comment.createComment(inp.split("comment")[1].trim(), User.getActiveUser(), null, User.getActiveUser().getActiveFood());
+                                System.out.println("comment created successfully");
+                            }
+                            else
+                                System.out.println("[Error]you can't comment on a food you have not ordered!");
+                        }catch (Exception e)
                         {
-                            Comment.createComment(inp.split("comment")[1].trim(), User.getActiveUser(), null, User.getActiveUser().getActiveFood());
-                            System.out.println("comment created successfully");
+                            System.out.println(e.getMessage());
                         }
-                        else
-                            System.out.println("[Error]you can't comment on a food you have not ordered!");
                     } else if (inp.matches("^\\s*edit\\s+comment\\s+\\d+\\s+.*"))
                     {
                         try
