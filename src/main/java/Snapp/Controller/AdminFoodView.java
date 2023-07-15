@@ -24,24 +24,6 @@ public class AdminFoodView implements Initializable {
     public Button addToCartButton;
     public Label foodNameLabel;
     public GridPane gridPane;
-    public Label addedToCartLabel;
-
-//    public void addToCart() {
-//        if (!Admin.getActiveUser().getActiveFood().isActive())
-//            return;
-//        try
-//        {
-//            Admin.getActiveUser().getCart().addFood(User.getActiveUser().getActiveFood());
-//            addedToCartLabel.setOpacity(1.0);
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//    public void openCart() throws IOException {
-//        SnapApplication.changeScene("user-cart.fxml");
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
