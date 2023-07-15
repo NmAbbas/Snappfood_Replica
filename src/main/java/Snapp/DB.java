@@ -40,8 +40,8 @@ public class DB {
     }
     static void savefoods(ArrayList<Food> foods) throws SQLException {
         for(Food f:foods){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.food (id, name, restaurantid,type,price,discount,cookingtime)\n" +
-                    "VALUES (?, ?, ?,?,?,?,?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO db.food (id, name, restaurantid,type,price,discount,cookingtime,imagepath)\n" +
+                    "VALUES (?, ?, ?,?,?,?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setString(2, f.getName());
             preparedStatement.setInt(3, f.getOwner().getId());
@@ -49,35 +49,38 @@ public class DB {
             preparedStatement.setDouble(5, f.getPrice());
             preparedStatement.setDouble(6, f.getDiscount());
             preparedStatement.setLong(7, f.getCookingTime());
+            preparedStatement.setString(8, f.getImageURL());
             preparedStatement.executeUpdate();
         }
     }
     static ArrayList<Food> loadfoods() throws SQLException, Food.InvalidPriceException, FoodType.UnknownType {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select id, name, restaurantid,type,price,discount,cookingtime from db.food ;");
+        resultSet = statement.executeQuery("select id, name, restaurantid,type,price,discount,cookingtime,imagepath from db.food ;");
         ArrayList<Food> foods = new ArrayList<>();
         while (resultSet.next()){
             Food f = new Food(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getLong("price"),FoodType.parse(resultSet.getString("type")),resultSet.getLong("cookingtime"),null);
             f.ownerid=resultSet.getInt("restaurantid");
+            f.setImageURL(resultSet.getString("imagepath"));
             foods.add(f);
         }
         return foods;
     }
     static void saveRestaurants(ArrayList<Restaurant> restaurants) throws SQLException {
         for(Restaurant f:restaurants){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.restaurants (id, name, adminid,type,loc)\n" +
-                    "VALUES (?, ?, ?,?,?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO db.restaurants (id, name, adminid,type,loc,imagepath)\n" +
+                    "VALUES (?, ?, ?,?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setString(2, f.getName());
             preparedStatement.setInt(3, f.getOwner().id);
             preparedStatement.setString(4, f.getFoodtype().toString());
             preparedStatement.setInt(5, f.getLocation());
+            preparedStatement.setString(6, f.getImageURL());
             preparedStatement.executeUpdate();
         }
     }
     static ArrayList<Restaurant> loadRestaurants() throws SQLException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select  id, name, adminid,type,loc from db.restaurants ;");
+        resultSet = statement.executeQuery("select  id, name, adminid,type,loc,imagepath from db.restaurants ;");
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         while (resultSet.next()){
             String type = resultSet.getString("type");
@@ -87,6 +90,7 @@ public class DB {
             }
             Restaurant f = new Restaurant(resultSet.getString("name"),resultSet.getInt("id"),foodtype.get(0) ,null,resultSet.getInt("loc"));
             f.ownerid = resultSet.getInt("adminid");
+            f.setImageURL(resultSet.getString("imagepath"));
             f.addFoodtype(foodtype);
             for( Account c: Account.AccountList){
                 if(c.getId()==f.getOwner().getId()){
@@ -100,8 +104,8 @@ public class DB {
 
     static void saveAccounts(ArrayList<Account> accounts) throws SQLException {
         for(Account f:accounts){
-            preparedStatement = connection.prepareStatement("INSERT INTO db.users (id, username, password,salt,isadmin,isdelivery,currency,location)\n" +
-                    "VALUES (?, ?, ?,?,?,?,?,?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO db.users (id, username, password,salt,isadmin,isdelivery,currency,location,answer,question)\n" +
+                    "VALUES (?, ?, ?,?,?,?,?,?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setString(2, f.getName());
             preparedStatement.setString(3, new String(f.getHashedPassword()));
@@ -110,13 +114,15 @@ public class DB {
             preparedStatement.setBoolean(6, f.isDelivery);
             preparedStatement.setInt(7, ((f.isIsadmin()||f.isDelivery())?0:((User)f).getCurrency()));
             preparedStatement.setInt(8, f.getLocation());
+            preparedStatement.setString(9,f.getAnswer());
+            preparedStatement.setString(10, f.getQuestion());
             preparedStatement.executeUpdate();
         }
     }
 
     static ArrayList<Account> loadAccounts() throws SQLException, FoodType.UnknownType,  Account.InvalidPasswordException, Account.InvalidUsernameException, NoSuchAlgorithmException, InvalidKeySpecException {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select id, username, password,salt,isadmin,isdelivery,currency,location from db.users ;");
+        resultSet = statement.executeQuery("select id, username, password,salt,isadmin,isdelivery,currency,location,question,answer from db.users ;");
         ArrayList<Account> accounts = new ArrayList<>();
         while (resultSet.next()){
             Account f;
@@ -129,6 +135,8 @@ public class DB {
                 f.setIsadmin(resultSet.getBoolean("isadmin"));
                 f.setDelivery(resultSet.getBoolean("isdelivery"));
                 f.setLocation(resultSet.getInt("location"));
+                f.setAnswer(resultSet.getString("answer"));
+                f.setQuestion(resultSet.getString("question"));
                 for(Restaurant r: Restaurant.getRestaurantList()){
                     if(r.ownerid==f.id){
                         ((Admin)f).addRestaurant(r);
@@ -145,6 +153,8 @@ public class DB {
                 f.setIsadmin(resultSet.getBoolean("isadmin"));
                 f.setDelivery(resultSet.getBoolean("isdelivery"));
                 f.setLocation(resultSet.getInt("location"));
+                f.setAnswer(resultSet.getString("answer"));
+                f.setQuestion(resultSet.getString("question"));
             }
             else{                                   // the point is giving currency
                 f = new User();
@@ -156,8 +166,11 @@ public class DB {
                 f.setDelivery(resultSet.getBoolean("isdelivery"));
                 f.setLocation(resultSet.getInt("location"));
                 ((User) f).setCurrency(resultSet.getInt("currency"));
+                f.setAnswer(resultSet.getString("answer"));
+                f.setQuestion(resultSet.getString("question"));
             }
             accounts.add(f);
+            Account.nextID = Math.max(Account.nextID,f.getId()+1);
         }
         return accounts;
     }
@@ -174,17 +187,17 @@ public class DB {
             preparedStatement.setInt(2, f.getCostomer().getId());
             preparedStatement.setInt(3, f.getRecipient().getId());
             preparedStatement.setInt(4, foodcount);
-            preparedStatement.setString(5, few.toString());
+            preparedStatement.setString(5, new String(few));
             preparedStatement.setInt(6, f.getOrderState().ordinal());
             preparedStatement.executeUpdate();
         }
     }
     static ArrayList<Order> loadOrders() throws SQLException, FoodType.UnknownType, Restaurant.FoodTypeUnchangable, Food.InvalidFoodID {
         statement = connection.createStatement();
-        resultSet = statement.executeQuery("select id, customerid, restaurantid,foodcount,foods,cookingtime,cookingstarttime from db.orders ;");
+        resultSet = statement.executeQuery("select id, customerid, restaurantid,foodcount,foods,cookingtime,cookingstarttime,state from db.orders ;");
         ArrayList<Order> orders = new ArrayList<>();
         while (resultSet.next()){
-            String type = resultSet.getString("type");
+
             ArrayList<Food> foods = new ArrayList<>();
             byte[] ids = new byte[resultSet.getByte("foodcount")];
             for(byte id:ids){
@@ -196,11 +209,17 @@ public class DB {
             f.setCookingStartTime(resultSet.getLong("cookingstarttime"));
             orders.add(f);
             for(Account a:Account.AccountList){
-                if(a.getId()==f.getCostomer().id) ((User)a).receivedOrders.add(f);
+                if(a.getId()==f.getCostomer().id) {
+                    if(f.orderIsActive()) ((User) a).setActiveOrder(f);
+                    else{
+                        ((User) a).receivedOrders.add(f);
+                    }
+                }
             }
             for(Restaurant r:Restaurant.getRestaurantList()){
                 if(r.getId()==f.getRecipient().getId()) r.addOrder(f);
             }
+            Order.nextId = Math.max(Order.nextId,f.getId()+1);
         }
         return orders;
     }
@@ -255,7 +274,7 @@ public class DB {
             comments.add(f);
         }
         for(Comment c: comments){
-            Comment.nextID=Math.max(Comment.nextID,c.getID());
+            Comment.nextID=Math.max(Comment.nextID,c.getID()+1);
             if(c.getUpper()!=null) c.getUpper().setReply(c);
         }
         return comments;
@@ -273,7 +292,7 @@ public class DB {
                         "VALUES (?, ?, ?,?);");
                 preparedStatement.setInt(1, f.getCostomer().getId());
                 preparedStatement.setInt(2, f.getRecipient().getId());
-                preparedStatement.setString(3, foo.toString());
+                preparedStatement.setString(3, new String(foo));
                 preparedStatement.setInt(4, count);
                 preparedStatement.executeUpdate();
             }
@@ -284,11 +303,6 @@ public class DB {
         resultSet = statement.executeQuery("select userid, restaurantid, foods,foodscount from db.carts ;");
         ArrayList<Cart> carts = new ArrayList<>();
         while (resultSet.next()){
-            ArrayList<Food> foods = new ArrayList<>();
-            byte[] ids = new byte[resultSet.getByte("foodscount")];
-            for(byte id:ids){
-                foods.add(Food.getFoodbyId(id));
-            }
             Cart f = new Cart(Restaurant.getRestaurantByID(resultSet.getInt("restaurantid")),User.getUserByID(resultSet.getInt("userid")));
             for(byte b :resultSet.getString("foods").getBytes() ){
                 f.addFood(Food.getFoodbyId(b));

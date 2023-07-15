@@ -244,7 +244,6 @@ public class Driver {
     }
     static void printOrders(ArrayList<Order> orders)
     {
-        System.out.println("menu:");
         System.out.println("ID\t\tNAME\t\tRESTAURANT\t\tDISCOUNT\t\t");
         for(Order o : orders)
         {
@@ -286,7 +285,7 @@ public class Driver {
         System.out.println("Comments: ");
         if(comments.isEmpty())
         {
-            System.out.println("no one has mwrote a comment! you can write one with <add new comment {...} command>");
+            System.out.println("no one has wrote a comment! you can write one with <add new comment {...} command>");
             return;
         }
         System.out.println("ID\t\tUSER:\tMESSAGE");
@@ -310,8 +309,8 @@ public class Driver {
     // cart
     static void printCart(Cart cart)
     {
-        System.out.println("RESTAURANT: " + cart.getRecipient());
-        System.out.println("COSTOMER: " + cart.getCostomer());
+        System.out.println("RESTAURANT: " + cart.getRecipient().getName());
+        System.out.println("COSTOMER: " + cart.getCostomer().getName());
         System.out.println("SELECTED FOODS:");
         if (cart.getFoods().isEmpty())
         {
@@ -336,9 +335,14 @@ public class Driver {
             User u2 = User.createUser("mylegfish", "P@ss12345678");
             User u3 = User.createUser("patrick", "P@ss12345678");
             u3.setLocation(3);
+            u1.setAnswer("Tehran");
+            u1.setQuestion("Birth place");
+
 
             Admin a1 = Admin.createAccount("Mr.Krabs", "P@ss12345678");
             Admin a2 = Admin.createAccount("plankton", "P@ss12345678");
+            a1.setAnswer("Tehran");
+            a1.setQuestion("Birth place");
 
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
             d1.setLocation(2);
@@ -396,7 +400,11 @@ public class Driver {
                 } else if (inp.matches("^\\s*login delivery.*"))
                 {
                     deliverylogin(parts[2], parts[3]);
+                }else if (inp.matches("^\\s*forgot password.*"))    //forgot password
+                {
+                    deliverylogin(parts[2], parts[3]);
                 }
+
             }
             else if (inp.matches("^\\s*logout\\s*") && Account.activeUser != null)
             {
@@ -676,7 +684,7 @@ public class Driver {
                             System.out.println("you don't have any order to be delivered!");
                         }
                         else {
-                            System.out.println("your food will be delivered in " + User.getActiveUser().getActiveOrder());
+                            System.out.println("your food will be delivered in " + User.getActiveUser().getActiveOrder().getCookingTime());
                         }
                     } else if (inp.matches("^\\s*charge\\s+\\d+\\s*"))
                     {

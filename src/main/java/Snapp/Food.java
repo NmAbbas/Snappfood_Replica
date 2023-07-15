@@ -69,7 +69,7 @@ public class Food {
 
     static void LinkBS(ArrayList<Food> foods){         //called after filling all
         for(Food f:foods){
-            nextID=Math.max(nextID,f.getId());
+            nextID=Math.max(nextID,f.getId()+1);
             if(f.getOwner()==null){
                 f.owner=Restaurant.getRestaurantByID(f.ownerid);
                 Restaurant.getRestaurantByID(f.ownerid).addFood(f);
