@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@sign-up-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminSignUp">
     <children>
         <Label fx:id="signUpLabel" layoutX="186.0" layoutY="270.0" prefWidth="198.0" text="ایجاد حساب مدیر" />
-        <Label fx:id="loginLabel" layoutX="185.0" layoutY="500.0" onMouseClicked="#openLogin" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
+        <Label fx:id="loginLabel" layoutX="186.0" layoutY="664.0" onMouseClicked="#openLogin" prefWidth="205.0" text="حساب کاربری دارید؟ وارد شوید" />
         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="184.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/user.png" />
@@ -26,6 +26,8 @@
         <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
         <Label fx:id="usernameErrorLabel" layoutX="167.0" layoutY="368.0" opacity="0.0" prefHeight="20.0" prefWidth="219.0" text="نام کاربری معتبر نیست یا قبلاً استفاده شده" />
         <Label fx:id="passwordErrorLabel" layoutX="225.0" layoutY="432.0" opacity="0.0" prefHeight="18.0" prefWidth="152.0" text="رمز قابل قبول نیست" />
-        <Button layoutX="191.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#checkSignUp" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
+        <Button layoutX="192.0" layoutY="613.0" mnemonicParsing="false" onMouseClicked="#checkSignUp" prefHeight="26.0" prefWidth="198.0" text="ایجاد حساب" />
+      <ImageView fx:id="cap" fitHeight="63.0" fitWidth="198.0" layoutX="191.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="capField" layoutX="209.0" layoutY="574.0" prefHeight="25.0" prefWidth="164.0" promptText="captcha" />
     </children>
 </AnchorPane>

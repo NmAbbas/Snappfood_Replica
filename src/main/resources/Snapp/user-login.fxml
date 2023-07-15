@@ -24,9 +24,9 @@
          </image>
       </ImageView>
       <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="46.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-      <Label fx:id="forgotPasswordLabel" layoutX="185.0" layoutY="520.0" prefWidth="205.0" text="فراموشی رمز" />
+      <Label fx:id="forgotPasswordLabel" layoutX="183.0" layoutY="555.0" prefWidth="205.0" text="فراموشی رمز" />
       <Label fx:id="errorLabel" layoutX="225.0" layoutY="425.0" opacity="0.0" prefHeight="18.0" prefWidth="164.0" text="نام‌کاربری یا رمز عبور اشتباه است!" />
-      <Button layoutX="191.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#checkLogin" prefHeight="26.0" prefWidth="198.0" text="ورود" />
+      <Button layoutX="189.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#checkLogin" prefHeight="26.0" prefWidth="198.0" text="ورود" />
       <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openLogin" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/arrow.png" />
