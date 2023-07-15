@@ -14,8 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class UserCart implements Initializable {
@@ -37,36 +35,41 @@ public class UserCart implements Initializable {
             {
                 //TODO "you have a new discount card"
             }
+            SnappApplication.changeScene("admin-home.fxml");
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
     }
     public void reset() {
+        if (User.getActiveUser().getCart().getFoods().size() != 0) {
+            User.getActiveUser().getCart().getFoods().clear();
+            gridPane.getChildren().clear();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (User.getActiveUser().getCart().price() != 0)
             totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
-
-        ObservableList<String> list = FXCollections.observableArrayList();
-        comboBox.setItems(list);
 
         //discount card
         if (User.getActiveUser().getDiscountCards().size() != 0) {
+            ObservableList<String> list = FXCollections.observableArrayList();
+            comboBox.setItems(list);
             for (int i = 0; i < User.getActiveUser().getDiscountCards().size(); i++){
                 list.add(User.getActiveUser().getDiscountCards().get(i).getId()+". "+User.getActiveUser().getDiscountCards().get(i).getDiscount());
             }
-            if (comboBox.getValue() != null) {
-                System.out.println("here");
-                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((comboBox.getValue().split("\\."))[0])));
-                if (User.getActiveUser().getCart().price() != 0)
-                    totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
-
-            }
-
+            comboBox.setOnAction(event -> {
+                try {
+                    User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((comboBox.getValue().split("\\."))[0])));
+                    if (User.getActiveUser().getCart().price() != 0)
+                        totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
+
         //foods
         if (User.getActiveUser().getCart().getFoods().size() != 0) {
             gridPane.setPrefHeight(135 * User.getActiveUser().getCart().getFoods().size());
@@ -79,8 +82,9 @@ public class UserCart implements Initializable {
             buttons[0].setGraphic(imageView);
             gridPane.add(buttons[0], 0, 0);
             buttons[0].setOnAction(e -> {
-                User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(0));
-                gridPane.getChildren().remove(0);
+                User.getActiveUser().getCart().getFoods().remove(User.getActiveUser().getCart().getFoods().get(0));
+                gridPane.getChildren().clear();
+                initialize(null,null);
             });
             //Food 1->
             for (int i = 1; i < User.getActiveUser().getCart().getFoods().size(); i++) {
@@ -92,8 +96,9 @@ public class UserCart implements Initializable {
                 gridPane.addRow(i, buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    User.getActiveUser().getCart().removeFood(User.getActiveUser().getCart().getFoods().get(k));
-                    gridPane.getChildren().remove(k);
+                    User.getActiveUser().getCart().getFoods().remove(User.getActiveUser().getCart().getFoods().get(k));
+                    gridPane.getChildren().clear();
+                    initialize(null,null);
                 });
             }
             gridPane.setVgap(10);

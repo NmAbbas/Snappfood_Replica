@@ -40,8 +40,8 @@ public class UserFoodView implements Initializable {
     public void openCart() throws IOException {
         SnappApplication.changeScene("user-cart.fxml");
     }
-    public void openHome() throws IOException {
-        SnappApplication.changeScene("user-home.fxml");
+    public void openRestaurantsList() throws IOException {
+        SnappApplication.changeScene("restaurants-list.fxml");
     }
 
     @Override

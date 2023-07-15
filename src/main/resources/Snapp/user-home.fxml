@@ -67,15 +67,6 @@
          </Button>
       </children>
    </GridPane>
-   <Button layoutX="93.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#openCart" prefHeight="35.0" prefWidth="35.0">
-      <graphic>
-         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../images/shopping-cart.png" />
-            </image>
-         </ImageView>
-      </graphic>
-   </Button>
    <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="453.0" layoutY="565.0" mnemonicParsing="false" onMouseClicked="#openLogin" prefHeight="74.0" prefWidth="100.0" text="خانه">
       <graphic>
          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
