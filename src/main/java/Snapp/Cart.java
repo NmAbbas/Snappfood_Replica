@@ -72,7 +72,7 @@ public class Cart
         this.foods = foods;
     }
 
-    public void buy() throws CartContainsDeactiveFoodsException, CurrencyNotEnoughException
+    public void buy() throws CartContainsDeactiveFoodsException, CurrencyNotEnoughException, User.DiscountCardDoesntExist
     {
         ArrayList<Food> inactive = new ArrayList<>();
         for (Food f : foods)
