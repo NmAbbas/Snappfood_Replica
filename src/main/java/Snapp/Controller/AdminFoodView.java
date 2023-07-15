@@ -31,15 +31,11 @@ public class AdminFoodView implements Initializable {
         foodImageView.setImage(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveFood().getImageURL())));
         cookingTimeLabel.setText(Admin.getActiveUser().getActiveFood().getCookingTime() / 1000 +" s");
         priceLabel.setText(String.valueOf(Admin.getActiveUser().getActiveFood().getPrice()));
-        if (!Admin.getActiveUser().getActiveFood().isActive()){
-            addToCartButton.getStyleClass().add("food-not-active");
-            addToCartButton.setText("این غذا موجود نیست");
-        }
 
         //add comments to food
 
         //your comment
-        Comment thisUserComment = Comment.checkIfHasCommentedInList(Admin.getActiveUser().getActiveFood().getComments(),Admin.getActiveUser().getId());
+        /*Comment thisUserComment = Comment.checkIfHasCommentedInList(Admin.getActiveUser().getActiveFood().getComments(),Admin.getActiveUser().getId());
         if (thisUserComment == null){
             Button addYourCommentButton = new Button();
             ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream("/images/add.png")));
@@ -102,14 +98,14 @@ public class AdminFoodView implements Initializable {
             AnchorPane.setTopAnchor(yourComment, 37.0);
             AnchorPane.setRightAnchor(yourComment, 40.0);
             gridPane.addRow(0, anchorPane);
-        }
-        if (User.getActiveUser().getActiveFood().getComments().size() != 0) {
-            gridPane.setPrefHeight(135+ 60*(User.getActiveUser().getActiveFood().getComments().size()+1));
-            AnchorPane[] anchorPanes = new AnchorPane[User.getActiveUser().getActiveFood().getComments().size()];
-            Label[] names = new Label[User.getActiveUser().getActiveFood().getComments().size()];
-            Label[] comments = new Label[User.getActiveUser().getActiveFood().getComments().size()];
-            Label[] replies = new Label[User.getActiveUser().getActiveFood().getComments().size()];
-            int row = 1;
+        }*/
+        if (Admin.getActiveUser().getActiveFood().getComments().size() != 0) {
+            gridPane.setPrefHeight(135+ 60*(Admin.getActiveUser().getActiveFood().getComments().size()+1));
+            AnchorPane[] anchorPanes = new AnchorPane[Admin.getActiveUser().getActiveFood().getComments().size()];
+            Label[] names = new Label[Admin.getActiveUser().getActiveFood().getComments().size()];
+            Label[] comments = new Label[Admin.getActiveUser().getActiveFood().getComments().size()];
+            Label[] replies = new Label[Admin.getActiveUser().getActiveFood().getComments().size()];
+            int row = 0;
             // adding Comments
             for (int i = 0; i < User.getActiveUser().getActiveFood().getComments().size() && i != User.getActiveUser().getActiveFood().getComments().indexOf(thisUserComment); i++)
                 if (User.getActiveUser().getActiveFood().getComments().get(i).getUpper() == null) {
