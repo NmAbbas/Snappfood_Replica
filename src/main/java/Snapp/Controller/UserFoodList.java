@@ -1,6 +1,6 @@
 package Snapp.Controller;
 
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,7 +16,7 @@ public class UserFoodList implements Initializable {
 
     public GridPane gridPane;
     public void openCart() throws IOException {
-        SnapApplication.changeScene("user-cart.fxml");
+        SnappApplication.changeScene("user-cart.fxml");
     }
 
     @Override
@@ -26,7 +26,7 @@ public class UserFoodList implements Initializable {
             Button[] buttons = new Button[User.getActiveUser().getActiveRestaurant().getMenu().size()];
             //Food 0
             buttons[0] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
+            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
@@ -36,7 +36,7 @@ public class UserFoodList implements Initializable {
                 User.getActiveUser().setActiveFood(User.getActiveUser().getActiveRestaurant().getMenu().get(0));
                 try
                 {
-                    SnapApplication.changeScene("user-food-view.fxml");
+                    SnappApplication.changeScene("user-food-view.fxml");
                 } catch (IOException ex)
                 {
                     ex.printStackTrace();
@@ -45,7 +45,7 @@ public class UserFoodList implements Initializable {
             //Restaurant 1->
             for (int i = 1; i < User.getActiveUser().getActiveRestaurant().getMenu().size(); i++){
                 buttons[i] = new Button(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
+                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
@@ -56,7 +56,7 @@ public class UserFoodList implements Initializable {
                     User.getActiveUser().setActiveFood(User.getActiveUser().getActiveRestaurant().getMenu().get(k));
                     try
                     {
-                        SnapApplication.changeScene("user-food-view.fxml");
+                        SnappApplication.changeScene("user-food-view.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();

@@ -1,9 +1,8 @@
 package Snapp.Controller;
 
 import Snapp.DiscountCard;
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import Snapp.User;
-import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserCart implements Initializable {
@@ -69,7 +67,7 @@ public class UserCart implements Initializable {
             Button[] buttons = new Button[User.getActiveUser().getCart().getFoods().size()];
             //Food 0
             buttons[0] = new Button(User.getActiveUser().getCart().getFoods().get(0).getName()+"\n"+User.getActiveUser().getCart().getFoods().get(0).getPrice());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getCart().getFoods().get(0).getImageURL())));
+            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getCart().getFoods().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
@@ -81,7 +79,7 @@ public class UserCart implements Initializable {
             //Food 1->
             for (int i = 1; i < User.getActiveUser().getCart().getFoods().size(); i++) {
                 buttons[i] = new Button(User.getActiveUser().getCart().getFoods().get(i).getName()+"\n"+User.getActiveUser().getCart().getFoods().get(i).getPrice());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getCart().getFoods().get(i).getImageURL())));
+                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getCart().getFoods().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);

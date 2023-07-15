@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SnapApplication extends Application {
+public class SnappApplication extends Application {
     public static Stage window;
 
     @Override
@@ -59,14 +59,14 @@ public class SnapApplication extends Application {
         //
 
         window = stage;
-        Scene scene = new Scene(FXMLLoader.load(SnapApplication.class.getResource("login.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(SnappApplication.class.getResource("login.fxml")));
         window.setTitle("Snapp!");
-        window.getIcons().add(new Image(SnapApplication.class.getResourceAsStream("/images/snappFoodIcon.png")));
+        window.getIcons().add(new Image(SnappApplication.class.getResourceAsStream("/images/snappFoodIcon.png")));
         window.setScene(scene);
         window.show();
     }
     public static void changeScene(String FXMLName) throws IOException {
-        SnapApplication.window.setScene(new Scene(FXMLLoader.load(SnapApplication.class.getResource(FXMLName))));
+        SnappApplication.window.setScene(new Scene(FXMLLoader.load(SnappApplication.class.getResource(FXMLName))));
         window.show();
     }
 

@@ -1,7 +1,7 @@
 package Snapp.Controller;
 
 import Snapp.Account;
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -29,7 +29,7 @@ public class UserSignUp implements Initializable {
         {
             if(captchacontent.equals(capField.getText())) User.createUser(usernameField.getText(), passwordField.getText());
 
-            SnapApplication.changeScene("user-login.fxml");
+            SnappApplication.changeScene("user-login.fxml");
         }
         catch (Account.InvalidUsernameException | Account.UsernameTakenException e)
         {
@@ -45,7 +45,7 @@ public class UserSignUp implements Initializable {
         }
     }
     public void openLogin() throws IOException {
-        SnapApplication.changeScene("user-login.fxml");
+        SnappApplication.changeScene("user-login.fxml");
     }
 
     @Override

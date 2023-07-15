@@ -1,9 +1,7 @@
 package Snapp.Controller;
 
 import Snapp.Admin;
-import Snapp.Restaurant;
-import Snapp.SnapApplication;
-import Snapp.User;
+import Snapp.SnappApplication;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -26,7 +24,7 @@ public class AdminRestaurantPanel implements Initializable
             Button[] buttons = new Button[Admin.getActiveUser().getActiveRestaurant().getMenu().size()];
             //Food 0
             buttons[0] = new Button(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
+            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
@@ -36,7 +34,7 @@ public class AdminRestaurantPanel implements Initializable
                 Admin.getActiveUser().setActiveFood(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0));
                 try
                 {
-                    SnapApplication.changeScene("admin-food-view.fxml");
+                    SnappApplication.changeScene("admin-food-view.fxml");
                 } catch (IOException ex)
                 {
                     ex.printStackTrace();
@@ -45,7 +43,7 @@ public class AdminRestaurantPanel implements Initializable
             //Restaurant 1->
             for (int i = 1; i < Admin.getActiveUser().getActiveRestaurant().getMenu().size(); i++){
                 buttons[i] = new Button(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
+                imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
@@ -56,7 +54,7 @@ public class AdminRestaurantPanel implements Initializable
                     Admin.getActiveUser().setActiveFood(Admin.getActiveUser().getActiveRestaurant().getMenu().get(k));
                     try
                     {
-                        SnapApplication.changeScene("admin-food-view.fxml");
+                        SnappApplication.changeScene("admin-food-view.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();

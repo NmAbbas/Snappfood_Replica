@@ -12,15 +12,6 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminHome">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-    <Button layoutX="35.0" layoutY="40.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0">
-        <graphic>
-            <ImageView fitHeight="34.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../images/shopping-cart.png" />
-                </image>
-            </ImageView>
-        </graphic>
-    </Button>
     <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="453.0" layoutY="692.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="100.0" text="خانه">
         <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -48,7 +39,7 @@
             </ImageView>
         </graphic>
     </Button>
-    <ScrollPane layoutX="39.0" layoutY="108.0" prefHeight="570.0" prefWidth="518.0">
+    <ScrollPane layoutX="39.0" layoutY="95.0" prefHeight="583.0" prefWidth="518.0">
         <content>
             <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@grid-pane-one-row-list.css">
                 <columnConstraints>

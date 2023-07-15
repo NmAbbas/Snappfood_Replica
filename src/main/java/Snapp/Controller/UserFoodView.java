@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,13 +38,13 @@ public class UserFoodView implements Initializable {
         }
     }
     public void openCart() throws IOException {
-        SnapApplication.changeScene("user-cart.fxml");
+        SnappApplication.changeScene("user-cart.fxml");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         foodNameLabel.setText(User.getActiveUser().getActiveFood().getName());
-        foodImageView.setImage(new Image(SnapApplication.class.getResourceAsStream(User.getActiveUser().getActiveFood().getImageURL())));
+        foodImageView.setImage(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getActiveFood().getImageURL())));
         cookingTimeLabel.setText(User.getActiveUser().getActiveFood().getCookingTime() / 1000 +" s");
         priceLabel.setText(String.valueOf(User.getActiveUser().getActiveFood().getPrice()));
         if (!User.getActiveUser().getActiveFood().isActive()){
@@ -59,7 +58,7 @@ public class UserFoodView implements Initializable {
         Comment thisUserComment = Comment.checkIfHasCommentedInList(User.getActiveUser().getActiveFood().getComments(),User.getActiveUser().getId());
         if (thisUserComment == null){
             Button addYourCommentButton = new Button();
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream("/images/add.png")));
+            ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream("/images/add.png")));
             imageView.setFitWidth(30);
             imageView.setFitHeight(30);
             addYourCommentButton.setGraphic(imageView);

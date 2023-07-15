@@ -1,6 +1,6 @@
 package Snapp.Controller;
 
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -10,12 +10,12 @@ public class UserHome {
     public GridPane gridPane;
 
     public void openRestaurants() throws IOException {
-        SnapApplication.changeScene("restaurants-list.fxml");
+        SnappApplication.changeScene("restaurants-list.fxml");
     }
     public void openLogin() throws IOException {
-        SnapApplication.changeScene("login.fxml");
+        SnappApplication.changeScene("login.fxml");
     }
     public void openCart() throws IOException {
-        SnapApplication.changeScene("user-cart.fxml");
+        SnappApplication.changeScene("user-cart.fxml");
     }
 }

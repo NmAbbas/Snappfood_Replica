@@ -1,7 +1,7 @@
 package Snapp.Controller;
 
 import Snapp.Account;
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,7 +25,7 @@ public class AdminLogin {
             if (account.isIsadmin())
             {
                 Account.setActiveUser(account);
-                SnapApplication.changeScene("admin-home.fxml");
+                SnappApplication.changeScene("admin-home.fxml");
             }
             else
                 throw new Account.UsernameNotExists();
@@ -58,7 +58,7 @@ public class AdminLogin {
             if (account.isIsadmin())
             {
                 Account.setActiveUser(account);
-                SnapApplication.changeScene("admin-home.fxml");
+                SnappApplication.changeScene("admin-home.fxml");
             }
         }
         catch (Account.UsernameNotExists | Account.IncorrectPasswordException e)
@@ -69,10 +69,10 @@ public class AdminLogin {
         }
     }
     public void openAdminSignUp() throws IOException {
-        SnapApplication.changeScene("admin-sign-up.fxml");
+        SnappApplication.changeScene("admin-sign-up.fxml");
     }
     public void openLogin() throws IOException {
-        SnapApplication.changeScene("login.fxml");
+        SnappApplication.changeScene("login.fxml");
     }
 
 }

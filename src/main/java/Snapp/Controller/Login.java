@@ -10,10 +10,10 @@ import java.util.ResourceBundle;
 
 public class Login implements Initializable {
     public void openUserLogin() throws IOException {
-        SnapApplication.changeScene("user-login.fxml");
+        SnappApplication.changeScene("user-login.fxml");
     }
     public void openAdminLogin() throws IOException {
-        SnapApplication.changeScene("admin-login.fxml");
+        SnappApplication.changeScene("admin-login.fxml");
     }
 
     @Override
