@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 
@@ -31,10 +33,7 @@ public class AdminNewRestaurant {
             Restaurant r =Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
             if(imgFile != null)
             {
-//                myFile
             }
-            else
-                r.setImageURL("images/hamburger.png");
             SnappApplication.changeScene("admin-home.fxml");
 
         } catch (FoodType.UnknownType | IOException e) {
