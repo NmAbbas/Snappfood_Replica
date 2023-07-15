@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 public class AdminRestaurantPanel implements Initializable
 {
+
     public GridPane gridPane;
 
     @Override

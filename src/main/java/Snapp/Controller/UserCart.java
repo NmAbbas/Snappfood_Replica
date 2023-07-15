@@ -1,5 +1,6 @@
 package Snapp.Controller;
 
+import Snapp.DiscountCard;
 import Snapp.SnapApplication;
 import Snapp.User;
 import javafx.fxml.Initializable;
@@ -17,8 +18,22 @@ public class UserCart implements Initializable {
 
     public GridPane gridPane;
 
-    public void pay(){
+    public void pay()
+    {
 
+        try
+        {
+            User.getActiveUser().getCart().buy();
+            //TODO "order confirmed succcessfully"
+            int disc = DiscountCard.giveDiscountCardToUser(User.getActiveUser(), User.getActiveUser().getCart().price());
+            if (disc > 0)
+            {
+                //TODO "you have a new discount card"
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     public void reset() {
     }
