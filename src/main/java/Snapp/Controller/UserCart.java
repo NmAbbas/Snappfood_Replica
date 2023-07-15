@@ -3,6 +3,7 @@ package Snapp.Controller;
 import Snapp.DiscountCard;
 import Snapp.SnappApplication;
 import Snapp.User;
+import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,13 +13,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class UserCart implements Initializable {
     public Label totalCostLabel;
 
     public GridPane gridPane;
-    public ComboBox comboBox;
+    public ComboBox<String> comboBox;
     public Label payedLabel;
 
     public void pay()
@@ -46,6 +49,8 @@ public class UserCart implements Initializable {
         if (User.getActiveUser().getCart().price() != 0)
             totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
         //discount card
+//        comboBox = new ComboBox<>();
+
 //        if (User.getActiveUser().getDiscountCards().size() != 0) {
 ////            comboBox = new ComboBox<String>();
 ////            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
