@@ -13,6 +13,8 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.UserCart">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
     <Button alignment="CENTER" contentDisplay="TOP" layoutX="55.0" layoutY="713.0" mnemonicParsing="false" onMouseClicked="#pay" prefHeight="46.0" prefWidth="110.0" text="پرداخت" />
@@ -37,6 +39,11 @@
        <items>
        </items>
    </ComboBox>
+    <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="483.0" layoutY="40.0" onMouseClicked="#openHome" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/arrow.png" />
+        </image>
+    </ImageView>
 
 
 </AnchorPane>

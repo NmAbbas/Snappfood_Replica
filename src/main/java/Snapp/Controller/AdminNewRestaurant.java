@@ -31,7 +31,7 @@ public class AdminNewRestaurant {
             Restaurant r =Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
             if(imgFile != null)
             {
-                myFile
+//                myFile
             }
             else
                 r.setImageURL("images/hamburger.png");
