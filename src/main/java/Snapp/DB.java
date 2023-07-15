@@ -181,14 +181,16 @@ public class DB {
             for(int i=0;i<foodcount;++i){
                 few[i] = (byte)f.getFoods().get(i).getId();
             }
-            preparedStatement = connection.prepareStatement("INSERT INTO db.orders (id, customerid, restaurantid,foodcount,foods,state)\n" +
-                    "VALUES (?, ?, ?,?,?,?);");
+            preparedStatement = connection.prepareStatement("INSERT INTO db.orders (id, customerid, restaurantid,foodcount,foods,state,cookingtime,cookingstarttime)\n" +
+                    "VALUES (?, ?, ?,?,?,?,?,?);");
             preparedStatement.setInt(1, f.getId());
             preparedStatement.setInt(2, f.getCostomer().getId());
             preparedStatement.setInt(3, f.getRecipient().getId());
             preparedStatement.setInt(4, foodcount);
             preparedStatement.setString(5, new String(few));
             preparedStatement.setInt(6, f.getOrderState().ordinal());
+            preparedStatement.setLong(7, f.getCookingTime());
+            preparedStatement.setLong(8, f.getCookingStartTime());
             preparedStatement.executeUpdate();
         }
     }
