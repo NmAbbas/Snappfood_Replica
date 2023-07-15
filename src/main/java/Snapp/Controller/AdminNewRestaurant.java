@@ -31,7 +31,10 @@ public class AdminNewRestaurant {
             Restaurant r =Restaurant.createRestaurant(nameField.getText(),FoodType.parse(foodTypeField.getText()), Admin.getActiveUser(),Integer.parseInt(addressField.getText()));
             if(imgFile != null)
             {
-                myFile
+                File newFile = new File(SnappApplication.class.getResource("").toString() + "/" + "newImage.jpg");
+                newFile.createNewFile();
+                Files.copy(imgFile.toPath(), newFile.toPath());
+                r.setImageURL(SnappApplication.class.getResource("newImage.jpg").toString());
             }
             else
                 r.setImageURL("images/hamburger.png");
