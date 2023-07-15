@@ -21,27 +21,9 @@ public class AdminHome implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (Admin.getActiveUser().getRestaurants().size() != 0)
-            gridPane.setPrefHeight(250*Admin.getActiveUser().getRestaurants().size());
-        //add Button
-        Button addButton = new Button();
-        ImageView imageView = new ImageView(new Image(SnappApplication.class.getResourceAsStream("/images/add.png")));
-        imageView.setFitWidth(80);
-        imageView.setFitWidth(80);
-        addButton.setGraphic(imageView);
-        gridPane.add(addButton,0,0);
-        addButton.setOnAction(e -> {
-            try
-            {
-                SnappApplication.changeScene("admin-new-restaurant.fxml");
-            } catch (IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        });
-
+        ImageView imageView;
         if (Admin.getActiveUser().getRestaurants().size() != 0){
-//            gridPane.setPrefHeight(135*Admin.getActiveUser().getRestaurants().size());
+            gridPane.setPrefHeight(135*(Admin.getActiveUser().getRestaurants().size()+1));
             Button[] buttons = new Button[Admin.getActiveUser().getRestaurants().size()];
             for (int i = 0; i < Admin.getActiveUser().getRestaurants().size(); i++){
                 buttons[i] = new Button(Admin.getActiveUser().getRestaurants().get(i).getName());
@@ -66,4 +48,7 @@ public class AdminHome implements Initializable {
         }
     }
 
+    public void openAdminNewRestaurant() throws IOException {
+        SnappApplication.changeScene("admin-new-restaurant.fxml");
+    }
 }

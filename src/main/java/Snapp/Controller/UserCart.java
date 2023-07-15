@@ -19,14 +19,15 @@ public class UserCart implements Initializable {
 
     public GridPane gridPane;
     public ComboBox comboBox;
+    public Label payedLabel;
 
     public void pay()
     {
-
+        payedLabel.setOpacity(0.0);
         try
         {
             User.getActiveUser().getCart().buy();
-            //TODO "order confirmed succcessfully"
+            payedLabel.setOpacity(1.0);
             int disc = DiscountCard.giveDiscountCardToUser(User.getActiveUser(), User.getActiveUser().getCart().price());
             if (disc > 0)
             {

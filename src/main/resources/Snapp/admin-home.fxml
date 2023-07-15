@@ -48,8 +48,18 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                 </rowConstraints>
+            <children>
+               <Button onMouseClicked="#openAdminNewRestaurant" mnemonicParsing="false">
+                  <graphic>
+                     <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/add.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
             </GridPane>
         </content>
     </ScrollPane>
-
 </AnchorPane>
