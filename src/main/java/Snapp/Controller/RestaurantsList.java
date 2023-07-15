@@ -20,7 +20,7 @@ public class RestaurantsList implements Initializable {
         SnappApplication.changeScene("user-cart.fxml");
     }
     public void openHome() throws IOException {
-        SnapApplication.changeScene("user-home.fxml");
+        SnappApplication.changeScene("user-home.fxml");
     }
 
     @Override
