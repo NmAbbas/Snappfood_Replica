@@ -84,6 +84,11 @@ public class Admin extends Account {
             System.out.println(r.getId() + "\t" + r);
     }
 
+    public void setActiveFood(Food activeFood)
+    {
+        this.activeFood = activeFood;
+    }
+
     int selectRestaurant(int id) // return 1 on success, 0 if doesn,t exist
     {
         for (Restaurant r : restaurants) {
@@ -96,7 +101,7 @@ public class Admin extends Account {
         return 0;
     }
 
-    Restaurant getActiveRestaurant() {
+    public Restaurant getActiveRestaurant() {
         return activeRestaurant;
     }
 
@@ -118,7 +123,7 @@ public class Admin extends Account {
     ArrayList<Food> getSelectedMenu(){
         return activeRestaurant.menu;
     }
-    void selectFood(int index) throws Food.InvalidFoodID {             //searches in the global list, unique IDs ...
+    public void selectFood(int index) throws Food.InvalidFoodID {             //searches in the global list, unique IDs ...
         activeFood = Food.getFoodbyId(index);
     }
     //    void editActiveFood(Food f) throws Food.FoodHasActiveOrder, Food.InvalidFoodID {
@@ -172,10 +177,15 @@ public class Admin extends Account {
         }
 
     }
-    ArrayList<Order> getActiveOrders(){
+     public ArrayList<Order> getActiveOrders(){
         return activeRestaurant.getActiveOrders();
     }
-    ArrayList<Order> getAllOrders(){
+    public ArrayList<Order> getAllOrders(){
         return activeRestaurant.getOrderList();
+    }
+
+    public void setActiveRestaurant(Restaurant activeRestaurant)
+    {
+        this.activeRestaurant = activeRestaurant;
     }
 }

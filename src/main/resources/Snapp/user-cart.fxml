@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<!--shows foods available in a restaurant for a user-->
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.UserCart">
+    <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
+    <Button onMouseClicked="#pay" alignment="CENTER" contentDisplay="TOP" layoutX="55.0" layoutY="713.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="پرداخت" />
+    <ScrollPane layoutX="39.0" layoutY="120.0" prefHeight="558.0" prefWidth="518.0">
+        <content>
+            <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@grid-pane-one-row-list.css">
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </content>
+    </ScrollPane>
+   <Label layoutX="156.0" layoutY="92.0" prefHeight="30.0" prefWidth="401.0" />
+   <Button onMouseClicked="#reset" alignment="CENTER" contentDisplay="TOP" layoutX="446.0" layoutY="714.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="بازنشانی" />
+   <Label layoutX="291.0" layoutY="84.0" text="برای حذف کردن هر مورد روی آن کلیک کنید" />
+   <Label fx:id="totalCostLabel" layoutX="240.0" layoutY="724.0" prefHeight="28.0" prefWidth="146.0" />
+
+</AnchorPane>

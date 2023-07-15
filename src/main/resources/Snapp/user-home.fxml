@@ -67,7 +67,7 @@
          </Button>
       </children>
    </GridPane>
-   <Button layoutX="93.0" layoutY="112.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
+   <Button onMouseClicked="#openCart" layoutX="93.0" layoutY="112.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0">
       <graphic>
          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
             <image>

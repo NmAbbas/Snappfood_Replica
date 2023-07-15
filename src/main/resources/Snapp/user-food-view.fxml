@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@food-view-style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.UserFoodView">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-    <Button layoutX="35.0" layoutY="40.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0">
+    <Button onMouseClicked="#openCart" layoutX="35.0" layoutY="40.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0">
         <graphic>
             <ImageView fitHeight="34.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                 <image>

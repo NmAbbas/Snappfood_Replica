@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +27,7 @@ public class AdminHome implements Initializable {
         imageView.setFitHeight(80);
         addButton.setGraphic(imageView);
         gridPane.add(addButton,0,0);
+
         if (Admin.getActiveUser().getRestaurants().size() != 0){
             System.out.println(Admin.getActiveUser().getRestaurants().size());
             gridPane.setPrefHeight(135*Admin.getActiveUser().getRestaurants().size());
@@ -39,6 +41,17 @@ public class AdminHome implements Initializable {
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
                 gridPane.addRow(i,buttons[i]);
+                int k = i;
+                buttons[i].setOnAction(e -> {
+                    Admin.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
+                    try
+                    {
+                        SnapApplication.changeScene("admin-restaurant-panel.fxml");
+                    } catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                });
             }
             gridPane.setVgap(10);
         }

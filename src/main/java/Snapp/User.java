@@ -3,6 +3,7 @@ package Snapp;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public class User extends Account
 {
@@ -17,6 +18,7 @@ public class User extends Account
      ArrayList<Order> receivedOrders = new ArrayList<>();
     private Restaurant activeRestaurant = null;
     private Food activeFood = null;
+    private ArrayList<DiscountCard> discountCards = new ArrayList<>();
     private Cart cart;
     private Order activeOrder = null;
     /* instance methods */
@@ -41,6 +43,16 @@ public class User extends Account
             return user;
         }
         throw new UsernameTakenException();
+    }
+
+    public ArrayList<DiscountCard> getDiscountCards()
+    {
+        return discountCards;
+    }
+
+    public void setDiscountCards(ArrayList<DiscountCard> discountCards)
+    {
+        this.discountCards = discountCards;
     }
 
     public static User getActiveUser()
@@ -164,10 +176,10 @@ public class User extends Account
         return activeOrder;
     }
 
-    void pay(int price) throws CurrencyNotEnoughException
+    void pay(int price) throws DiscountCardDoesntExist
     {
         if (currency < price)
-            throw new CurrencyNotEnoughException();
+            throw new DiscountCardDoesntExist();
         currency -= price;
     }
 
@@ -235,6 +247,54 @@ public class User extends Account
         }
     }
 
+    public DiscountCard getDiscountCardById(int id) throws DiscountCardDoesntExist
+    {
+        for (DiscountCard dis: discountCards)
+        {
+            if(dis.getId() == id)
+                return dis;
+        }
+        throw new DiscountCardDoesntExist();
+    }
 
+    static public class DiscountCardDoesntExist extends Exception
+    {
+        DiscountCardDoesntExist()
+        {
+            super("[Error] discount card with selected id doesn't exist or you don't own it!");
+        }
+    }
+
+    public FoodType recommend() throws InsufficientDataForReceomendationException
+    {
+        if(receivedOrders.isEmpty())
+            throw new InsufficientDataForReceomendationException();
+        EnumSet<FoodType> enumSet = EnumSet.allOf(FoodType.class);
+        int[] usageArray = new int[enumSet.toArray().length];
+        java.util.Arrays.fill(usageArray, 0);
+        for (Order o:receivedOrders)
+            for(FoodType f : o.getRecipient().getFoodtype())
+                usageArray[f.ordinal()]++;
+
+
+        int maxUsage = 0;
+        FoodType recommendedEnum = null;
+        for (FoodType enumValue : enumSet) {
+            int usage = usageArray[enumValue.ordinal()];
+            if (usage > maxUsage) {
+                maxUsage = usage;
+                recommendedEnum = enumValue;
+            }
+        }
+        return recommendedEnum;
+    }
+
+    public class InsufficientDataForReceomendationException extends Exception
+    {
+        InsufficientDataForReceomendationException()
+        {
+            super("you haven't ordered anything yet, how can i recommend something!");
+        }
+    }
 }
 

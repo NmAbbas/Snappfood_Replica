@@ -32,12 +32,14 @@ public class UserFoodView implements Initializable {
         {
             User.getActiveUser().getCart().addFood(User.getActiveUser().getActiveFood());
             addedToCartLabel.setOpacity(1.0);
-//            System.out.println("food added to cart successfully!"); // change label
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
+    }
+    public void openCart() throws IOException {
+        SnapApplication.changeScene("user-cart.fxml");
     }
 
     @Override
@@ -54,7 +56,6 @@ public class UserFoodView implements Initializable {
         //add comments to food
 
         //your comment
-        //todo manage that a person have added a comment yet, or not.
         Comment thisUserComment = Comment.checkIfHasCommentedInList(User.getActiveUser().getActiveFood().getComments(),User.getActiveUser().getId());
         if (thisUserComment == null){
             Button addYourCommentButton = new Button();
@@ -87,6 +88,15 @@ public class UserFoodView implements Initializable {
                     addButton.setOnAction(event -> {
                         try{
                             Comment.createComment(textField.getText(),User.getActiveUser(),null,User.getActiveUser().getActiveFood());
+                            Label yourCommentName = new Label(User.getActiveUser().getName());
+                            AnchorPane commentAnchorPane = new AnchorPane(yourCommentName);
+                            AnchorPane.setTopAnchor(yourCommentName, 15.0);
+                            AnchorPane.setRightAnchor(yourCommentName, 30.0);
+                            Label yourComment = new Label(thisUserComment.getMessage());
+                            commentAnchorPane.getChildren().add(yourComment);
+                            AnchorPane.setTopAnchor(yourComment, 37.0);
+                            AnchorPane.setRightAnchor(yourComment, 40.0);
+                            gridPane.addRow(0, commentAnchorPane);
 
                         } catch (Exception exception)
                         {
@@ -100,27 +110,44 @@ public class UserFoodView implements Initializable {
             });
         }
         else {
-
+            Label yourCommentName = new Label(User.getActiveUser().getName());
+            AnchorPane anchorPane = new AnchorPane(yourCommentName);
+            AnchorPane.setTopAnchor(yourCommentName, 15.0);
+            AnchorPane.setRightAnchor(yourCommentName, 30.0);
+            Label yourComment = new Label(thisUserComment.getMessage());
+            anchorPane.getChildren().add(yourComment);
+            AnchorPane.setTopAnchor(yourComment, 37.0);
+            AnchorPane.setRightAnchor(yourComment, 40.0);
+            gridPane.addRow(0, anchorPane);
         }
         if (User.getActiveUser().getActiveFood().getComments().size() != 0) {
             gridPane.setPrefHeight(135+ 60*(User.getActiveUser().getActiveFood().getComments().size()+1));
             AnchorPane[] anchorPanes = new AnchorPane[User.getActiveUser().getActiveFood().getComments().size()];
             Label[] names = new Label[User.getActiveUser().getActiveFood().getComments().size()];
             Label[] comments = new Label[User.getActiveUser().getActiveFood().getComments().size()];
+            Label[] replies = new Label[User.getActiveUser().getActiveFood().getComments().size()];
+            int row = 1;
             // adding Comments
-            //todo manage that a person have added a comment yet, or not.
-            for (int i = 0; i < User.getActiveUser().getActiveFood().getComments().size(); i++) {
-                names[i] = new Label(User.getActiveUser().getActiveFood().getComments().get(i).getCommenter().getName());
-                anchorPanes[i] = new AnchorPane(names[i]);
-                AnchorPane.setTopAnchor(names[i], 15.0);
-                AnchorPane.setRightAnchor(names[i], 30.0);
-                comments[i] = new Label(User.getActiveUser().getActiveFood().getComments().get(i).getMessage());
-                anchorPanes[i].getChildren().add(comments[i]);
-                AnchorPane.setTopAnchor(comments[i], 37.0);
-                AnchorPane.setRightAnchor(comments[i], 40.0);
-                gridPane.addRow(i+1, anchorPanes[i]);
-
-            }
+            for (int i = 0; i < User.getActiveUser().getActiveFood().getComments().size() && i != User.getActiveUser().getActiveFood().getComments().indexOf(thisUserComment); i++)
+                if (User.getActiveUser().getActiveFood().getComments().get(i).getUpper() == null) {
+                    names[i] = new Label(User.getActiveUser().getActiveFood().getComments().get(i).getCommenter().getName());
+                    anchorPanes[i] = new AnchorPane(names[i]);
+                    AnchorPane.setTopAnchor(names[i], 15.0);
+                    AnchorPane.setRightAnchor(names[i], 30.0);
+                    comments[i] = new Label(User.getActiveUser().getActiveFood().getComments().get(i).getMessage());
+                    anchorPanes[i].getChildren().add(comments[i]);
+                    AnchorPane.setTopAnchor(comments[i], 37.0);
+                    AnchorPane.setRightAnchor(comments[i], 40.0);
+                    //adding replies
+                    if (User.getActiveUser().getActiveFood().getComments().get(i).getReply() != null) {
+                        replies[i] = new Label("->"+User.getActiveUser().getActiveFood().getComments().get(i).getReply().getMessage());
+                        anchorPanes[i].getChildren().add(replies[i]);
+                        AnchorPane.setTopAnchor(replies[i],100.0);
+                        AnchorPane.setRightAnchor(replies[i],50.0);
+                    }
+                    gridPane.addRow(row, anchorPanes[i]);
+                    row++;
+                }
         }
     }
 }

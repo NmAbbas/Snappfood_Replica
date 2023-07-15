@@ -1,6 +1,6 @@
 package Snapp.Controller;
 
-import Snapp.Cart;
+import Snapp.Admin;
 import Snapp.Restaurant;
 import Snapp.SnapApplication;
 import Snapp.User;
@@ -14,40 +14,37 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RestaurantsList implements Initializable {
+public class AdminRestaurantPanel implements Initializable
+{
     public GridPane gridPane;
-    public void openCart() throws IOException {
-        SnapApplication.changeScene("user-cart.fxml");
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (Restaurant.getRestaurantList().size() != 0) {
-            gridPane.setPrefHeight(135*Restaurant.getRestaurantList().size());
-            Button[] buttons = new Button[Restaurant.getRestaurantList().size()];
-            //Restaurant 0
-            buttons[0] = new Button(Restaurant.getRestaurantList().get(0).getName());
-            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(0).getImageURL())));
+        if (Admin.getActiveUser().getActiveRestaurant().getMenu().size() != 0) {
+            gridPane.setPrefHeight(135*Admin.getActiveUser().getActiveRestaurant().getMenu().size());
+            Button[] buttons = new Button[Admin.getActiveUser().getActiveRestaurant().getMenu().size()];
+            //Food 0
+            buttons[0] = new Button(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0).getName());
+            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0).getImageURL())));
             imageView.setFitWidth(80);
             imageView.setFitWidth(80);
             buttons[0].setGraphic(imageView);
 //            buttons[0].setGraphicTextGap(buttons[0].getWidth()-80-buttons[0].getText().length()-20);
             gridPane.add(buttons[0],0,0);
             buttons[0].setOnAction(e -> {
-                User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(0));
+                Admin.getActiveUser().setActiveFood(Admin.getActiveUser().getActiveRestaurant().getMenu().get(0));
                 try
                 {
-                    User.getActiveUser().setCart(new Cart(User.getActiveUser().getActiveRestaurant(), User.getActiveUser()));
-                    SnapApplication.changeScene("user-food-list.fxml");
+                    SnapApplication.changeScene("admin-food-view.fxml");
                 } catch (IOException ex)
                 {
                     ex.printStackTrace();
                 }
             });
             //Restaurant 1->
-            for (int i = 1; i < Restaurant.getRestaurantList().size(); i++){
-                buttons[i] = new Button(Restaurant.getRestaurantList().get(i).getName());
-                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Restaurant.getRestaurantList().get(i).getImageURL())));
+            for (int i = 1; i < Admin.getActiveUser().getActiveRestaurant().getMenu().size(); i++){
+                buttons[i] = new Button(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getName());
+                imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream(Admin.getActiveUser().getActiveRestaurant().getMenu().get(i).getImageURL())));
                 imageView.setFitWidth(80);
                 imageView.setFitWidth(80);
                 buttons[i].setGraphic(imageView);
@@ -55,10 +52,10 @@ public class RestaurantsList implements Initializable {
                 gridPane.addRow(i,buttons[i]);
                 int k = i;
                 buttons[i].setOnAction(e -> {
-                    User.getActiveUser().setActiveRestaurant(Restaurant.getRestaurantList().get(k));
+                    Admin.getActiveUser().setActiveFood(Admin.getActiveUser().getActiveRestaurant().getMenu().get(k));
                     try
                     {
-                        SnapApplication.changeScene("user-food-list.fxml");
+                        SnapApplication.changeScene("admin-food-view.fxml");
                     } catch (IOException ex)
                     {
                         ex.printStackTrace();

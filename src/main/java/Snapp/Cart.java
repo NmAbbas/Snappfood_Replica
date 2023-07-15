@@ -1,7 +1,7 @@
 package Snapp;
 
 import Snapp.Food.FoodIsDeactiveException;
-import Snapp.User.CurrencyNotEnoughException;
+import Snapp.User.DiscountCardDoesntExist;
 
 import java.util.ArrayList;
 
@@ -10,31 +10,34 @@ public class Cart
     private Restaurant recipient;
     private User costomer;
     private ArrayList<Food> foods = new ArrayList<>();
+    private DiscountCard discountCard = null;
 
-    int price() 
+    public double price()
     {
-        int price = 0;
+        double price = 0;
         for (Food f : foods)
-            price += f.getPrice();
+            price += f.getPrice() * (1.00 - f.getDiscount());
+        if(discountCard != null)
+            price *= discountCard.getDiscount();
         return price;
     }
 
-    public Restaurant getRecipient() 
+    public Restaurant getRecipient()
     {
         return recipient;
     }
 
-    public void setRecipient(Restaurant recipient) 
+    public void setRecipient(Restaurant recipient)
     {
         this.recipient = recipient;
     }
 
-    public User getCostomer() 
+    public User getCostomer()
     {
         return costomer;
     }
 
-    public void setCostomer(User costomer) 
+    public void setCostomer(User costomer)
     {
         this.costomer = costomer;
     }
@@ -53,13 +56,23 @@ public class Cart
         foods.add(food);
     }
 
-    public int remvoeFood(Food f) 
+    public int removeFood(Food f)
     {
         if (foods.contains(f))
             return 0;
 
         foods.remove(f);
         return 1;
+    }
+
+    public DiscountCard getDiscountCard()
+    {
+        return discountCard;
+    }
+
+    public void setDiscountCard(DiscountCard discountCard)
+    {
+        this.discountCard = discountCard;
     }
 
     public ArrayList<Food> getFoods()
@@ -72,7 +85,7 @@ public class Cart
         this.foods = foods;
     }
 
-    public void buy() throws CartContainsDeactiveFoodsException, CurrencyNotEnoughException
+    public void buy() throws CartContainsDeactiveFoodsException, DiscountCardDoesntExist
     {
         ArrayList<Food> inactive = new ArrayList<>();
         for (Food f : foods)
@@ -82,14 +95,14 @@ public class Cart
         if (!inactive.isEmpty())
             throw new CartContainsDeactiveFoodsException(inactive);
 
-        costomer.pay(price());
+        costomer.pay((int)price());
         Order o = Order.createOrder(costomer, foods, recipient);
         costomer.setActiveOrder(o);
     }
 
 
 
-    static public class CartContainsDeactiveFoodsException extends Exception 
+    static public class CartContainsDeactiveFoodsException extends Exception
     {
         static String createMsg(ArrayList<Food> inactiveFoods)
         {
@@ -104,11 +117,11 @@ public class Cart
         ArrayList<Food> inactiveFoods;
 
         CartContainsDeactiveFoodsException(ArrayList<Food> inactiveFoods)
-       	{
+        {
             super(createMsg(inactiveFoods));
             this.inactiveFoods = inactiveFoods;
 
         }
     }
-    
+
 }
