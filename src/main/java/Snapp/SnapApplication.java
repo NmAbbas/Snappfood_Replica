@@ -35,9 +35,9 @@ public class SnapApplication extends Application {
             //f1.deactivate();
             u1.selectRestaurant(1);
 
-            Comment.createComment("it tastes like shit", u1, null, f1);
-            Comment.createComment("i like it", u2, null, f1);
-            Comment.createComment("uhhhhhhhhhhhh!", u3, null, f1);
+            Comment.createComment("متبسیمنتبسمنبتسمبتسیمبنستیمست بنسدمستبمسی بتمد یب ب ی سی س س س بس س    یسیسسیبیسبسبسیبسبسسبسیبسیبسیبسشیبسیبس    زه گوه میده", u1, null, f1);
+            Comment.createComment("دوست داشتم", u2, null, f1);
+            Comment.createComment("اهههههه!", u3, null, f1);
 
 
         }
@@ -65,6 +65,6 @@ public class SnapApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-        Savior.saving();
+//        Savior.saving();
     }
 }

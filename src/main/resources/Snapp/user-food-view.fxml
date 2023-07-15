@@ -50,7 +50,7 @@
     </Button>
     <ScrollPane layoutX="39.0" layoutY="327.0" prefHeight="351.0" prefWidth="518.0">
         <content>
-            <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@buttons-grid-pane-one-row-list.css">
+            <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@grid-pane-one-row-list.css">
                 <columnConstraints>
                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0" />
                 </columnConstraints>
@@ -70,5 +70,6 @@
    <Label layoutX="527.0" layoutY="241.0" prefHeight="28.0" prefWidth="46.0" text="قیمت:" />
    <Label fx:id="priceLabel" layoutX="430.0" layoutY="239.0" prefHeight="30.0" prefWidth="94.0" />
    <Label fx:id="cookingTimeLabel" layoutX="396.0" layoutY="182.0" prefHeight="28.0" prefWidth="68.0" />
+   <Label fx:id="addedToCartLabel" layoutX="151.0" layoutY="286.0" opacity="0.0" prefHeight="28.0" prefWidth="256.0" text="غذا با موفقیت به سبد خرید اضافه شد" />
 
 </AnchorPane>

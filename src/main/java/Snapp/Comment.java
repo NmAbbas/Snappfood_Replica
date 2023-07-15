@@ -22,7 +22,7 @@ public class Comment {
         throw new CommentDoesntExistException();
     }
 
-    static void createComment(String message, User commenter, Restaurant restaurant, Food food)
+    public static void createComment(String message, User commenter, Restaurant restaurant, Food food)
     {
         Comment c = new Comment(message, commenter, restaurant, food);
 //        food.comments.add(c);
