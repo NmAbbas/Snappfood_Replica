@@ -18,4 +18,33 @@ public class UserHome {
     public void openCart() throws IOException {
         SnappApplication.changeScene("user-cart.fxml");
     }
+    public void restaurantCommand()
+    {
+            RestaurantsList.Command = RestaurantsList.Command.RESTAURANT;
+    }
+
+    public void allCommand()
+    {
+        RestaurantsList.Command = RestaurantsList.Command.ALL;
+    }
+
+    public void cafeCommand()
+    {
+        RestaurantsList.Command = RestaurantsList.Command.CAFE;
+    }
+
+    public void superCommand()
+    {
+        RestaurantsList.Command = RestaurantsList.Command.SUPER;
+    }
+
+    public void nearCommand()
+    {
+        RestaurantsList.Command = RestaurantsList.Command.NEAR;
+    }
+
+    public void recommendCommand()
+    {
+        RestaurantsList.Command = RestaurantsList.Command.RECOMEND;
+    }
 }
