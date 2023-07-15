@@ -26,13 +26,16 @@ public class AdminNewFood {
 
     public void addFood() {
         try {
-            Food.createFood(nameField.getText(),Double.parseDouble(foodPriceField.getText()),FoodType.parse(foodPriceField.getText()),Long.parseLong(cookingTimeField.getText()),Admin.getActiveUser().getActiveRestaurant());
+            Food f = Food.createFood(nameField.getText(),Double.parseDouble(foodPriceField.getText()),FoodType.parse(foodPriceField.getText()),Long.parseLong(cookingTimeField.getText()),Admin.getActiveUser().getActiveRestaurant());
             if(imgFile != null)
             {
+                f.setImageURL("/images/"+imgFile.getName());
             }
+            else
+                f.setImageURL("/images/hamburger.png");
             SnappApplication.changeScene("admin-home.fxml");
 
-        } catch (FoodType.UnknownType | IOException | Food.InvalidPriceException e) {
+        } catch (FoodType.UnknownType | Food.InvalidPriceException | IOException e) {
             throw new RuntimeException(e);
         }
     }
