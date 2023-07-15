@@ -17,7 +17,7 @@ public class RestaurantsList implements Initializable {
 
     public enum Command
     {
-        ALL, RESTAURANT, CAFE, SUPER, RECOMEND, NEAr;
+        ALL, RESTAURANT, CAFE, SUPER, RECOMEND, NEAR;
     }
 
     public Command command = Command.ALL;
@@ -59,6 +59,9 @@ public class RestaurantsList implements Initializable {
                 rs.addAll(Restaurant.getRestaurantsOfType(FoodType.IRANIAN));
 
                 showRestaurantList(rs);
+            }
+            case NEAR -> {
+                showRestaurantList(User.getActiveUser().kNearestRestaurants(5));
             }
         }
     }
