@@ -47,17 +47,22 @@ public class UserCart implements Initializable {
         if (User.getActiveUser().getCart().price() != 0)
             totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
         //discount card
-        if (User.getActiveUser().getDiscountCards().size() != 0) {
-            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
-            for (DiscountCard temp : User.getActiveUser().getDiscountCards()){
-                discountCardsForComboBox.add(temp.getId()+". "+temp.getDiscount());
-            }
-            comboBox = new ComboBox(FXCollections.observableArrayList(discountCardsForComboBox));
-            if (comboBox.getValue() != null) {
-                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((((String)comboBox.getValue()).split("\\."))[0])));
-            }
-
-        }
+//        if (User.getActiveUser().getDiscountCards().size() != 0) {
+////            comboBox = new ComboBox<String>();
+////            ArrayList<String> discountCardsForComboBox = new ArrayList<>();
+//            String[] discountCardsForComboBox = new String[User.getActiveUser().getDiscountCards().size()];
+//            for (int i = 0; i < User.getActiveUser().getDiscountCards().size(); i++){
+////                comboBox.getItems().add(temp.getId()+". "+temp.getDiscount());
+////                discountCardsForComboBox.add(temp.getId()+". "+temp.getDiscount());
+//                discountCardsForComboBox[i] = User.getActiveUser().getDiscountCards().get(i).getId()+". "+User.getActiveUser().getDiscountCards().get(i).getDiscount();
+////                System.out.println(temp.getId()+". "+temp.getDiscount());
+//            }
+//            comboBox = new ComboBox(FXCollections.observableArrayList(discountCardsForComboBox));
+//            if (comboBox.getValue() != null) {
+//                User.getActiveUser().getCart().setDiscountCard(User.getActiveUser().getDiscountCards().get(Integer.parseInt((((String)comboBox.getValue()).split("\\."))[0])));
+//            }
+//
+//        }
         //foods
         if (User.getActiveUser().getCart().getFoods().size() != 0) {
             gridPane.setPrefHeight(135 * User.getActiveUser().getCart().getFoods().size());
