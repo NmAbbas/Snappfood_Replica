@@ -15,6 +15,7 @@ public class    SnappApplication extends Application {
     public void start(Stage stage) throws IOException {// example creation:
         try
         {
+            System.out.println(SnappApplication.class.getResource("").toString());
 //            Savior.loading();
             User u1 = User.createUser("sandy", "P@ss12345678");
             User u2 = User.createUser("mylegfish", "P@ss12345678");
