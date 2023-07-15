@@ -17,8 +17,8 @@ public class AdminHome implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ImageView imageView;
         if (Admin.getActiveUser().getRestaurants().size() != 0){
+            ImageView imageView;
             gridPane.setPrefHeight(135*(Admin.getActiveUser().getRestaurants().size()+1));
             Button[] buttons = new Button[Admin.getActiveUser().getRestaurants().size()];
             for (int i = 0; i < Admin.getActiveUser().getRestaurants().size(); i++){

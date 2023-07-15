@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminRestaurantPanel">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-    <Button onMouseClicked="#removeRestaurant" layoutX="44.0" layoutY="44.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="78.0">
+    <Button layoutX="44.0" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#removeRestaurant" prefHeight="73.0" prefWidth="78.0">
         <graphic>
             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -50,7 +50,7 @@
             </ImageView>
         </graphic>
     </Button>
-    <ScrollPane layoutX="39.0" layoutY="146.0" prefHeight="532.0" prefWidth="518.0">
+    <ScrollPane layoutX="39.0" layoutY="233.0" prefHeight="445.0" prefWidth="518.0">
         <content>
             <GridPane fx:id="gridPane" alignment="CENTER" maxHeight="-Infinity" prefHeight="120.0" prefWidth="511.0" stylesheets="@grid-pane-one-row-list.css">
                 <columnConstraints>
@@ -59,6 +59,17 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                 </rowConstraints>
+            <children>
+               <Button mnemonicParsing="false" onMouseClicked="#openAdminNewFood">
+                  <graphic>
+                     <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/add.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
             </GridPane>
         </content>
     </ScrollPane>
@@ -69,5 +80,12 @@
             <Image url="@../images/arrow.png" />
         </image>
     </ImageView>
+   <ImageView fx:id="imageView" fitHeight="107.0" fitWidth="123.0" layoutX="49.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/hamburger.png" />
+      </image>
+   </ImageView>
+   <Label fx:id="restaurantNameLabel" layoutX="165.0" layoutY="152.0" prefHeight="27.0" prefWidth="190.0" text="نام رستوران" />
+   <Label fx:id="foodTypeLabel" layoutX="171.0" layoutY="191.0" prefHeight="27.0" prefWidth="190.0" text="نوع غذا" />
 
 </AnchorPane>
