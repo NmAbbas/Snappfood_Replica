@@ -247,7 +247,7 @@ public class Driver {
         System.out.println("ID\t\tNAME\t\tRESTAURANT\t\tDISCOUNT\t\t");
         for(Order o : orders)
         {
-            System.out.println(o.getId() + "\t\t" + o.getCostomer().getName() + "\t\t" + o.getRecipient());
+            System.out.println(o.getId() + "\t\t" + o.getCostomer().getName() + "\t\t" + o.getRecipient().getName());
             System.out.println("\t\tID\t\tFOOD\t\tPRICE\t\tDISCOUNT\t\t");
             for(Food f : o.getFoods()){
                 System.out.println("\t\t" +f.getId() + "\t\t" + f.getName() + "\t\t" + f.getPrice()+ "\t\t" +f.getDiscount());
