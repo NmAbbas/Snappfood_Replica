@@ -3,6 +3,7 @@ package Snapp;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public class User extends Account
 {
@@ -235,6 +236,36 @@ public class User extends Account
         }
     }
 
+    public FoodType recommend() throws InsufficientDataForReceomendationException
+    {
+        if(receivedOrders.isEmpty())
+            throw new InsufficientDataForReceomendationException();
+        EnumSet<FoodType> enumSet = EnumSet.allOf(FoodType.class);
+        int[] usageArray = new int[enumSet.toArray().length];
+        java.util.Arrays.fill(usageArray, 0);
+        for (Order o:receivedOrders)
+            for(FoodType f : o.getRecipient().getFoodtype())
+                usageArray[f.ordinal()]++;
 
+
+        int maxUsage = 0;
+        FoodType recommendedEnum = null;
+        for (FoodType enumValue : enumSet) {
+            int usage = usageArray[enumValue.ordinal()];
+            if (usage > maxUsage) {
+                maxUsage = usage;
+                recommendedEnum = enumValue;
+            }
+        }
+        return recommendedEnum;
+    }
+
+    public class InsufficientDataForReceomendationException extends Exception
+    {
+        InsufficientDataForReceomendationException()
+        {
+            super("you haven't ordered anything yet, how can i recommend something!");
+        }
+    }
 }
 

@@ -17,6 +17,22 @@ public class Restaurant
         return r;
     }
 
+    public static ArrayList<Restaurant> getRestaurantsOfType(FoodType foodType)
+    {
+        HashSet<Restaurant> list = new HashSet<>();
+
+        for (Restaurant r:restaurantList)
+        {
+            for (FoodType f: r.getFoodtype())
+            {
+                if(foodType == f)
+                    list.add(r);
+            }
+        }
+
+        return new ArrayList<>(list.stream().toList());
+    }
+
     public static void sort(List<Restaurant> restaurants) {
         Collections.sort(restaurants, new restaurantComparator());
     }
@@ -87,6 +103,11 @@ public class Restaurant
         {
             super("No rating exists for this restaurant");
         }
+    }
+
+    public void setFoodtype(HashSet<FoodType> foodtype)
+    {
+        this.foodtype = foodtype;
     }
 
     private String imageURL = "/images/hamburger.png";

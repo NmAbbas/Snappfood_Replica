@@ -746,6 +746,17 @@ public class Driver {
                             System.out.println(e.getMessage());
                         }
                     }
+                    else if (inp.matches("^\\s*recommend\\s*"))
+                    {
+                        try
+                        {
+                            printRestaurantList(Restaurant.getRestaurantsOfType(User.getActiveUser().recommend()));
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println(e.getMessage());
+                        }
+                    }
             }
             if(inp.matches("exit.*")) running=false;
             // map and path :
