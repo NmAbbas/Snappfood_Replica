@@ -97,7 +97,7 @@ public class Account {
         return acc.question;
     }
 
-    static void logout()
+    public static void logout()
     {
         activeUser = null;
     }

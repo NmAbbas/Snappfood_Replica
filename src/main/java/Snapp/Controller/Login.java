@@ -1,7 +1,7 @@
 package Snapp.Controller;
 
 import Snapp.Account;
-import Snapp.SnapApplication;
+import Snapp.SnappApplication;
 import javafx.fxml.Initializable;
 
 import java.io.IOException;
@@ -18,6 +18,6 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Account.logout();
     }
 }

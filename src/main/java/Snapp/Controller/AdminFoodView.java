@@ -1,5 +1,6 @@
 package Snapp.Controller;
 
+import Snapp.Admin;
 import Snapp.Comment;
 import Snapp.SnappApplication;
 import Snapp.User;
@@ -44,7 +45,7 @@ public class AdminFoodView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        foodNameLabel.setText(User.getActiveUser().getActiveFood().getName());
+        foodNameLabel.setText(Admin.getActiveUser().getActiveFood().getName());
         foodImageView.setImage(new Image(SnappApplication.class.getResourceAsStream(User.getActiveUser().getActiveFood().getImageURL())));
         cookingTimeLabel.setText(User.getActiveUser().getActiveFood().getCookingTime() / 1000 +" s");
         priceLabel.setText(String.valueOf(User.getActiveUser().getActiveFood().getPrice()));

@@ -40,6 +40,9 @@ public class UserFoodView implements Initializable {
     public void openCart() throws IOException {
         SnappApplication.changeScene("user-cart.fxml");
     }
+    public void openHome() throws IOException {
+        SnappApplication.changeScene("user-home.fxml");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
