@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="600.0" stylesheets="@list-viewed-page.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Snapp.Controller.AdminRestaurantPanel">
     <Label fx:id="snappFoodLabel" layoutX="240.0" layoutY="36.0" stylesheets="@small-snapp-food-label.css" text="Snapp! Food" />
-    <Button onMouseClicked="#removeRestaurant" layoutX="44.0" layoutY="44.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="78.0">
+    <Button layoutX="44.0" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#removeRestaurant" prefHeight="73.0" prefWidth="78.0">
         <graphic>
             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -59,6 +59,17 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                 </rowConstraints>
+            <children>
+               <Button onMouseClicked="#openAdminNewFood" mnemonicParsing="false">
+                  <graphic>
+                     <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/add.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
             </GridPane>
         </content>
     </ScrollPane>
