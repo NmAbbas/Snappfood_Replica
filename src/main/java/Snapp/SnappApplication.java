@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SnappApplication extends Application {
+public class    SnappApplication extends Application {
     public static Stage window;
 
     @Override
@@ -33,7 +33,7 @@ public class SnappApplication extends Application {
             Delivery d1 = Delivery.createAccount("spongebob", "P@ss12345678");
             d1.setLocation(2);
 
-            Restaurant r1 = Restaurant.createRestaurant("زستوران خرچنگی", FoodType.FRIED, a1, 1);
+            Restaurant r1 = Restaurant.createRestaurant("رستوران خرچنگی", FoodType.FRIED, a1, 1);
             Restaurant r11 = Restaurant.createRestaurant("رستوران خرچنگی۲", FoodType.FRIED, a1, 2);
             Restaurant r2 = Restaurant.createRestaurant("چام باکت", FoodType.FRIED, a2, 1);
 
