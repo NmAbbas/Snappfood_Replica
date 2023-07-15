@@ -35,11 +35,6 @@
    <Label fx:id="payedLabel" layoutX="61.0" layoutY="763.0" opacity="0.0" text="سفارش ثبت شد" />
    <ComboBox fx:id="comboBox" layoutX="39.0" layoutY="38.0" prefWidth="150.0" >
        <items>
-           <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Three"/>
-               <String fx:value="Two"/>
-               <String fx:value="One"/>
-           </FXCollections>
        </items>
    </ComboBox>
 
