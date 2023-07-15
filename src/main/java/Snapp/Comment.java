@@ -85,6 +85,13 @@ public class Comment {
     Comment getReply(){
         return this.reply;
     }
+    public static Comment checkIfHasCommentedInList(ArrayList<Comment> comments, int userID)
+    {
+        for (Comment c : comments)
+            if(c.getCommenter().getId() == userID)
+                return c;
+        return null;
+    }
 
     void removeReply() {
         this.reply=null;

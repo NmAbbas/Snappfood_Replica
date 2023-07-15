@@ -53,50 +53,55 @@ public class UserFoodView implements Initializable {
 
         //add comments to food
 
-        //add your comment button
+        //your comment
         //todo manage that a person have added a comment yet, or not.
-        Button addYourCommentButton = new Button();
-        ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream("/images/add.png")));
-        imageView.setFitWidth(30);
-        imageView.setFitHeight(30);
-        addYourCommentButton.setGraphic(imageView);
-        addYourCommentButton.setText("نظر خود را اضافه کنید");
-        gridPane.add(addYourCommentButton,0,0);
-        addYourCommentButton.setOnAction(e -> {
-            try
-            {
-                gridPane.getChildren().remove(addYourCommentButton);
-                Label yourName = new Label(User.getActiveUser().getName());
-                AnchorPane anchorPane = new AnchorPane(yourName);
-                AnchorPane.setTopAnchor(yourName,20.0);
-                AnchorPane.setRightAnchor(yourName,30.0);
-                TextField textField = new TextField();
-                textField.setPromptText("نظر خود را اضافه کنید");
-                anchorPane.getChildren().add(textField);
-                AnchorPane.setTopAnchor(textField,42.0);
-                AnchorPane.setRightAnchor(textField,40.0);
-                Button addButton = new Button("اضافه کردن");
-                addButton.setMaxWidth(120);
-                addButton.setMaxHeight(30);
-                anchorPane.getChildren().add(addButton);
-                AnchorPane.setTopAnchor(addButton,134.0);
-                AnchorPane.setLeftAnchor(addButton,15.0);
-                gridPane.add(anchorPane,0,0);
-                addButton.setOnAction(event -> {
-                    try{
-                        Comment.createComment(textField.getText(),User.getActiveUser(),null,User.getActiveUser().getActiveFood());
-                        //todo manage that a person have added a comment yet, or not.
-                    } catch (Exception exception)
-                    {
-                        exception.printStackTrace();
-                    }
-                });
-            } catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
-        });
+        Comment thisUserComment = Comment.checkIfHasCommentedInList(User.getActiveUser().getActiveFood().getComments(),User.getActiveUser().getId());
+        if (thisUserComment == null){
+            Button addYourCommentButton = new Button();
+            ImageView imageView = new ImageView(new Image(SnapApplication.class.getResourceAsStream("/images/add.png")));
+            imageView.setFitWidth(30);
+            imageView.setFitHeight(30);
+            addYourCommentButton.setGraphic(imageView);
+            addYourCommentButton.setText("نظر خود را اضافه کنید");
+            gridPane.add(addYourCommentButton,0,0);
+            addYourCommentButton.setOnAction(e -> {
+                try
+                {
+                    gridPane.getChildren().remove(addYourCommentButton);
+                    Label yourName = new Label(User.getActiveUser().getName());
+                    AnchorPane anchorPane = new AnchorPane(yourName);
+                    AnchorPane.setTopAnchor(yourName,20.0);
+                    AnchorPane.setRightAnchor(yourName,30.0);
+                    TextField textField = new TextField();
+                    textField.setPromptText("نظر خود را اضافه کنید");
+                    anchorPane.getChildren().add(textField);
+                    AnchorPane.setTopAnchor(textField,42.0);
+                    AnchorPane.setRightAnchor(textField,40.0);
+                    Button addButton = new Button("اضافه کردن");
+                    addButton.setMaxWidth(120);
+                    addButton.setMaxHeight(30);
+                    anchorPane.getChildren().add(addButton);
+                    AnchorPane.setTopAnchor(addButton,134.0);
+                    AnchorPane.setLeftAnchor(addButton,15.0);
+                    gridPane.add(anchorPane,0,0);
+                    addButton.setOnAction(event -> {
+                        try{
+                            Comment.createComment(textField.getText(),User.getActiveUser(),null,User.getActiveUser().getActiveFood());
 
+                        } catch (Exception exception)
+                        {
+                            exception.printStackTrace();
+                        }
+                    });
+                } catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            });
+        }
+        else {
+
+        }
         if (User.getActiveUser().getActiveFood().getComments().size() != 0) {
             gridPane.setPrefHeight(135+ 60*(User.getActiveUser().getActiveFood().getComments().size()+1));
             AnchorPane[] anchorPanes = new AnchorPane[User.getActiveUser().getActiveFood().getComments().size()];
