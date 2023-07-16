@@ -52,6 +52,7 @@ public class UserCart implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (User.getActiveUser().getCart().price() != 0)
             totalCostLabel.setText(String.valueOf(User.getActiveUser().getCart().price()));
 
         //discount card
