@@ -4,6 +4,7 @@ public enum FoodType {
     IRANIAN,
     CAFE,
     SUPER_MARKET,
+    ITALIAN,
     Unknown,
     ;
     // etc
@@ -19,8 +20,8 @@ public enum FoodType {
             case "CAFE" -> {
                 return CAFE;
             }
-            case "SUPER MARKET" -> {
-                return SUPER_MARKET;
+            case "ITALIAN" -> {
+                return ITALIAN;
             }
         }
         throw new UnknownType();
