@@ -55,7 +55,7 @@ public class Driver {
     static void usernew(String username, String pass) {
         Account a;
         try {
-            User.createAccount(username, pass);
+            User.createUser(username, pass);
             System.out.println("USER CREATION SUCCESS");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -740,7 +740,7 @@ public class Driver {
                     {
                         try
                         {
-                            User.getActiveUser().addCurrency(Integer.parseInt(parts[2]));
+                            User.getActiveUser().addCurrency(Integer.parseInt(parts[1]));
                         }
                         catch (Exception e)
                         {
