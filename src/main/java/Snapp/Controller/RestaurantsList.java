@@ -72,14 +72,14 @@ public class RestaurantsList implements Initializable {
 
     public void showRestaurantList(ArrayList<Restaurant> restaurants)
     {
-        String ftype = "";
-        for (FoodType f: User.getActiveUser().getActiveRestaurant().getFoodtype())
-        {
-            ftype += f.toString() + ", ";
-        }
-        ftype = ftype.substring(0, ftype.length() - 2);
-        foodTypeLabel.setText(ftype);
-        restaurantNameLabel.setText(User.getActiveUser().getActiveRestaurant().getName());
+//        String ftype = "";
+//        for (FoodType f: User.getActiveUser().getActiveRestaurant().getFoodtype())
+//        {
+//            ftype += f.toString() + ", ";
+//        }
+//        ftype = ftype.substring(0, ftype.length() - 2);
+//        foodTypeLabel.setText(ftype);
+//        restaurantNameLabel.setText(User.getActiveUser().getActiveRestaurant().getName());
 
         if (restaurants.size() != 0) {
             gridPane.setPrefHeight(135*restaurants.size());
